@@ -1,0 +1,3 @@
+[submodule "protocol-specifications"]
+	path = protocol-specifications
+	url = git@github.com:beckn/protocol-specifications.git
