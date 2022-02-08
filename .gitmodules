@@ -1,3 +1,6 @@
 [submodule "protocol-specifications"]
 	path = protocol-specifications/protocol-core
 	url = git@github.com:beckn/protocol-specifications.git
+[submodule "protocol-specifications/protocol-core"]
+	path = protocol-specifications/protocol-core
+	url = git@github.com:beckn/protocol-specifications.git
