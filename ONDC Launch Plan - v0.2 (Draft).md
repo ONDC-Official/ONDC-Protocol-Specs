@@ -77,29 +77,3 @@ This note covers the following aspects of ONDC Launch:
 
 
 &nbsp;
-
-
-#### (d) Minimum Market Readiness Requirements for Soft Launch – Retail Seller App
-
-| #    | Checklist Item                                               | Remark                                                       |
-| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1    | Have sellers, selling **grocery**, in **Delhi** , **Bengaluru, Shillong, Bhopal and Udipi**, and located in the **pin codes** indicated by ONDC, been **identified**  and the **data shared** with ONDC -[ here](https://docs.google.com/spreadsheets/d/1JBYUercptDN3NGYzAvBDot_C_Hl4RtTB/edit?usp=sharing&ouid=114815859170461032580&rtpof=true&sd=true) | *Have you completed the legal and other formalities for these sellers.* |
-| 2    | Has the seller been **onboarded** on the ONDC enabled App?   | *Is the ONDC compatible app going to be a modified version of an existing product or is this going to be a totally new product?* |
-| 3    | Has the onboarded seller **digitised** their **catalogs** and **updated** their inventory on the application? | *Can the seller update the catalog and inventory themselves?* |
-| 4    | Have the **terms and conditions** of **sellers** for transactions including Payment Terms, Fulfilment Terms etc. been configured in the application? | *Refer to Seller data checklist*                             |
-| 5    | Has the seller been trained on order confirmation and fulfilment? |                                                              |
-
-| No. of sellers for whom step 2-5 have been completed |      |
-| ---------------------------------------------------- | ---- |
-
-&nbsp;
-
-
-#### (e) Minimum Market Readiness Requirements for Soft Launch – Retail Buyer App
-
-| #    | Checklist Item                                               | Remark                                                       |
-| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 1    | Have **active buyers** been identified in **Delhi, Bengaluru, Shillong, Bhopal and Udipi**, located in the **pin codes** given by ONDC? | *Is the ONDC compatible app going to be a modified version of an existing product or is this going to be a totally new application? Will the experience be seamless or will there be new features added to the app added to the frontend? Are the ONDC enabled search results going to be merged with the search result from your existing platform? etc.* |
-| 2    | Has the modified/updated buyer app been **rolled out** to the buyers? |                                                              |
-| 3    | Have **awareness campaign** for buyers to **highlight ONDC** enabled **functionalities** been planned and rolled out? | *Have you planned the rolling out to the targeted audience?* |
-
