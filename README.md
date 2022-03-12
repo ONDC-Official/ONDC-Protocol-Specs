@@ -1,2 +1,2 @@
-# Open Network for Digital Commerce (ONDC) Open API Specifications
+# Open Network for Digital Commerce (ONDC) Protocol Open API Specifications
 
