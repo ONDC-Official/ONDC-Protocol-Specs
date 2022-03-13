@@ -1495,12 +1495,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Provider'
+          required:
+            - descriptor.name
+            - locations.gps
+            - items.descriptor.name
         exp:
           type: string
           description: Time after which catalog has to be refreshed
           format: date-time
+      required:
+        - bpp/providers
     Category:
-      description: Describes a category
+      description: Describes a category. Category codes can have following values - 'Express Delivery', 'Standard Delivery'
       type: object
       properties:
         id:
@@ -1946,6 +1952,9 @@ components:
           type: boolean
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - id
+        - category_id
     Language:
       description: indicates language code. ONDC supports country codes as per ISO 639.2 standard
       type: object
@@ -2101,6 +2110,16 @@ components:
         updated_at:
           type: string
           format: date-time
+        ./ondc-cancellation_reason:
+          type: string
+          enum:
+            - Order delivery not possible
+            - Delivery pincode not serviceable
+      required:
+        - id
+        - state
+        - created_at
+        - updated_at
     Organization:
       description: Describes an organization
       type: object
@@ -2218,6 +2237,10 @@ components:
           $ref: '#/components/schemas/DecimalValue'
         maximum_value:
           $ref: '#/components/schemas/DecimalValue'
+      required:
+        - currency
+        - value
+        - estimated_value
     Provider:
       description: 'Describes a service provider. This can be a restaurant, a hospital, a Store etc'
       type: object
