@@ -1500,18 +1500,18 @@ components:
             - locations.gps
             - items.descriptor.name
             - items."./ondc-returnable"
-            - items."./ondc-seller-pickup-return"
-            - items."./ondc-return-window"
+            - items."./ondc-seller_pickup_return"
+            - items."./ondc-return_window"
             - items."./ondc-cancellable"
-            - items."./ondc-time-to-ship"
+            - items."./ondc-time_to_ship"
             - items."./ondc-manufacturer_or_packer_name"
             - items."./ondc-manufacturer_or_packer_address"
-            - items."./ondc-common-or-generic-name-of-commodity"
-            - items."./ondc-multiple-products-name-number-or-qty"
-            - items."./ondc-net-quantity-or-measure-of-commodity-in-pkg"
-            - items."./ondc-month-year-of-manufacture-packing-import"
-            - items."./ondc-contact-details-consumer-complaint"
-            - items."./ondc-imported-product-country-of-origin"
+            - items."./ondc-common_or_generic_name_of_commodity"
+            - items."./ondc-multiple_products_name_number_or_qty"
+            - items."./ondc-net_quantity_or_measure_of_commodity_in_pkg"
+            - items."./ondc-month_year_of_manufacture_packing_import"
+            - items."./ondc-contact_details_consumer_complaint"
+            - items."./ondc-imported_product_country_of_origin"
         exp:
           type: string
           description: Time after which catalog has to be refreshed
@@ -1971,16 +1971,16 @@ components:
         ./ondc-returnable:
           description: whether the item is returnable
           type: boolean
-        ./ondc-seller-pickup-return:
+        ./ondc-seller_pickup_return:
           description: in case of return, whether the item should be picked up by seller
           type: boolean
-        ./ondc-return-window:
+        ./ondc-return_window:
           description: return window for the item in ISO8601 format e.g. '24:00:00' indicates 24 hour return window
           type: string
         ./ondc-cancellable:
           description: whether the item is cancellable
           type: boolean
-        ./ondc-time-to-ship:
+        ./ondc-time_to_ship:
           description: time from order confirmation by which item ready to ship in ISO8601 format e.g. '02:00:00' indicates item ready to ship in 2 hrs
           type: string
         ./ondc-manufacturer_or_packer_name:
@@ -1989,22 +1989,22 @@ components:
         ./ondc-manufacturer_or_packer_address:
           description: address of manufacturer or packer (in case manufacturer is not the packer) or address of importer for imported goods - statutory requirement
           type: string
-        ./ondc-common-or-generic-name-of-commodity:
+        ./ondc-common_or_generic_name_of_commodity:
           description: common or generic name of commodity - statutory requirement
           type: string
-        ./ondc-multiple-products-name-number-or-qty:
+        ./ondc-multiple_products_name_number_or_qty:
           description: for packages with multiple products, the name and number of quantity of each (can be shown as "name1-number_or_quantity; name2-number_or_quantity..") - statutory requirement
           type: string
-        ./ondc-net-quantity-or-measure-of-commodity-in-pkg:
+        ./ondc-net_quantity_or_measure_of_commodity_in_pkg:
           description: net quantity of commodity in terms of standard unit of weight or measure of commodity contained in package - statutory requirement
           type: string
-        ./ondc-month-year-of-manufacture-packing-import:
+        ./ondc-month_year_of_manufacture_packing_import:
           description: month and year of manufacture or packing or import - statutory requirement
           type: string
-        ./ondc-contact-details-consumer-complaint:
+        ./ondc-contact_details_consumer_complaint:
           description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..) - statutory requirement
           type: string
-        ./ondc-imported-product-country-of-origin:
+        ./ondc-imported_product_country_of_origin:
           description: country of origin for imported products - statutory requirement
           type: string
         tags:
