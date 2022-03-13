@@ -1496,10 +1496,8 @@ components:
           items:
             $ref: '#/components/schemas/Provider'
           required:
-            - id
             - descriptor.name
             - locations.gps
-            - items.id
             - items.descriptor.name
             - items."./ondc-returnable"
             - items."./ondc-seller-pickup-return"
@@ -1514,11 +1512,6 @@ components:
             - items."./ondc-month-year-of-manufacture-packing-import"
             - items."./ondc-contact-details-consumer-complaint"
             - items."./ondc-imported-product-country-of-origin"
-            - items.price.currency
-            - items.price.value
-            - items.price.listed_value
-            - items.category_id
-            - items.fulfillment_id
         exp:
           type: string
           description: Time after which catalog has to be refreshed
@@ -1797,7 +1790,7 @@ components:
           required:
             - feedback_id
     Fulfillment:
-      description: Describes how a single product/service will be rendered/fulfilled to the end customer
+      description: Describes how a single product/service will be rendered/fulfilled to the end customer. state can have following values - "Searching-for-Agent", "Assigned-Agent", "En-route-to-drop", "At-pickup-location", "At-drop-location", "Delivered-package", "Cancelled-package", "Returned-package"
       type: object
       properties:
         id:
@@ -1805,7 +1798,7 @@ components:
           description: Unique reference ID to the fulfillment of an order
         type:
           type: string
-          description: This describes the type of fulfillment (Pickup - Buyer picks up from store by themselves or through their logistics provider; Delivery - seller delivers to buyer)
+          description: This describes the type of fulfillment ("Pickup" - Buyer picks up from store by themselves or through their logistics provider; "Delivery" - seller delivers to buyer)
           enum:
             - Pickup
             - Delivery
@@ -2016,6 +2009,10 @@ components:
           type: string
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - id
+        - category_id
+        - fulfillment_id
     Language:
       description: indicates language code. ONDC supports country codes as per ISO 639.2 standard
       type: object
@@ -2175,6 +2172,18 @@ components:
         updated_at:
           type: string
           format: date-time
+        ./ondc-cancellation_reason:
+          type: string
+          enum:
+            - Order delivery delayed or not possible
+            - Price of one or more items in the order have changed due to which buyer was asked to make additional payment
+            - One or more items in the order not available
+            - Delivery pincode not serviceable
+      required:
+        - id
+        - state
+        - created_at
+        - updated_at
     Organization:
       description: Describes an organization
       type: object
@@ -2292,6 +2301,10 @@ components:
           $ref: '#/components/schemas/DecimalValue'
         maximum_value:
           $ref: '#/components/schemas/DecimalValue'
+      required:
+        - currency
+        - value
+        - listed_value
     Provider:
       description: 'Describes a service provider. This can be a restaurant, a hospital, a Store etc'
       type: object
@@ -2345,6 +2358,9 @@ components:
           $ref: '#/components/schemas/Rateable'
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - id
+        - rateable
     Quotation:
       description: Describes a quote
       type: object
