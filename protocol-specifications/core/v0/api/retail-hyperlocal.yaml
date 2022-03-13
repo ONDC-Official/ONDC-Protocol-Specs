@@ -1495,10 +1495,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Provider'
+          required:
+            - id
+            - descriptor.name
+            - locations.gps
+            - items.id
+            - items.descriptor.name
+            - items."./ondc-returnable"
+            - items."./ondc-seller-pickup-return"
+            - items."./ondc-return-window"
+            - items."./ondc-cancellable"
+            - items."./ondc-time-to-ship"
+            - items."./ondc-manufacturer_or_packer_name"
+            - items."./ondc-manufacturer_or_packer_address"
+            - items."./ondc-common-or-generic-name-of-commodity"
+            - items."./ondc-multiple-products-name-number-or-qty"
+            - items."./ondc-net-quantity-or-measure-of-commodity-in-pkg"
+            - items."./ondc-month-year-of-manufacture-packing-import"
+            - items."./ondc-contact-details-consumer-complaint"
+            - items."./ondc-imported-product-country-of-origin"
+            - items.price.currency
+            - items.price.value
+            - items.price.listed_value
+            - items.category_id
+            - items.fulfillment_id
         exp:
           type: string
           description: Time after which catalog has to be refreshed
           format: date-time
+      required:
+        - bpp/providers
     Category:
       description: Describes a category
       type: object
@@ -1721,7 +1747,6 @@ components:
           $ref: '#/components/schemas/FeedbackForm'
         feedback_url:
           $ref: '#/components/schemas/FeedbackUrl'
-
     FeedbackForm:
       description: Describes a feedback form that a Seller App can send to get feedback from the Buyer App
       type: array
@@ -1845,6 +1870,8 @@ components:
           $ref: '#/components/schemas/Rateable'
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - type
     Gps:
       description: Describes a gps coordinate
       type: string
@@ -1948,6 +1975,45 @@ components:
           type: boolean
         recommended:
           type: boolean
+        ./ondc-returnable:
+          description: whether the item is returnable
+          type: boolean
+        ./ondc-seller-pickup-return:
+          description: in case of return, whether the item should be picked up by seller
+          type: boolean
+        ./ondc-return-window:
+          description: return window for the item in ISO8601 format e.g. '24:00:00' indicates 24 hour return window
+          type: string
+        ./ondc-cancellable:
+          description: whether the item is cancellable
+          type: boolean
+        ./ondc-time-to-ship:
+          description: time from order confirmation by which item ready to ship in ISO8601 format e.g. '02:00:00' indicates item ready to ship in 2 hrs
+          type: string
+        ./ondc-manufacturer_or_packer_name:
+          description: name of manufacturer or packer (in case manufacturer is not the packer) or name of importer for imported goods - statutory requirement
+          type: string
+        ./ondc-manufacturer_or_packer_address:
+          description: address of manufacturer or packer (in case manufacturer is not the packer) or address of importer for imported goods - statutory requirement
+          type: string
+        ./ondc-common-or-generic-name-of-commodity:
+          description: common or generic name of commodity - statutory requirement
+          type: string
+        ./ondc-multiple-products-name-number-or-qty:
+          description: for packages with multiple products, the name and number of quantity of each (can be shown as "name1-number_or_quantity; name2-number_or_quantity..") - statutory requirement
+          type: string
+        ./ondc-net-quantity-or-measure-of-commodity-in-pkg:
+          description: net quantity of commodity in terms of standard unit of weight or measure of commodity contained in package - statutory requirement
+          type: string
+        ./ondc-month-year-of-manufacture-packing-import:
+          description: month and year of manufacture or packing or import - statutory requirement
+          type: string
+        ./ondc-contact-details-consumer-complaint:
+          description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..) - statutory requirement
+          type: string
+        ./ondc-imported-product-country-of-origin:
+          description: country of origin for imported products - statutory requirement
+          type: string
         tags:
           $ref: '#/components/schemas/Tags'
     Language:
@@ -2206,7 +2272,7 @@ components:
         time:
           $ref: '#/components/schemas/Time'
     Price:
-      description: Describes the price of an item. Allows for domain extension.
+      description: Describes the price of an item. 'value' is the declared price and 'listed_value' is the MRP. Allows for domain extension.
       type: object
       properties:
         currency:
