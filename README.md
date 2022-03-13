@@ -1,10 +1,10 @@
 # Open Network for Digital Commerce (ONDC) Protocol Open API Specifications
 
 ## Latest Release
-1.0.0 | March 15th 2022
+1.0.0-draft | March 15th 2022
 
 ## Current Working Draft Version: 
-1.0.1-draft
+1.0.0-draft
 
 ## Versioning Scheme
 [Semantic Version Scheme 2.0.0](https://semver.org/)
