@@ -33,6 +33,9 @@ CC-BY-ND
   ## Error Codes
   |**Code**|**Type**|**Message**|**Description**|
   |---|---|---|---|
+  |10000|Gateway|Bad or Invalid request error|Generic bad or invalid request error|
+  |10001|Gateway|Invalid Signature|Cannot verify signature for request|
+  |20000|Buyer App|Invalid catalog item|Catalog Item cannot be displayed as it does not meet statutory requirements|
   |30000|Seller App|Invalid request error|Generic invalid request error|
   |30001|Seller App|Provider not found|When Seller App is unable to find the provider id sent by the Buyer App|
   |30002|Seller App|Provider location not found|When Seller App is unable to find the provider location id sent by the Buyer App|
