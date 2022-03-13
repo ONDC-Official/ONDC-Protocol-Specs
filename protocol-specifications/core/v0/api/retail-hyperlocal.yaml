@@ -3,7 +3,6 @@ info:
   title: ONDC Protocol API for retail (hyperlocal)
   description: ONDC Protocol API specification. This is an adaptation of Beckn Core version 0.9.3
   version: 1.0.0-draft
-
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -16,7 +15,7 @@ paths:
         - ONDC Gateway
       description: Search for services by intent
       requestBody:
-        description: Buyer App searches for services
+        description: Buyer searches for products and services
         content:
           application/json:
             schema:
@@ -57,7 +56,7 @@ paths:
         - ONDC Seller App
       description: Select items from the catalog and build your order
       requestBody:
-        description: TODO
+        description: Buyer selects one or more catalog items
         content:
           application/json:
             schema:
@@ -75,9 +74,6 @@ paths:
               required:
                 - context
                 - message
-
-
-
       responses:
         '200':
           description: Acknowledgement of message received
@@ -103,7 +99,7 @@ paths:
         - ONDC Seller App
       description: Initialize an order by providing billing and/or shipping details
       requestBody:
-        description: TODO
+        description: Buyer initializes order checkout
         content:
           application/json:
             schema:
@@ -146,7 +142,7 @@ paths:
         - ONDC Seller App
       description: Initialize an order by providing billing and/or shipping details
       requestBody:
-        description: TODO
+        description: Buyer confirms an order
         content:
           application/json:
             schema:
@@ -189,7 +185,7 @@ paths:
         - ONDC Seller App
       description: Fetch the latest order object
       requestBody:
-        description: TODO
+        description: Buyer checks for status of order
         content:
           application/json:
             schema:
@@ -232,7 +228,7 @@ paths:
         - ONDC Seller App
       description: Track an active order
       requestBody:
-        description: TODO
+        description: Buyer tracks fulfillment of an order
         content:
           application/json:
             schema:
@@ -278,7 +274,7 @@ paths:
         - ONDC Seller App
       description: Cancel an order
       requestBody:
-        description: TODO
+        description: Buyer cancels an order
         content:
           application/json:
             schema:
@@ -323,9 +319,9 @@ paths:
     post:
       tags:
         - ONDC Seller App
-      description: Remove object
+      description: Update an order
       requestBody:
-        description: TODO
+        description: Buyer updates an order
         content:
           application/json:
             schema:
@@ -372,7 +368,7 @@ paths:
         - ONDC Seller App
       description: Provide feedback on a service
       requestBody:
-        description: TODO
+        description: Buyer rates for one or more rating categories
         content:
           application/json:
             schema:
@@ -404,14 +400,13 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /support:
     post:
       tags:
         - ONDC Seller App
       description: Contact support
       requestBody:
-        description: TODO
+        description: Buyer searches for Support Contact details
         content:
           application/json:
             schema:
@@ -447,7 +442,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /on_search:
     post:
       tags:
@@ -455,7 +449,7 @@ paths:
         - ONDC Gateway
       description: Send catalog
       requestBody:
-        description: TODO
+        description: Sellers provide their catalog in response to buyer search
         content:
           application/json:
             schema:
@@ -499,7 +493,7 @@ paths:
         - ONDC Buyer App
       description: Send draft order object with quoted price for selected items
       requestBody:
-        description: TODO
+        description: Seller provides quote for selected items
         content:
           application/json:
             schema:
@@ -566,7 +560,7 @@ paths:
         - ONDC Buyer App
       description: Send order object with payment details updated
       requestBody:
-        description: TODO
+        description: Seller provides terms and conditions for an order
         content:
           application/json:
             schema:
@@ -652,7 +646,7 @@ paths:
         - ONDC Buyer App
       description: Send active order object
       requestBody:
-        description: TODO
+        description: Seller confirms order
         content:
           application/json:
             schema:
@@ -696,7 +690,7 @@ paths:
         - ONDC Buyer App
       description: Send tracking details of an active order
       requestBody:
-        description: TODO
+        description: Seller provides tracking details for an order
         content:
           application/json:
             schema:
@@ -740,7 +734,7 @@ paths:
         - ONDC Buyer App
       description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object
       requestBody:
-        description: TODO
+        description: Seller provides response to cancellation request
         content:
           application/json:
             schema:
@@ -784,7 +778,7 @@ paths:
         - ONDC Buyer App
       description: Returns updated service with updated runtime object
       requestBody:
-        description: TODO
+        description: Seller provides response to order update
         content:
           application/json:
             schema:
@@ -828,7 +822,7 @@ paths:
         - ONDC Buyer App
       description: Fetch the status of a Service
       requestBody:
-        description: TODO
+        description: Seller provides status information for order
         content:
           application/json:
             schema:
@@ -872,7 +866,7 @@ paths:
         - ONDC Buyer App
       description: Provide feedback on a service
       requestBody:
-        description: TODO
+        description: Seller provides response to rating provided by buyer
         content:
           application/json:
             schema:
@@ -911,7 +905,7 @@ paths:
         - ONDC Buyer App
       description: Contact Support
       requestBody:
-        description: TODO
+        description: Seller provides Contact Support details
         content:
           application/json:
             schema:
@@ -954,7 +948,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /get_cancellation_reasons:
     post:
       tags:
@@ -988,7 +981,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /cancellation_reasons:
     post:
       tags:
@@ -1029,7 +1021,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /get_return_reasons:
     post:
       tags:
@@ -1063,7 +1054,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /return_reasons:
     post:
       tags:
@@ -1101,7 +1091,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /get_rating_categories:
     post:
       tags:
@@ -1135,7 +1124,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /rating_categories:
     post:
       tags:
@@ -1173,7 +1161,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /get_feedback_categories:
     post:
       tags:
@@ -1207,7 +1194,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /feedback_categories:
     post:
       tags:
@@ -1245,7 +1231,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /get_feedback_form:
     post:
       tags:
@@ -1286,7 +1271,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
   /feedback_form:
     post:
       tags:
@@ -1303,7 +1287,6 @@ paths:
                   $ref: '#/components/schemas/Context'
                 message:
                     $ref: '#/components/schemas/Feedback'
-
       responses:
         '200':
           description: Acknowledgement of message received
@@ -1323,7 +1306,6 @@ paths:
                     $ref: '#/components/schemas/Error'
                 required:
                   - message
-
 components:
   securitySchemes:
     SubscriberAuth:
@@ -1552,7 +1534,7 @@ components:
           description: Name of the city
         code:
           type: string
-          description: City code
+          description: Codification of city code will be using the std code of the city e.g. for Bengaluru, city code is 'std:080'
     Contact:
       type: object
       properties:
@@ -1630,7 +1612,7 @@ components:
           description: The encryption public key of the sender
         ttl:
           type: string
-          description: The duration in ISO8601 format after timestamp for which this message holds valid
+          description: The duration in ISO8601 format after timestamp for which this message holds valid. Value for search, select, init, confirm, status, track, cancel, update, rating, support is '00:00:30' or 30s
       required:
         - domain
         - action
@@ -1656,7 +1638,6 @@ components:
       description: Describes a decimal value
       type: string
       pattern: '[+-]?([0-9]*[.])?[0-9]+'
-
     Descriptor:
       description: Describes the description of a real-world object.
       type: object
@@ -1681,7 +1662,6 @@ components:
         3d_render:
           type: string
           format: uri
-
     Dimensions:
       description: Describes the dimensions of a real-world object
       type: object
@@ -1692,7 +1672,6 @@ components:
           $ref: '#/components/schemas/Scalar'
         height:
           $ref: '#/components/schemas/Scalar'
-
     Document:
       description: Describes a document which can be sent as a url
       type: object
@@ -1702,15 +1681,14 @@ components:
           format: uri
         label:
           type: string
-
     Domain:
-      description: Describes the domain of an object
+      description: Codification of domain for ONDC
       type: string
-
+      enum:
+        - nic2004:52110
     Duration:
       description: Describes duration as per ISO8601 format
       type: string
-
     Error:
       description: Describes an error object
       type: object
@@ -1735,7 +1713,6 @@ components:
       required:
         - type
         - code
-
     Feedback:
       description: Feedback for a service
       type: object
@@ -1750,7 +1727,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FeedbackFormElement'
-
     FeedbackFormElement:
       description: An element in the feedback form. It can be question or an answer to the question.
       type: object
@@ -1772,7 +1748,6 @@ components:
             - radio
             - checkbox
             - text
-
     FeedbackUrl:
       description: Describes how a feedback URL will be sent by the Seller App
       type: object
@@ -1796,7 +1771,6 @@ components:
             type: string
           required:
             - feedback_id
-
     Fulfillment:
       description: Describes how a single product/service will be rendered/fulfilled to the end customer
       type: object
@@ -1898,7 +1872,6 @@ components:
           $ref: '#/components/schemas/Item'
         tags:
           $ref: '#/components/schemas/Tags'
-
     ItemQuantity:
       description: Describes count or amount of an item
       type: object
@@ -2013,7 +1986,6 @@ components:
       type: string
       description: 'Describes the name of a person in format: ./{given_name}/{honorific_prefix}/{first_name}/{middle_name}/{last_name}/{honorific_suffix}'
       pattern: '^\./[^/]+/[^/]*/[^/]*/[^/]*/[^/]*/[^/]*$'
-
     Offer:
       description: Describes an offer
       type: object
@@ -2036,7 +2008,6 @@ components:
             $ref: '#/components/schemas/Item/properties/id'
         time:
           $ref: '#/components/schemas/Time'
-
     Operator:
       description: Describes the agent of a service
       allOf:
@@ -2138,7 +2109,6 @@ components:
         updated_at:
           type: string
           format: date-time
-
     Organization:
       description: Describes an organization
       type: object
@@ -2147,7 +2117,6 @@ components:
           type: string
         cred:
           type: string
-
     Page:
       description: Describes a page in a search result
       type: object
@@ -2156,8 +2125,6 @@ components:
           type: string
         next_id:
           type: string
-
-
     Payment:
       description: Describes a payment
       type: object
@@ -2208,7 +2175,6 @@ components:
           enum:
             - BAP
             - BPP
-
     Person:
       description: Describes a person.
       type: object
@@ -2239,13 +2205,13 @@ components:
           $ref: '#/components/schemas/Policy/properties/id'
         time:
           $ref: '#/components/schemas/Time'
-
     Price:
       description: Describes the price of an item. Allows for domain extension.
       type: object
       properties:
         currency:
           type: string
+          description: ISO 4217 alphabetic currency code e.g. 'INR'
         value:
           $ref: '#/components/schemas/DecimalValue'
         estimated_value:
@@ -2260,7 +2226,6 @@ components:
           $ref: '#/components/schemas/DecimalValue'
         maximum_value:
           $ref: '#/components/schemas/DecimalValue'
-
     Provider:
       description: 'Describes a service provider. This can be a restaurant, a hospital, a Store etc'
       type: object
@@ -2314,7 +2279,6 @@ components:
           $ref: '#/components/schemas/Rateable'
         tags:
           $ref: '#/components/schemas/Tags'
-
     Quotation:
       description: Describes a quote
       type: object
@@ -2332,11 +2296,9 @@ components:
                 $ref: '#/components/schemas/Price'
         ttl:
           $ref: '#/components/schemas/Duration'
-
     Rateable:
       description: If the entity can be rated or not
       type: boolean
-
     Rating:
       description: Describes the rating of a person or an object.
       type: object
@@ -2356,7 +2318,6 @@ components:
           $ref: '#/components/schemas/FeedbackForm'
         feedback_id:
           $ref: '#/components/schemas/FeedbackUrl/properties/params/properties/feedback_id'
-
     RatingAck:
       type: object
       properties:
@@ -2366,7 +2327,6 @@ components:
         rating_ack:
           description: If rating has been recorded or not
           type: boolean
-
     Scalar:
       description: An object representing a scalar quantity.
       type: object
@@ -2394,7 +2354,6 @@ components:
       required:
         - value
         - unit
-
     Schedule:
       description: Describes a schedule
       type: object
@@ -2470,7 +2429,6 @@ components:
           type: string
           description: Expiry timestamp in UTC derived from the ```lease_time``` of the subscriber
           format: date-time
-
     Support:
       description: Customer support
       type: object
@@ -2485,7 +2443,6 @@ components:
           type: string
         channels:
           $ref: '#/components/schemas/Tags'
-
     Tags:
       description: Describes a tag. This is a simple key-value store which is used to contain extended metadata
       additionalProperties:
@@ -2515,11 +2472,9 @@ components:
           description: comma separated values representing days of the week
         schedule:
           $ref: '#/components/schemas/Schedule'
-
     TrackingData:
       description: Describes tracking data object during live tracking of an order
       $ref: '#/components/schemas/Location/properties/gps'
-
     Tracking:
       description: Describes the tracking info of an object
       type: object
@@ -2532,7 +2487,6 @@ components:
           enum:
             - active
             - inactive
-
     Vehicle:
       description: Describes the properties of a vehicle used in a mobility service
       type: object
