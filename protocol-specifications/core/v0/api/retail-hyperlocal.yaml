@@ -1652,7 +1652,7 @@ components:
           description: Name of the country
         code:
           type: string
-          description: Country code as per ISO 3166-1 and ISO 3166-2 format
+          description: Country code as per ISO 3166 Alpha-3 code format
     DecimalValue:
       description: Describes a decimal value
       type: string
@@ -2005,7 +2005,7 @@ components:
           description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..) - statutory requirement
           type: string
         ./ondc-imported_product_country_of_origin:
-          description: country of origin for imported products - statutory requirement
+          description: country of origin for imported products (ISO 3166 Alpha-3 code format)- statutory requirement
           type: string
         tags:
           $ref: '#/components/schemas/Tags'
@@ -2014,7 +2014,7 @@ components:
         - category_id
         - fulfillment_id
     Language:
-      description: indicates language code. ONDC supports country codes as per ISO 639.2 standard
+      description: indicates language code. ONDC supports language codes as per ISO 639.2 standard
       type: object
       properties:
         code:
