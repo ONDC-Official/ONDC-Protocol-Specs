@@ -1639,7 +1639,7 @@ components:
           description: Name of the country
         code:
           type: string
-          description: Country code as per ISO 3166-1 and ISO 3166-2 format
+          description: Country code as per ISO 3166 Alpha-3 code format
     DecimalValue:
       description: Describes a decimal value
       type: string
@@ -1956,7 +1956,7 @@ components:
         - id
         - category_id
     Language:
-      description: indicates language code. ONDC supports country codes as per ISO 639.2 standard
+      description: indicates language code. ONDC supports language codes as per ISO 639.2 standard
       type: object
       properties:
         code:
