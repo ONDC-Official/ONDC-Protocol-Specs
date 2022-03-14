@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: ONDC Protocol API for retail (food & beverage)
-  description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
+  description: ONDC Protocol Core API specification, which includes statutory requirements for pre-packaged food. This is an adaptation of Beckn Core version 0.9.3
   version: 1.0.0-draft
 security:
   - SubscriberAuth: []
@@ -1495,10 +1495,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Provider'
+          required:
+            - descriptor.name
+            - locations.gps
+            - items.descriptor.name
+            - items."./ondc-ingredients_info"
+            - items."./ondc-additives_info"
+            - items."./ondc-manufacturer_or_packer_name"
+            - items."./ondc-manufacturer_or_packer_address"
+            - items."./ondc-brand_owner_name"
+            - items."./ondc-brand_owner_address"
+            - items."./ondc-brand_owner_FSSAI_logo"
+            - items."./ondc-brand_owner_FSSAI_license_no"
+            - items."./ondc-net_quantity"
+            - items."./ondc-contact_details_consumer_care"
         exp:
           type: string
           description: Time after which catalog has to be refreshed
           format: date-time
+      required:
+        - bpp/providers
     Category:
       description: Describes a category
       type: object
@@ -1633,7 +1649,7 @@ components:
           description: Name of the country
         code:
           type: string
-          description: Country code as per ISO 3166-1 and ISO 3166-2 format
+          description: Country code as per ISO 3166 Alpha-3 code format
     DecimalValue:
       description: Describes a decimal value
       type: string
@@ -1844,6 +1860,9 @@ components:
           $ref: '#/components/schemas/Rateable'
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - id
+        - type
     Gps:
       description: Describes a gps coordinate
       type: string
@@ -1916,7 +1935,7 @@ components:
             measure:
               $ref: '#/components/schemas/Scalar'
     Item:
-      description: Describes a product or a service offered to the end consumer by the provider.
+      description: Describes a product or a service offered to the end consumer by the provider. Use descriptor.name for food name, descriptor.symbol for Veg or Non-veg, descriptor.short_desc for food allergen and descriptor.long_desc for instructions for use
       type: object
       properties:
         id:
@@ -1947,10 +1966,74 @@ components:
           type: boolean
         recommended:
           type: boolean
+        ./ondc-ingredients_info:
+          description: list of ingredients (except single ingredient foods), along with nutritional info (can be shown as ingredient1-nutritionalinfo;ingredient2-nutritionalinfo;..) - statutory requirement
+          type: string
+        ./ondc-additives_info:
+          description: food additives together with specific name or recognized International Numbering System (can be shown as additive1-name or number;additive2-name or number;..) - statutory requirement
+          type: string
+        ./ondc-manufacturer_or_packer_name:
+          description: name of manufacturer or packer (for non-retail containers) - statutory requirement
+          type: string
+        ./ondc-manufacturer_or_packer_address:
+          description: address of manufacturer or packer (for non-retail containers) - statutory requirement
+          type: string
+        ./ondc-brand_owner_name:
+          description: name of brand owner - statutory requirement
+          type: string
+        ./ondc-brand_owner_address:
+          description: address of brand owner - statutory requirement
+          type: string
+        ./ondc-brand_owner_FSSAI_logo:
+          description: FSSAI logo of brand owner (url based image e.g. uri:http://path/to/image) - statutory requirement
+          type: string
+        ./ondc-brand_owner_FSSAI_license_no:
+          description: FSSAI license no of brand owner - statutory requirement
+          type: string
+        ./ondc-other_FSSAI_license_no:
+          description: FSSAI license no of manufacturer or marketer or packer or bottler if different from brand owner - statutory requirement
+          type: string
+        ./ondc-net_quantity:
+          description: net quantity - statutory requirement
+          type: string
+        ./ondc-importer_name:
+          description: name of importer - statutory requirement
+          type: string
+        ./ondc-importer_address:
+          description: address of importer - statutory requirement
+          type: string
+        ./ondc-importer_FSSAI_logo:
+          description: FSSAI logo of importer (url based image e.g. uri:http://path/to/image) - statutory requirement
+          type: string
+        ./ondc-importer_FSSAI_license_no:
+          description: FSSAI license no of importer - statutory requirement
+          type: string
+        ./ondc-imported_product_country_of_origin:
+          description: country of origin for imported products (ISO 3166 Alpha-3 code format)- statutory requirement
+          type: string
+        ./ondc-other_importer_name:
+          description: name of importer for product manufactured outside but packaged or bottled in India - statutory requirement
+          type: string
+        ./ondc-other_importer_address:
+          description: address of importer for product manufactured outside but packaged or bottled in India - statutory requirement
+          type: string
+        ./ondc-other_premises:
+          description: premises where product manufactured outside are packaged or bottled in India - statutory requirement
+          type: string
+        ./ondc-other_importer_country_of_origin:
+          description: country of origin for product manufactured outside but packaged or bottled in India (ISO 3166 Alpha-3 code format)- statutory requirement
+          type: string
+        ./ondc-contact_details_consumer_care:
+          description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..) - statutory requirement
+          type: string
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - id
+        - category_id
+        - fulfillment_id
     Language:
-      description: indicates language code. ONDC supports country codes as per ISO 639.2 standard
+      description: indicates language code. ONDC supports language codes as per ISO 639.2 standard
       type: object
       properties:
         code:
@@ -2101,12 +2184,24 @@ components:
           $ref: '#/components/schemas/Quotation'
         payment:
           $ref: '#/components/schemas/Payment'
+        ./ondc-cancellation_reason:
+          type: string
+          enum:
+            - Order delivery delayed or not possible
+            - Price of one or more items in the order have changed due to which buyer was asked to make additional payment
+            - One or more items in the order not available
+            - Delivery pincode not serviceable
         created_at:
           type: string
           format: date-time
         updated_at:
           type: string
           format: date-time
+      required:
+        - id
+        - state
+        - created_at
+        - updated_at
     Organization:
       description: Describes an organization
       type: object
@@ -2224,6 +2319,9 @@ components:
           $ref: '#/components/schemas/DecimalValue'
         maximum_value:
           $ref: '#/components/schemas/DecimalValue'
+      required:
+        - currency
+        - value
     Provider:
       description: 'Describes a service provider. This can be a restaurant, a hospital, a Store etc'
       type: object
@@ -2277,6 +2375,9 @@ components:
           $ref: '#/components/schemas/Rateable'
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - id
+        - rateable
     Quotation:
       description: Describes a quote
       type: object
