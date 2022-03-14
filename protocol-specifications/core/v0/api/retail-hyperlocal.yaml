@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: ONDC Protocol API for retail (hyperlocal)
-  description: ONDC Protocol API specification. This is an adaptation of Beckn Core version 0.9.3
+  description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities. This is an adaptation of Beckn Core version 0.9.3
   version: 1.0.0-draft
 security:
   - SubscriberAuth: []
