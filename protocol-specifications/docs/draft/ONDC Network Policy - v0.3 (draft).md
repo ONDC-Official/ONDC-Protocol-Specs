@@ -38,4 +38,4 @@ ONDC Protocol includes the following:
 - ONDC Error Codes. Links are below:
   - [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol/blob/master/protocol-specifications/docs/draft/Error Codes.md)
 
-ONDC Protocol will continue to evolve with the ONDC network. All issues, related to the ONDC Protocol APIs, should be logged to [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol/issues)
+ONDC Protocol will continue to evolve with the ONDC network. All issues, related to the ONDC Protocol APIs, should be logged to [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol-Specs/blob/master/protocol-specifications/docs/draft/Error%20Codes.md) 
