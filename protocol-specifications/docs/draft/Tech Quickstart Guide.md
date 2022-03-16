@@ -12,7 +12,7 @@ To get started with understanding ONDC technology, please refer to the following
 
 > Core APIs for buyer and seller platforms along with schema reference.
 
- 3. [ONDC Transaction Flows](https://docs.google.com/presentation/d/17mJ_zPjEYPagc5PZuw7FS3Ftcc-Gop4U6536wStRSag/edit#slide=id.gfb4748baf9_0_472)
+ 3. [ONDC Transaction Flows](https://docs.google.com/presentation/d/17mJ_zPjEYPagc5PZuw7FS3Ftcc-Gop4U6536wStRSag/edit#slide=id.g1030fbe2b4a_0_0)
 
 > Presentation to brief on transaction flows wrt discovery, order, fulfilment and post fulfilment.
 
