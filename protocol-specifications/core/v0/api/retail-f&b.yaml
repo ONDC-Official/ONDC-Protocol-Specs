@@ -1935,7 +1935,7 @@ components:
             measure:
               $ref: '#/components/schemas/Scalar'
     Item:
-      description: Describes a product or a service offered to the end consumer by the provider. Use descriptor.name for food name, descriptor.symbol for Veg or Non-veg, descriptor.short_desc for food allergen and descriptor.long_desc for instructions for use
+      description: Describes a product or a service offered to the end consumer by the provider. Use descriptor.name for food name, descriptor.symbol for Veg or Non-veg, descriptor.short_desc for food allergen, descriptor.long_desc for instructions for use, price.listed_value for declared price
       type: object
       properties:
         id:
@@ -2321,7 +2321,6 @@ components:
           $ref: '#/components/schemas/DecimalValue'
       required:
         - currency
-        - value
     Provider:
       description: 'Describes a service provider. This can be a restaurant, a hospital, a Store etc'
       type: object
