@@ -1936,7 +1936,7 @@ components:
             measure:
               $ref: '#/components/schemas/Scalar'
     Item:
-      description: Describes a product or a service offered to the end consumer by the provider. Use Item.price.listed_value for declared price, Item.price.maximum_value for MRP.
+      description: Describes a product or a service offered to the end consumer by the provider. Use price.listed_value for declared price, price.maximum_value for MRP.
       type: object
       properties:
         id:
