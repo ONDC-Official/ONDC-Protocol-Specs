@@ -1871,7 +1871,7 @@ components:
       description: 'Image of an object. <br/><br/> A url based image will look like <br/><br/>```uri:http://path/to/image``` <br/><br/> An image can also be sent as a data string. For example : <br/><br/> ```data:js87y34ilhriuho84r3i4```'
       type: string
     Intent:
-      description: Intent of a user. Used for searching for services
+      description: Intent of a user. Used for searching for services. Buyer App can set finder fee type in payment."./ondc-buyer_app_finder_fee_type" and amount in "./ondc-buyer_app_finder_fee_amount"
       type: object
       properties:
         descriptor:
@@ -2268,6 +2268,13 @@ components:
           enum:
             - BAP
             - BPP
+        ./ondc-buyer_app_finder_fee_type:
+          type: string
+          enum:
+            - Amount
+            - Percentage
+        ./ondc-buyer_app_finder_fee_amount:
+          $ref: '#/components/schemas/DecimalValue'
     Person:
       description: Describes a person.
       type: object
