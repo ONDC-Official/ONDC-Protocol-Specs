@@ -2275,6 +2275,12 @@ components:
             - Percentage
         ./ondc-buyer_app_finder_fee_amount:
           $ref: '#/components/schemas/DecimalValue'
+        ./ondc-withholding_amount:
+          $ref: '#/components/schemas/DecimalValue'
+        ./ondc-return_window:
+          $ref: '#/components/schemas/DecimalValue'
+        ./ondc-settlement_window:
+          $ref: '#/components/schemas/DecimalValue'
     Person:
       description: Describes a person.
       type: object
