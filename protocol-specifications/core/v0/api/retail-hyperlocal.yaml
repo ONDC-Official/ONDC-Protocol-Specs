@@ -2249,19 +2249,99 @@ components:
           enum:
             - BAP
             - BPP
+        ./ondc-collected_by_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
         ./ondc-buyer_app_finder_fee_type:
           type: string
           enum:
             - Amount
-            - Percentage
+            - Percent
         ./ondc-buyer_app_finder_fee_amount:
           $ref: '#/components/schemas/DecimalValue'
         ./ondc-withholding_amount:
           $ref: '#/components/schemas/DecimalValue'
+        ./ondc-withholding_amount_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
         ./ondc-return_window:
           $ref: '#/components/schemas/DecimalValue'
+        ./ondc-return_window_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
+        ./ondc-settlement_basis:
+          description: In case of prepaid payment, whether settlement between counterparties should be on the basis of collection, shipment or delivery
+          type: string
+          enum:
+            - Collection
+            - Shipment
+            - Delivery
+        ./ondc-settlement_basis_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
         ./ondc-settlement_window:
           $ref: '#/components/schemas/DecimalValue'
+        ./ondc-settlement_window_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
+        ./ondc-settlement_details:
+          type: array
+          items:
+            type: object
+            properties:
+              settlement_counterparty:
+                type: string
+                enum:
+                  - buyer-app
+                  - seller-app
+                  - logistics-provider
+              settlement_phase:
+                type: string
+                enum:
+                  - sale-amount
+                  - withholding-amount
+              settlement_type:
+                type: string
+                enum:
+                  - neft
+                  - rtgs
+                  - upi
+              settlement_bank_account_no:
+                type: string
+              settlement_ifsc_code:
+                type: string
+              settlement_status:
+                type: string
+                enum:
+                  - PAID
+                  - NOT-PAID
+              settlement_reference:
+                description: Settlement transaction reference number
+                type: string
+              settlement_timestamp:
+                description: Settlement transaction timestamp
+                type: string
+                format: date-time
     Person:
       description: Describes a person.
       type: object
