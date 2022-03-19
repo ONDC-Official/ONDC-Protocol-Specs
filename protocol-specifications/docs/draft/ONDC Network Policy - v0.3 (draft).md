@@ -8,7 +8,7 @@ ONDC will define network policies that will govern the operation of the network,
 
 - Registration of Participants
 - Data Privacy and Security
-- [Payment and Settlement Protocol](https://docs.google.com/document/d/1V0zqFAS4bQP9tXBAOaPZq5PX8cTbKx6wKAoYZFlYURU/edit)
+- [Payment and Settlement Protocol](https://docs.google.com/document/d/1iqLdayk488ekEzKrEs-yn6gVrevbxBkILBe5j4oIxMY/edit)
 - Use-cases for different domains
 - Open Data Protocol
 - Transaction Authentication & Non-repudiation
