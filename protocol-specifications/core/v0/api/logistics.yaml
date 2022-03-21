@@ -987,7 +987,7 @@ paths:
         - Buyer App Meta APIs
       description: Get cancellation reasons from the Seller App
       requestBody:
-        description: List of cancellation reasons
+        description: List of cancellation reasons. Includes - Order delivery delayed or not possible, Delivery pin code not serviceable
         content:
           application/json:
             schema:
@@ -2110,11 +2110,6 @@ components:
         updated_at:
           type: string
           format: date-time
-        ./ondc-cancellation_reason:
-          type: string
-          enum:
-            - Order delivery not possible
-            - Delivery pincode not serviceable
       required:
         - id
         - state
