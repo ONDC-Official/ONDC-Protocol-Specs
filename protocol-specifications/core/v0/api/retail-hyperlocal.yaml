@@ -1974,13 +1974,13 @@ components:
           description: in case of return, whether the item should be picked up by seller
           type: boolean
         ./ondc-return_window:
-          description: return window for the item in ISO8601 format e.g. '24:00:00' indicates 24 hour return window
+          description: return window for the item in ISO8601 durations format e.g. 'P24H' indicates 24 hour return window
           type: string
         ./ondc-cancellable:
           description: whether the item is cancellable
           type: boolean
         ./ondc-time_to_ship:
-          description: time from order confirmation by which item ready to ship in ISO8601 format e.g. '02:00:00' indicates item ready to ship in 2 hrs
+          description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'P2H' indicates item ready to ship in 2 hrs
           type: string
         ./ondc-manufacturer_or_packer_name:
           description: name of manufacturer or packer (in case manufacturer is not the packer) or name of importer for imported goods - statutory requirement
