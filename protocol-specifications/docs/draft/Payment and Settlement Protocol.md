@@ -1,7 +1,8 @@
-# Payment and Settlement Protocol - v0.4 (DRAFT) 
+# Payment and Settlement Protocol - v0.5 (DRAFT) 
 
 | Version | Date          | Changes                                                      |
 | ------- | ------------- | ------------------------------------------------------------ |
+| 0.5     | 22nd Mar 2022 | - Changed "Seller App Settlement details" for scenario 2 to "Buyer App Settlement details" (page 12);<br />- Added for scenario b - "Who collects payment" - if the Seller App asserts its right to collect payment, the buyer aoo should agree in the subsequent init call (page 17); |
 | 0.4     | 16th Mar 2022 | - Assertion to collect payment (by Buyer App or Seller App) to be decided during order initialization, whether or not it’s a part of search intent;<br />- Deterministic negotiation protocol for payment & settlement terms;<br />- Withholding amount to be held by entity that collects payment;Updated Technical Specs for different scenarios;<br />- Added scenarios for settlement; |
 | 0.3     | 8th Feb 2022  | Incorporate following changes to align with updated ONDC Commercial Policy Release 1:<br />- Willingness to collect payment will be a part of the search intent from the Buyer App;<br />- Settlement time starts from the time the proof of payment is available;<br />- Open Issues - markup for buyer app during initialising checkout of order? refund trail for COD; |
 | 0.2     | 7th Feb 2022  | Initial Version                                              |
@@ -178,7 +179,7 @@ The process flow for payment & settlement will be as follows for a Buyer App and
 
 - Buyer App refuses to assert first right to collect payment and Seller App agrees to collect payment;
 - Seller App & Buyer App mutually negotiate & agree on the following - **withholding amount** of 10%, **settlement window** of 2 days, **return window** of 7 days.
-- Seller App provides its settlement details (payee bank account no);
+- Buyer App provides its settlement details (payee bank account no);
 - Seller App collects payment from Buyer and settles with Buyer App, its **Finder Fee**, as per the mutually agreed settlement terms & conditions. In case logistics services were procured through the Buyer App, the Seller App also includes the cost of logistics services;
 - In case logistics services were procured through the Seller App, the Seller App settles with the logistics provider based on its settlement terms & conditions;
 
@@ -324,7 +325,7 @@ Payment & Settlement terms will be communicated using the Payment object. This s
 
 }
 </pre>
-**/on_init**: If Seller App asserts its right to collect payment:
+**/on_init**: If Seller App asserts its right to collect payment (note: the Buyer App should agree to this in the subsequent /init call):
 <pre>
 {
 
