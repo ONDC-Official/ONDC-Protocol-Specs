@@ -1701,7 +1701,7 @@ components:
       description: Codification of domain for ONDC
       type: string
       enum:
-        - nic2004:52110
+        - nic2004:55204
     Duration:
       description: Describes duration as per ISO8601 format
       type: string
