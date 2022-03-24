@@ -1,4 +1,4 @@
-# ONDC Network Policy - v0.3 (draft)
+# ONDC Network Policy - v0.4 (draft)
 
 
 
@@ -37,6 +37,8 @@ ONDC Protocol includes the following:
   - [Swaggerhub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Logistics/1.0.0-draft)
 - ONDC Error Codes. Links are below:
   - [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol-Specs/blob/master/protocol-specifications/docs/draft/Error%20Codes.md)
+- Harmonization of information between retail seller and logistics provider. Links are below:
+  - [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol-Specs/blob/master/protocol-specifications/docs/draft/Harmonizing%20statuses%20in%20cascaded%20retail%20%26%20logistics%20transaction.md)
 
 
 ONDC Protocol will continue to evolve with the ONDC network. All issues, related to the ONDC Protocol APIs, should be logged to [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol/issues)) 
