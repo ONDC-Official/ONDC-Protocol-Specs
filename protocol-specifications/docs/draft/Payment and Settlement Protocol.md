@@ -2,7 +2,7 @@
 
 | Version | Date          | Changes                                                      |
 | ------- | ------------- | ------------------------------------------------------------ |
-| 0.6     | 24th Mar 2022 | - Changed scenarios d & e for Seller App collecting payment & updating status using unsolicited callback; |
+| 0.6     | 24th Mar 2022 | - Changed scenarios for Seller App collecting payment to update status using unsolicited callback; |
 | 0.5     | 22nd Mar 2022 | - Changed "Seller App Settlement details" for scenario 2 to "Buyer App Settlement details" (page 12);<br />- Added for scenario b - "Who collects payment" - if the Seller App asserts its right to collect payment, the buyer aoo should agree in the subsequent init call (page 17); |
 | 0.4     | 16th Mar 2022 | - Assertion to collect payment (by Buyer App or Seller App) to be decided during order initialization, whether or not it’s a part of search intent;<br />- Deterministic negotiation protocol for payment & settlement terms;<br />- Withholding amount to be held by entity that collects payment;Updated Technical Specs for different scenarios;<br />- Added scenarios for settlement; |
 | 0.3     | 8th Feb 2022  | Incorporate following changes to align with updated ONDC Commercial Policy Release 1:<br />- Willingness to collect payment will be a part of the search intent from the Buyer App;<br />- Settlement time starts from the time the proof of payment is available;<br />- Open Issues - markup for buyer app during initialising checkout of order? refund trail for COD; |
@@ -412,9 +412,9 @@ Seller App provides UPI payment link, for rendering, by Buyer App:
 
 }
 </pre>
-Buyer App provides proof of payment
+Seller App provides proof of payment
 
-**/confirm**:
+**/on_status**:
 <pre>
 {
 
@@ -474,9 +474,9 @@ Seller App provides payment gateway link, for rendering, by Buyer App:
 
 }
 </pre>
-Buyer App provides proof of payment
+Seller App provides proof of payment
 
-**/confirm**:
+**/on_status**:
 <pre>
 {
 
