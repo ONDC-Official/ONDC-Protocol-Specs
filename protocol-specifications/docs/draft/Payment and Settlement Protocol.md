@@ -191,13 +191,13 @@ Figure 3: Process Flow: Payment Collection by Seller App
 
 **Example**
 
-Buyer purchases 5 kg of Atta through a Buyer App and declared value for this item by a Seller App is ₹300. Buyer App has a fixed finder fee of 5%, included in the declared price. Seller App also provides home delivery through a logistics provider which charges fees of ₹30. Hence, total order value is ₹300 + ₹30 = ₹330;
+Buyer purchases 5 kg of Atta through a Buyer App and declared value for this item by a Seller App is ₹315. Buyer App has a fixed finder fee of 5%, included in the declared price. Seller App also provides home delivery through a logistics provider which charges fees of ₹30. Hence, total order value is ₹315 + ₹30 = ₹345;
 
 During confirmation of order, buyer app & seller app negotiate the payment & settlement terms & conditions as follows (assume settlement start time is 21st Mar 2022):
 
 1. Buyer App refuses to assert right to collect payment and Seller App agrees to collect payment;
 2. Seller App & Buyer App mutually negotiate & agree on the following - **settlement window** of 2 days;
-3. Buyer App provides its settlement details (payee bank account no);Seller App collects ₹330 from buyer;
+3. Buyer App provides its settlement details (payee bank account no);Seller App collects ₹345 from buyer;
 4. Seller App pays Buyer App ₹15 (Finder fee) by 23rd Mar 2022;
 5. Seller App pays Logistics Provider ₹30 as per their settlement terms & conditions;Settlement of withholding amount will be between the Seller App and the Seller;
 
@@ -229,15 +229,15 @@ Figure 4: Process Flow: Cash on Delivery Payment
 
 **Example**
 
-Buyer purchases 5 kg of Atta through a Buyer App and declared value for this item by a Seller App is ₹400. Buyer App has a fixed finder fee of 5%, included in the declared price. Seller App also provides home delivery through a logistics provider which charges fees of ₹30. Hence, total order value is ₹400 + ₹30 = ₹430;
+Buyer purchases 5 kg of Atta through a Buyer App and declared value for this item by a Seller App is ₹420. Buyer App has a fixed finder fee of 5%, included in the declared price. Seller App also provides home delivery through a logistics provider which charges fees of ₹30. Hence, total order value is ₹420 + ₹30 = ₹450;
 
 During confirmation of order, buyer app & seller app negotiate the payment & settlement terms & conditions as follows (assume settlement start time starts on 21st Mar 2022):
 
 1. Buyer App & Seller App mutually negotiate and agree on the following - **settlement window** of 3 days;
 2. Buyer App provides its settlement details (payee bank account no);
 3. Seller App agrees to settlement window of 1 day with Logistics Provider and specifies its payee account details;
-4. Logistics Agent collects ₹430 from buyer and settles with their Logistics Provider;
-5. Logistics Provider pays Seller App ₹400 (after deducting their charges of ₹30) by 22nd Mar;
+4. Logistics Agent collects ₹450 from buyer and settles with their Logistics Provider;
+5. Logistics Provider pays Seller App ₹420 (after deducting their charges of ₹30) by 22nd Mar;
 6. Seller App pays Buyer App its Finder fee of ₹20 by 24th Mar;Settlement of Withholding Amount will be between the Seller App and the Seller;
 
 
