@@ -1440,6 +1440,7 @@ components:
       required:
         - name
         - phone
+        - tax_number
     Cancellation:
       description: Describes the ACK response
       type: object
@@ -1499,6 +1500,7 @@ components:
             - descriptor.name
             - locations.gps
             - items.descriptor.name
+            - items.fulfillments.type
             - items."./ondc-returnable"
             - items."./ondc-seller_pickup_return"
             - items."./ondc-return_window"
@@ -2106,6 +2108,7 @@ components:
             - Created
             - Shipped
             - Delivered
+            - Updated
             - Returned
             - Replaced
             - Cancelled
