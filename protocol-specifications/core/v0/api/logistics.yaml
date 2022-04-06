@@ -1440,6 +1440,7 @@ components:
       required:
         - name
         - phone
+        - tax_number
     Cancellation:
       description: Describes the ACK response
       type: object
@@ -2046,6 +2047,7 @@ components:
           type: string
           enum:
             - Active
+            - Updated
             - Completed
             - Cancelled
         provider:
@@ -2181,6 +2183,10 @@ components:
           enum:
             - BAP
             - BPP
+        collection_preference:
+          type: string
+          enum:
+            - CoD
     Person:
       description: Describes a person.
       type: object
