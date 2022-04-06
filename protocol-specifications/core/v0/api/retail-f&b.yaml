@@ -1440,6 +1440,7 @@ components:
       required:
         - name
         - phone
+        - tax_number
     Cancellation:
       description: Describes the ACK response
       type: object
@@ -1499,6 +1500,7 @@ components:
             - descriptor.name
             - locations.gps
             - items.descriptor.name
+            - items.fulfillments.type
             - items."./ondc-ingredients_info"
             - items."./ondc-additives_info"
             - items."./ondc-manufacturer_or_packer_name"
@@ -1966,6 +1968,15 @@ components:
           type: boolean
         recommended:
           type: boolean
+        ./ondc-returnable:
+          description: whether the item is returnable
+          type: boolean
+        ./ondc-cancellable:
+          description: whether the item is cancellable
+          type: boolean
+        ./ondc-time_to_ship:
+          description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'P2H' indicates item ready to ship in 2 hrs
+          type: string
         ./ondc-ingredients_info:
           description: list of ingredients (except single ingredient foods), along with nutritional info (can be shown as ingredient1-nutritionalinfo;ingredient2-nutritionalinfo;..) - statutory requirement
           type: string
@@ -2125,6 +2136,7 @@ components:
             - Created
             - Shipped
             - Delivered
+            - Updated
             - Returned
             - Replaced
             - Cancelled
