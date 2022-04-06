@@ -64,6 +64,8 @@ CC-BY-ND
   |50002|Seller App|Updation not possible|When the Seller App is unable to update the order due to it's updation policy|
   |50003|Seller App|Unsupported rating category|When the Seller App receives an entity to rate which is not supported|
   |50004|Seller App|Support unavailable|When the Seller App receives an object if for which it does not provide support|
+  |60001|Logistics|Location Serviceability Error|Pickup or Dropoff locations not serviceable by Logistics Provider|
+  |60002|Logistics|Order Serviceability Error|Order not serviceable as Logistics Agents not available|
 
   ## Acknowledgements
   This document has been adapted from the [Error Codes draft document](https://github.com/beckn/protocol-specifications/blob/draft/docs/protocol-drafts/BECKN-RFC-005-Error-Codes-Draft-01.md) from the Beckn Foundation.
