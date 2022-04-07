@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: ONDC Protocol API for logistics
-  description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
+  title: ONDC Protocol API for retail (hyperlocal)
+  description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities. This is an adaptation of Beckn Core version 0.9.3
   version: 1.0.0-draft
 security:
   - SubscriberAuth: []
@@ -1445,6 +1445,8 @@ components:
       description: Describes a cancellation event.<br>
                    Use (reasons.id, reasons.descriptor.code) to define the cancellation codes:<br>
                    ("001", "Order delivery delayed or not possible");<br>
+                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment");<br>
+                   ("003", "One or more items in the Order not available");<br>
                    ("004", "Delivery pin code not serviceable");
       type: object
       properties:
@@ -1503,6 +1505,18 @@ components:
             - descriptor.name
             - locations.gps
             - items.descriptor.name
+            - items.fulfillments.type
+            - items."./ondc-returnable"
+            - items."./ondc-seller_pickup_return"
+            - items."./ondc-return_window"
+            - items."./ondc-cancellable"
+            - items."./ondc-time_to_ship"
+            - items."./ondc-manufacturer_or_packer_name"
+            - items."./ondc-manufacturer_or_packer_address"
+            - items."./ondc-common_or_generic_name_of_commodity"
+            - items."./ondc-net_quantity_or_measure_of_commodity_in_pkg"
+            - items."./ondc-month_year_of_manufacture_packing_import"
+            - items."./ondc-contact_details_consumer_care"
         exp:
           type: string
           description: Time after which catalog has to be refreshed
@@ -1510,7 +1524,7 @@ components:
       required:
         - bpp/providers
     Category:
-      description: Describes a category. Category codes can have following values - 'Express Delivery', 'Standard Delivery'
+      description: Describes a category
       type: object
       properties:
         id:
@@ -1695,7 +1709,7 @@ components:
       description: Codification of domain for ONDC
       type: string
       enum:
-        - nic2004:60232
+        - nic2004:52110
     Duration:
       description: Describes duration as per ISO8601 format
       type: string
@@ -1781,7 +1795,7 @@ components:
           required:
             - feedback_id
     Fulfillment:
-      description: Describes how a single product/service will be rendered/fulfilled to the end customer
+      description: Describes how a single product/service will be rendered/fulfilled to the end customer. state can have following values - "Searching-for-Agent", "Assigned-Agent", "En-route-to-drop", "At-pickup-location", "At-drop-location", "Delivered-package", "Cancelled-package", "Returned-package"
       type: object
       properties:
         id:
@@ -1789,7 +1803,10 @@ components:
           description: Unique reference ID to the fulfillment of an order
         type:
           type: string
-          description: This describes the type of fulfillment
+          description: This describes the type of fulfillment ("Pickup" - Buyer picks up from store by themselves or through their logistics provider; "Delivery" - seller delivers to buyer)
+          enum:
+            - Pickup
+            - Delivery
         provider_id:
           $ref: '#/components/schemas/Provider/properties/id'
         rating:
@@ -1851,6 +1868,9 @@ components:
           $ref: '#/components/schemas/Rateable'
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - id
+        - type
     Gps:
       description: Describes a gps coordinate
       type: string
@@ -1859,7 +1879,7 @@ components:
       description: 'Image of an object. <br/><br/> A url based image will look like <br/><br/>```uri:http://path/to/image``` <br/><br/> An image can also be sent as a data string. For example : <br/><br/> ```data:js87y34ilhriuho84r3i4```'
       type: string
     Intent:
-      description: Intent of a user. Used for searching for services
+      description: Intent of a user. Used for searching for services. Buyer App can set finder fee type in payment."./ondc-buyer_app_finder_fee_type" and amount in "./ondc-buyer_app_finder_fee_amount"
       type: object
       properties:
         descriptor:
@@ -1923,7 +1943,7 @@ components:
             measure:
               $ref: '#/components/schemas/Scalar'
     Item:
-      description: Describes a product or a service offered to the end consumer by the provider.
+      description: Describes a product or a service offered to the end consumer by the provider. Use price.listed_value for declared price, price.maximum_value for MRP.
       type: object
       properties:
         id:
@@ -1954,11 +1974,51 @@ components:
           type: boolean
         recommended:
           type: boolean
+        ./ondc-returnable:
+          description: whether the item is returnable
+          type: boolean
+        ./ondc-seller_pickup_return:
+          description: in case of return, whether the item should be picked up by seller
+          type: boolean
+        ./ondc-return_window:
+          description: return window for the item in ISO8601 durations format e.g. 'P24H' indicates 24 hour return window
+          type: string
+        ./ondc-cancellable:
+          description: whether the item is cancellable
+          type: boolean
+        ./ondc-time_to_ship:
+          description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'P2H' indicates item ready to ship in 2 hrs
+          type: string
+        ./ondc-manufacturer_or_packer_name:
+          description: name of manufacturer or packer (in case manufacturer is not the packer) or name of importer for imported goods - statutory requirement
+          type: string
+        ./ondc-manufacturer_or_packer_address:
+          description: address of manufacturer or packer (in case manufacturer is not the packer) or address of importer for imported goods - statutory requirement
+          type: string
+        ./ondc-common_or_generic_name_of_commodity:
+          description: common or generic name of commodity - statutory requirement
+          type: string
+        ./ondc-multiple_products_name_number_or_qty:
+          description: for packages with multiple products, the name and number of quantity of each (can be shown as "name1-number_or_quantity; name2-number_or_quantity..") - statutory requirement
+          type: string
+        ./ondc-net_quantity_or_measure_of_commodity_in_pkg:
+          description: net quantity of commodity in terms of standard unit of weight or measure of commodity contained in package - statutory requirement
+          type: string
+        ./ondc-month_year_of_manufacture_packing_import:
+          description: month and year of manufacture or packing or import - statutory requirement
+          type: string
+        ./ondc-imported_product_country_of_origin:
+          description: country of origin for imported products (ISO 3166 Alpha-3 code format)- statutory requirement
+          type: string
+        ./ondc-contact_details_consumer_care:
+          description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..) - statutory requirement
+          type: string
         tags:
           $ref: '#/components/schemas/Tags'
       required:
         - id
         - category_id
+        - fulfillment_id
     Language:
       description: indicates language code. ONDC supports language codes as per ISO 639.2 standard
       type: object
@@ -2031,6 +2091,7 @@ components:
                   type: string
                 unit:
                   type: string
+
     Option:
       description: Describes a selectable option
       type: object
@@ -2049,9 +2110,12 @@ components:
         state:
           type: string
           enum:
-            - Active
+            - Created
+            - Shipped
+            - Delivered
             - Updated
-            - Completed
+            - Returned
+            - Replaced
             - Cancelled
         provider:
           type: object
@@ -2186,10 +2250,99 @@ components:
           enum:
             - BAP
             - BPP
-        collection_preference:
+        ./ondc-collected_by_status:
           type: string
           enum:
-            - CoD
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
+        ./ondc-buyer_app_finder_fee_type:
+          type: string
+          enum:
+            - Amount
+            - Percent
+        ./ondc-buyer_app_finder_fee_amount:
+          $ref: '#/components/schemas/DecimalValue'
+        ./ondc-withholding_amount:
+          $ref: '#/components/schemas/DecimalValue'
+        ./ondc-withholding_amount_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
+        ./ondc-return_window:
+          $ref: '#/components/schemas/DecimalValue'
+        ./ondc-return_window_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
+        ./ondc-settlement_basis:
+          description: In case of prepaid payment, whether settlement between counterparties should be on the basis of collection, shipment or delivery
+          type: string
+          enum:
+            - Collection
+            - Shipment
+            - Delivery
+        ./ondc-settlement_basis_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
+        ./ondc-settlement_window:
+          $ref: '#/components/schemas/DecimalValue'
+        ./ondc-settlement_window_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
+        ./ondc-settlement_details:
+          type: array
+          items:
+            type: object
+            properties:
+              settlement_counterparty:
+                type: string
+                enum:
+                  - buyer-app
+                  - seller-app
+                  - logistics-provider
+              settlement_phase:
+                type: string
+                enum:
+                  - sale-amount
+                  - withholding-amount
+              settlement_type:
+                type: string
+                enum:
+                  - neft
+                  - rtgs
+                  - upi
+              settlement_bank_account_no:
+                type: string
+              settlement_ifsc_code:
+                type: string
+              settlement_status:
+                type: string
+                enum:
+                  - PAID
+                  - NOT-PAID
+              settlement_reference:
+                description: Settlement transaction reference number
+                type: string
+              settlement_timestamp:
+                description: Settlement transaction timestamp
+                type: string
+                format: date-time
     Person:
       description: Describes a person.
       type: object
@@ -2244,7 +2397,7 @@ components:
       required:
         - currency
         - value
-        - estimated_value
+        - maximum_value
     Provider:
       description: 'Describes a service provider. This can be a restaurant, a hospital, a Store etc'
       type: object
@@ -2298,6 +2451,9 @@ components:
           $ref: '#/components/schemas/Rateable'
         tags:
           $ref: '#/components/schemas/Tags'
+      required:
+        - id
+        - rateable
     Quotation:
       description: Describes a quote
       type: object
