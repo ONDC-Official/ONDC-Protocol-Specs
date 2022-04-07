@@ -1876,6 +1876,20 @@ components:
           $ref: '#/components/schemas/Offer'
         item:
           $ref: '#/components/schemas/Item'
+        ./ondc-payload_details:
+          type: object
+          description: payload details that will allow logistics provider to determine serviceability.<br>
+                       For weight, enums for unit are:<br>
+                       "Kilogram"<br>
+                       "Gram"<br>
+                       For dimensions, enums for length.unit, breadth.unit and height.unit are:<br>
+                       "meter"<br>
+                       "centimeter"<br>
+          properties:
+            weight:
+              $ref: '#/components/schemas/Scalar'
+            dimensions:
+              $ref: '#/components/schemas/Dimensions'
         tags:
           $ref: '#/components/schemas/Tags'
     ItemQuantity:
