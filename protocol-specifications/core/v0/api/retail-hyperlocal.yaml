@@ -2180,8 +2180,8 @@ components:
         updated_at:
           type: string
           format: date-time
-        ./ondc-cascaded_orders:
-          description: information on linked orders e.g. order for logistics services cascaded to a retail order
+        ./ondc-linked_orders:
+          description: payload for cascaded orders e.g. order for logistics services linked to a retail order
           type: array
           items:
             type: object
