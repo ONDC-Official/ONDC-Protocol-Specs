@@ -1781,7 +1781,12 @@ components:
           required:
             - feedback_id
     Fulfillment:
-      description: Describes how a single product/service will be rendered/fulfilled to the end customer
+      description: Describes how a single product/service will be rendered/fulfilled to the end customer<br>
+                   Use tags to communicate if order is ready to ship<br>
+                   Order not ready to ship<br>
+                   "./ondc-order_ready_to_ship:" no<br>
+                   Order ready to ship<br>
+                   "./ondc-order_ready_to_ship:" yes<br>
       type: object
       properties:
         id:
