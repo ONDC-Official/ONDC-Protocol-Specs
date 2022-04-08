@@ -272,7 +272,10 @@ paths:
     post:
       tags:
         - ONDC Seller App
-      description: Cancel an order
+      description: Cancel an order<br>
+                   Use the following cancellation reason codes (cancellation_reason_id, descriptor.code):<br>
+                   ("001", "Order delivery delayed or not possible");<br>
+                   ("004", "Delivery pin code not serviceable");
       requestBody:
         description: Buyer cancels an order
         content:
@@ -732,7 +735,8 @@ paths:
     post:
       tags:
         - ONDC Buyer App
-      description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object
+      description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object<br>
+                   Use the same cancellation reason codes as in /cancel
       requestBody:
         description: Seller provides response to cancellation request
         content:
@@ -1442,10 +1446,7 @@ components:
         - phone
         - tax_number
     Cancellation:
-      description: Describes a cancellation event.<br>
-                   Use (reasons.id, reasons.descriptor.code) to define the cancellation codes:<br>
-                   ("001", "Order delivery delayed or not possible");<br>
-                   ("004", "Delivery pin code not serviceable");
+      description: Describes a cancellation event
       type: object
       properties:
         type:
