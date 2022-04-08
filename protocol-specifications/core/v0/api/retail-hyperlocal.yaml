@@ -2179,6 +2179,14 @@ components:
         updated_at:
           type: string
           format: date-time
+        ./ondc-cascaded_orders:
+          description: information on linked orders e.g. order for logistics services cascaded to a retail order
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
       required:
         - id
         - state
