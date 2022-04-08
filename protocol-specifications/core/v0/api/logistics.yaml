@@ -2138,6 +2138,19 @@ components:
         updated_at:
           type: string
           format: date-time
+        ./ondc-created_by:
+          description: order created by
+          type: string
+          enum:
+            - buyer-app
+            - seller-app
+        ./ondc-cancelled_by:
+          description: order cancelled by
+          type: string
+          enum:
+            - buyer-app
+            - seller-app
+            - logistics-provider
         ./ondc-linked_orders:
           description: payload for linked orders e.g. retail order that cascaded into this logistics order
           type: array
