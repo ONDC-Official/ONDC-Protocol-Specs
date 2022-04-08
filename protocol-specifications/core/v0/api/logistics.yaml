@@ -2073,6 +2073,9 @@ components:
             - Updated
             - Completed
             - Cancelled
+            - Shipped
+            - RTO_Init
+            - RTO_Delivered
         provider:
           type: object
           properties:
@@ -2135,6 +2138,46 @@ components:
         updated_at:
           type: string
           format: date-time
+        ./ondc-linked_orders:
+          description: payload for linked orders e.g. retail order that cascaded into this logistics order
+          type: array
+          items:
+            type: object
+            properties:
+              items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      $ref: '#/components/schemas/Item/properties/id'
+                    name:
+                      $ref: '#/components/schemas/Descriptor/properties/name'
+                    quantity:
+                      $ref: '#/components/schemas/ItemQuantity/properties/selected'
+                    price:
+                      $ref: '#/components/schemas/Price'
+              provider:
+                type: object
+                properties:
+                  id:
+                    $ref: '#/components/schemas/Provider/properties/id'
+                  name:
+                    $ref: '#/components/schemas/Descriptor/properties/name'
+                  address:
+                    $ref: '#/components/schemas/Address'
+              order:
+                description: use same units for weight and dimensions as defined for Intent
+                type: object
+                properties:
+                  weight:
+                    $ref: '#/components/schemas/Scalar'
+                  dimensions:
+                    $ref: '#/components/schemas/Dimensions'
+                  value:
+                    $ref: '#/components/schemas/Price'
+                  payment:
+                    $ref: '#/components/schemas/Payment'
       required:
         - id
         - state
