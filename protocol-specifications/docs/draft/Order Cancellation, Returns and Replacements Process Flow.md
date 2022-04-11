@@ -28,6 +28,15 @@ The money trail, associated with cancellation, return & replacement, will be add
     - Logistics Provider
   - This also covers cases where buyer may refuse acceptance on attempt to deliver;
 
+- **Cancellation Reasons**
+
+  Criteria for order cancellation along with cancellation reason codes (cancellation_reason_id, descriptor.code) are defined below:
+
+  - "001", "Order delivery delayed or not possible";
+  - "002", "Price of one or more items have changed due to which buyer was asked to make additional payment";
+  - "003", "One or more items in the Order not available";
+  - "004", "Delivery pin code not serviceable"
+
 - **Process flow - Buyer or Buyer App Initiated**
 
   Buyer can initiate cancellation of order. Alternatively, Buyer App may have a policy to initiate cancellation of order without buyer’s request, due to breach of policy e.g. (shipping time committed + “X” days grace) has lapsed.
