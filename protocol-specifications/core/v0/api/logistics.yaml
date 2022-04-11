@@ -275,7 +275,10 @@ paths:
       description: Cancel an order<br>
                    Use the following cancellation reason codes (cancellation_reason_id, descriptor.code):<br>
                    ("001", "Order delivery delayed or not possible");<br>
-                   ("004", "Delivery pin code not serviceable");
+                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment");<br>
+                   ("003", "One or more items in the Order not available");<br>
+                   ("004", "Delivery pin code not serviceable");<br>
+                   ("005", "Buyer refused to accept delivery");<br>
       requestBody:
         description: Buyer cancels an order
         content:
