@@ -31,11 +31,16 @@ The money trail, associated with cancellation, return & replacement, will be add
 - **Cancellation Reasons**
 
   Criteria for order cancellation along with cancellation reason codes (cancellation_reason_id, descriptor.code) are defined below:
+  
+| Code | Reason for Cancellation                                      |
+| ---- | ------------------------------------------------------------ |
+| 001  | Order delivery delayed or not possible                       |
+| 002  | Price of one or more items have changed due to which buyer was asked to make additional payment |
+| 003  | One or more items in the Order not available                 |
+| 004  | Delivery pin code not serviceable                            |
+| 005  | Buyer refused to accept delivery                             |
 
-  - "001", "Order delivery delayed or not possible";
-  - "002", "Price of one or more items have changed due to which buyer was asked to make additional payment";
-  - "003", "One or more items in the Order not available";
-  - "004", "Delivery pin code not serviceable"
+
 
 - **Process flow - Buyer or Buyer App Initiated**
 
