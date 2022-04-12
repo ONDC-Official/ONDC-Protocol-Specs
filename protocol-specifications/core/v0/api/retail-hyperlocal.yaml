@@ -2181,6 +2181,8 @@ components:
         updated_at:
           type: string
           format: date-time
+        ./ondc-cancellation_reason_id:
+          $ref: '#/components/schemas/Option/properties/id'
         ./ondc-cancelled_by:
           description: order cancelled by
           type: string
