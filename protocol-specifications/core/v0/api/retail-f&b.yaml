@@ -2217,6 +2217,7 @@ components:
           enum:
             - buyer-app
             - seller-app
+            - logistics-provider
         ./ondc-linked_orders:
           description: payload for cascaded orders e.g. order for logistics services linked to a retail order
           type: array
@@ -2289,6 +2290,7 @@ components:
           enum:
             - PAID
             - NOT-PAID
+            - PENDING
         time:
           $ref: '#/components/schemas/Time'
         collected_by:
