@@ -2260,6 +2260,7 @@ components:
           enum:
             - PAID
             - NOT-PAID
+            - PENDING
         time:
           $ref: '#/components/schemas/Time'
         collected_by:
