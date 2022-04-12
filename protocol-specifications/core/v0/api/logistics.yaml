@@ -2147,6 +2147,8 @@ components:
           enum:
             - buyer-app
             - seller-app
+        ./ondc-cancellation_reason_id:
+          $ref: '#/components/schemas/Option/properties/id'
         ./ondc-cancelled_by:
           description: order cancelled by
           type: string
