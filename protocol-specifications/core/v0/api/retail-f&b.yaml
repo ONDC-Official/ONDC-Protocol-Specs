@@ -1944,7 +1944,8 @@ components:
             measure:
               $ref: '#/components/schemas/Scalar'
     Item:
-      description: Describes a product or a service offered to the end consumer by the provider. Use descriptor.name for food name, descriptor.symbol for Veg or Non-veg, descriptor.short_desc for food allergen, descriptor.long_desc for instructions for use, price.listed_value for declared price
+      description: Describes a product or a service offered to the end consumer by the provider. Use price.listed_value for declared price<br>
+                   Use descriptor.name for food name, descriptor.symbol for Veg or Non-veg, descriptor.short_desc for food allergen (e.g. "Product contains nuts"), descriptor.long_desc for instructions for use - all statutory requirements;
       type: object
       properties:
         id:
@@ -1985,7 +1986,12 @@ components:
           description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'P2H' indicates item ready to ship in 2 hrs
           type: string
         ./ondc-ingredients_info:
-          description: list of ingredients (except single ingredient foods), along with nutritional info (can be shown as ingredient1-nutritionalinfo;ingredient2-nutritionalinfo;..) - statutory requirement
+          description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..) - statutory requirement<br>
+                       e.g. "Puffed Rice (40%); Split Green Gram (20%); Ground Nuts (20%);.."
+          type: string
+        ./ondc-nutritional_info:
+          description: nutritional info (can be shown as nutritional info (with unit, per standard unit, per serving);..) - statutory requirement<br>
+                       e.g. "Energy(KCal) - (per 100kg) 420, (per serving 50g) 250; Protein(g) - (per 100kg) 12, (per serving 50g)6;.."
           type: string
         ./ondc-additives_info:
           description: food additives together with specific name or recognized International Numbering System (can be shown as additive1-name or number;additive2-name or number;..) - statutory requirement
