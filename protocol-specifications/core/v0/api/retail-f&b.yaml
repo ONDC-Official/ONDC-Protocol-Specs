@@ -1637,7 +1637,8 @@ components:
           description: The encryption public key of the sender
         ttl:
           type: string
-          description: The duration in ISO8601 format after timestamp for which this message holds valid. Value for search, select, init, confirm, status, track, cancel, update, rating, support is '00:00:30' or 30s
+          description: Timestamp for which this message holds valid in ISO8601 durations format<br>
+                       Value for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds
       required:
         - domain
         - action
@@ -1983,7 +1984,7 @@ components:
           description: whether the item is cancellable
           type: boolean
         ./ondc-time_to_ship:
-          description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'P2H' indicates item ready to ship in 2 hrs
+          description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'PT2H' indicates item ready to ship in 2 hrs
           type: string
         ./ondc-ingredients_info:
           description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..) - statutory requirement<br>
@@ -2137,7 +2138,11 @@ components:
         descriptor:
           $ref: '#/components/schemas/Descriptor'
     Order:
-      description: Describes the details of an order
+      description: Describes the details of an order<br>
+                   For "./ondc-cancellation.cancelled_by" use following values<br>
+                   buyer-app<br>
+                   seller-app<br>
+                   logistics-provider<br>
       type: object
       properties:
         id:
@@ -2215,15 +2220,8 @@ components:
         updated_at:
           type: string
           format: date-time
-        ./ondc-cancellation_reason_id:
-          $ref: '#/components/schemas/Option/properties/id'
-        ./ondc-cancelled_by:
-          description: order cancelled by
-          type: string
-          enum:
-            - buyer-app
-            - seller-app
-            - logistics-provider
+        ./ondc-cancellation:
+          $ref: '#/components/schemas/Cancellation'
         ./ondc-linked_orders:
           description: payload for cascaded orders e.g. order for logistics services linked to a retail order
           type: array
