@@ -1626,7 +1626,8 @@ components:
           description: The encryption public key of the sender
         ttl:
           type: string
-          description: The duration in ISO8601 format after timestamp for which this message holds valid. Value for search, select, init, confirm, status, track, cancel, update, rating, support is '00:00:30' or 30s
+          description: Timestamp for which this message holds valid in ISO8601 durations format<br>
+                       Value for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds
       required:
         - domain
         - action
@@ -2063,7 +2064,11 @@ components:
         descriptor:
           $ref: '#/components/schemas/Descriptor'
     Order:
-      description: Describes the details of an order
+      description: Describes the details of an order<br>
+                   For "./ondc-cancellation.cancelled_by" use following values<br>
+                   buyer-app<br>
+                   seller-app<br>
+                   logistics-provider<br>
       type: object
       properties:
         id:
@@ -2147,15 +2152,8 @@ components:
           enum:
             - buyer-app
             - seller-app
-        ./ondc-cancellation_reason_id:
-          $ref: '#/components/schemas/Option/properties/id'
-        ./ondc-cancelled_by:
-          description: order cancelled by
-          type: string
-          enum:
-            - buyer-app
-            - seller-app
-            - logistics-provider
+        ./ondc-cancellation:
+          $ref: '#/components/schemas/Cancellation'
         ./ondc-linked_orders:
           description: payload for linked orders e.g. retail order that cascaded into this logistics order
           type: array
