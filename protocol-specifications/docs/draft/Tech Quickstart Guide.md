@@ -20,7 +20,7 @@ To get started with understanding ONDC technology, please refer to the following
 
 > Steps to sign & verify authentication headers in API requests & responses.
 
- 5. [NSDL Adaptor Interfaces](https://github.com/dhiraj-nsdl/Beckn-API)
+ 5. [NSDL Adaptor Interfaces](https://github.com/NSDL-e-Governance/ondc_adaptor)
 
 > ONDC APIs Adaptors developed by NSDL eGov complied with Beckn Protocol.
 
