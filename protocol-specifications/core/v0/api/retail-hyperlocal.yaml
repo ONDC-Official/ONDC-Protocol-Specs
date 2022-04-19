@@ -1992,104 +1992,100 @@ components:
           description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'PT2H' indicates item ready to ship in 2 hrs
           type: string
         ./ondc-statutory_reqs_packaged_commodities:
-          type: array
-          items:
-            type: object
-            properties:
-              manufacturer_or_packer_name:
-                description: name of manufacturer or packer (in case manufacturer is not the packer) or name of importer for imported goods
-                type: string
-              manufacturer_or_packer_address:
-                description: address of manufacturer or packer (in case manufacturer is not the packer) or address of importer for imported goods
-                type: string
-              common_or_generic_name_of_commodity:
-                description: common or generic name of commodity
-                type: string
-              multiple_products_name_number_or_qty:
-                description: for packages with multiple products, the name and number of quantity of each (can be shown as "name1-number_or_quantity; name2-number_or_quantity..")
-                type: string
-              net_quantity_or_measure_of_commodity_in_pkg:
-                description: net quantity of commodity in terms of standard unit of weight or measure of commodity contained in package
-                type: string
-              month_year_of_manufacture_packing_import:
-                description: month and year of manufacture or packing or import
-                type: string
-              imported_product_country_of_origin:
-                description: country of origin for imported products (ISO 3166 Alpha-3 code format)
-                type: string
-              contact_details_consumer_care:
-                description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..)
-                type: string
+          type: object
+          properties:
+            manufacturer_or_packer_name:
+              description: name of manufacturer or packer (in case manufacturer is not the packer) or name of importer for imported goods
+              type: string
+            manufacturer_or_packer_address:
+              description: address of manufacturer or packer (in case manufacturer is not the packer) or address of importer for imported goods
+              type: string
+            common_or_generic_name_of_commodity:
+              description: common or generic name of commodity
+              type: string
+            multiple_products_name_number_or_qty:
+              description: for packages with multiple products, the name and number of quantity of each (can be shown as "name1-number_or_quantity; name2-number_or_quantity..")
+              type: string
+            net_quantity_or_measure_of_commodity_in_pkg:
+              description: net quantity of commodity in terms of standard unit of weight or measure of commodity contained in package
+              type: string
+            month_year_of_manufacture_packing_import:
+              description: month and year of manufacture or packing or import
+              type: string
+            imported_product_country_of_origin:
+              description: country of origin for imported products (ISO 3166 Alpha-3 code format)
+              type: string
+            contact_details_consumer_care:
+              description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..)
+              type: string
         ./ondc-statutory_reqs_prepackaged_food:
-          type: array
-          items:
-            type: object
-            properties:
-              ingredients_info:
-                description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..)<br>
-                             e.g. "Puffed Rice (40%); Split Green Gram (20%); Ground Nuts (20%);.."
-                type: string
-              nutritional_info:
-                description: nutritional info (can be shown as nutritional info (with unit, per standard unit, per serving);..)<br>
-                             e.g. "Energy(KCal) - (per 100kg) 420, (per serving 50g) 250; Protein(g) - (per 100kg) 12, (per serving 50g)6;.."
-                type: string
-              additives_info:
-                description: food additives together with specific name or recognized International Numbering System (can be shown as additive1-name or number;additive2-name or number;..)
-                type: string
-              manufacturer_or_packer_name:
-                description: name of manufacturer or packer (for non-retail containers)
-                type: string
-              manufacturer_or_packer_address:
-                description: address of manufacturer or packer (for non-retail containers)
-                type: string
-              brand_owner_name:
-                description: name of brand owner
-                type: string
-              brand_owner_address:
-                description: address of brand owner
-                type: string
-              brand_owner_FSSAI_logo:
-                description: FSSAI logo of brand owner (url based image e.g. uri:http://path/to/image)
-                type: string
-              brand_owner_FSSAI_license_no:
-                description: FSSAI license no of brand owner
-                type: string
-              other_FSSAI_license_no:
-                description: FSSAI license no of manufacturer or marketer or packer or bottler if different from brand owner
-                type: string
-              net_quantity:
-                description: net quantity
-                type: string
-              importer_name:
-                description: name of importer
-                type: string
-              importer_address:
-                description: address of importer
-                type: string
-              importer_FSSAI_logo:
-                description: FSSAI logo of importer (url based image e.g. uri:http://path/to/image)
-                type: string
-              importer_FSSAI_license_no:
-                description: FSSAI license no of importer
-                type: string
-              imported_product_country_of_origin:
-                description: country of origin for imported products (ISO 3166 Alpha-3 code format)
-                type: string
-              other_importer_name:
-                description: name of importer for product manufactured outside but packaged or bottled in India
-                type: string
-              other_importer_address:
-                description: address of importer for product manufactured outside but packaged or bottled in India
-                type: string
-              other_premises:
-                description: premises where product manufactured outside are packaged or bottled in India
-                type: string
-              other_importer_country_of_origin:
-                description: country of origin for product manufactured outside but packaged or bottled in India (ISO 3166 Alpha-3 code format)
-                type: string
-              contact_details_consumer_care:
-                description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..)
-                type: string
+          type: object
+          properties:
+            ingredients_info:
+              description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..)<br>
+                           e.g. "Puffed Rice (40%); Split Green Gram (20%); Ground Nuts (20%);.."
+              type: string
+            nutritional_info:
+              description: nutritional info (can be shown as nutritional info (with unit, per standard unit, per serving);..)<br>
+                           e.g. "Energy(KCal) - (per 100kg) 420, (per serving 50g) 250; Protein(g) - (per 100kg) 12, (per serving 50g)6;.."
+              type: string
+            additives_info:
+              description: food additives together with specific name or recognized International Numbering System (can be shown as additive1-name or number;additive2-name or number;..)
+              type: string
+            manufacturer_or_packer_name:
+              description: name of manufacturer or packer (for non-retail containers)
+              type: string
+            manufacturer_or_packer_address:
+              description: address of manufacturer or packer (for non-retail containers)
+              type: string
+            brand_owner_name:
+              description: name of brand owner
+              type: string
+            brand_owner_address:
+              description: address of brand owner
+              type: string
+            brand_owner_FSSAI_logo:
+              description: FSSAI logo of brand owner (url based image e.g. uri:http://path/to/image)
+              type: string
+            brand_owner_FSSAI_license_no:
+              description: FSSAI license no of brand owner
+              type: string
+            other_FSSAI_license_no:
+              description: FSSAI license no of manufacturer or marketer or packer or bottler if different from brand owner
+              type: string
+            net_quantity:
+              description: net quantity
+              type: string
+            importer_name:
+              description: name of importer
+              type: string
+            importer_address:
+              description: address of importer
+              type: string
+            importer_FSSAI_logo:
+              description: FSSAI logo of importer (url based image e.g. uri:http://path/to/image)
+              type: string
+            importer_FSSAI_license_no:
+              description: FSSAI license no of importer
+              type: string
+            imported_product_country_of_origin:
+              description: country of origin for imported products (ISO 3166 Alpha-3 code format)
+              type: string
+            other_importer_name:
+              description: name of importer for product manufactured outside but packaged or bottled in India
+              type: string
+            other_importer_address:
+              description: address of importer for product manufactured outside but packaged or bottled in India
+              type: string
+            other_premises:
+              description: premises where product manufactured outside are packaged or bottled in India
+              type: string
+            other_importer_country_of_origin:
+              description: country of origin for product manufactured outside but packaged or bottled in India (ISO 3166 Alpha-3 code format)
+              type: string
+            contact_details_consumer_care:
+              description: name, address, telephone no, email of person or office for contacting for consumer complaints (can be shown as name-"name of person or office; email-"email address";..)
+              type: string
         tags:
           $ref: '#/components/schemas/Tags'
       required:
@@ -2398,43 +2394,41 @@ components:
             - Disagree
             - Terminate
         ./ondc-settlement_details:
-          type: array
-          items:
-            type: object
-            properties:
-              settlement_counterparty:
-                type: string
-                enum:
-                  - buyer-app
-                  - seller-app
-                  - logistics-provider
-              settlement_phase:
-                type: string
-                enum:
-                  - sale-amount
-                  - withholding-amount
-              settlement_type:
-                type: string
-                enum:
-                  - neft
-                  - rtgs
-                  - upi
-              settlement_bank_account_no:
-                type: string
-              settlement_ifsc_code:
-                type: string
-              settlement_status:
-                type: string
-                enum:
-                  - PAID
-                  - NOT-PAID
-              settlement_reference:
-                description: Settlement transaction reference number
-                type: string
-              settlement_timestamp:
-                description: Settlement transaction timestamp
-                type: string
-                format: date-time
+          type: object
+          properties:
+            settlement_counterparty:
+              type: string
+              enum:
+                - buyer-app
+                - seller-app
+                - logistics-provider
+            settlement_phase:
+              type: string
+              enum:
+                - sale-amount
+                - withholding-amount
+            settlement_type:
+              type: string
+              enum:
+                - neft
+                - rtgs
+                - upi
+            settlement_bank_account_no:
+              type: string
+            settlement_ifsc_code:
+              type: string
+            settlement_status:
+              type: string
+              enum:
+                - PAID
+                - NOT-PAID
+            settlement_reference:
+              description: Settlement transaction reference number
+              type: string
+            settlement_timestamp:
+              description: Settlement transaction timestamp
+              type: string
+              format: date-time
     Person:
       description: Describes a person.
       type: object
