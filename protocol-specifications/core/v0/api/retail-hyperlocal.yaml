@@ -2394,41 +2394,43 @@ components:
             - Disagree
             - Terminate
         ./ondc-settlement_details:
-          type: object
-          properties:
-            settlement_counterparty:
-              type: string
-              enum:
-                - buyer-app
-                - seller-app
-                - logistics-provider
-            settlement_phase:
-              type: string
-              enum:
-                - sale-amount
-                - withholding-amount
-            settlement_type:
-              type: string
-              enum:
-                - neft
-                - rtgs
-                - upi
-            settlement_bank_account_no:
-              type: string
-            settlement_ifsc_code:
-              type: string
-            settlement_status:
-              type: string
-              enum:
-                - PAID
-                - NOT-PAID
-            settlement_reference:
-              description: Settlement transaction reference number
-              type: string
-            settlement_timestamp:
-              description: Settlement transaction timestamp
-              type: string
-              format: date-time
+          type: array
+          items:
+            type: object
+            properties:
+              settlement_counterparty:
+                type: string
+                enum:
+                  - buyer-app
+                  - seller-app
+                  - logistics-provider
+              settlement_phase:
+                type: string
+                enum:
+                  - sale-amount
+                  - withholding-amount
+              settlement_type:
+                type: string
+                enum:
+                  - neft
+                  - rtgs
+                  - upi
+              settlement_bank_account_no:
+                type: string
+              settlement_ifsc_code:
+                type: string
+              settlement_status:
+                type: string
+                enum:
+                  - PAID
+                  - NOT-PAID
+              settlement_reference:
+                description: Settlement transaction reference number
+                type: string
+              settlement_timestamp:
+                description: Settlement transaction timestamp
+                type: string
+                format: date-time
     Person:
       description: Describes a person.
       type: object
