@@ -1,4 +1,4 @@
-# ONDC Network Policy - v0.4 (draft)
+# ONDC Network Policy - v0.5 (draft)
 
 
 
@@ -26,12 +26,9 @@ ONDC Protocol includes the following:
 - ONDC Protocol Core API - this is the core API from which the domain specific APIs (below) are derived. Links are below:
   - [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol/blob/master/protocol-specifications/core/v0/api/core.yaml)
   - [SwaggerHub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Core/1.0.0-draft)
-- ONDC Protocol API for Retail (hyperlocal) - this is the API for retail (hyperlocal). Links are below:
+- ONDC Protocol API for Retail (hyperlocal, F&B) - this is the API for retail (hyperlocal). Links are below:
   - [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol/blob/master/protocol-specifications/core/v0/api/retail-hyperlocal.yaml)
   - [SwaggerHub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Hyperlocal/1.0.0-draft)
-- ONDC Protocol API for Retail (Food & Beverage) - this is the API for retail (food & beverage). Links are below:
-  - [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol/blob/master/protocol-specifications/core/v0/api/retail-f%26b.yaml)
-  - [SwaggerHub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Food-and-Beverage/1.0.0-draft)
 - ONDC Protocol API for Logistics - this is the API for Logistics. Links are below:
   - [Github](https://github.com/Open-network-for-digital-commerce/ONDC-Protocol/blob/master/protocol-specifications/core/v0/api/logistics.yaml)
   - [Swaggerhub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Logistics/1.0.0-draft)
