@@ -34,7 +34,7 @@ To get started with understanding ONDC technology, please refer to the following
 
  7. [ONDC Buyer Reference App APK](https://github.com/Open-network-for-digital-commerce/ONDC-Reference-Apps-Mobile/tree/main/BuyerApp/apk)
 
-> ONDC Buyer Reference App APK.
+> ONDC Buyer Reference App APK (under development).
 
  8. [BAP Reference App](https://github.com/beckn/bap-reference-app/tree/1019546f35581e606236c3f4c7794ae8ac8198a0)
 
