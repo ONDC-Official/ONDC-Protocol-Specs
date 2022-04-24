@@ -2419,6 +2419,9 @@ components:
                 type: string
               settlement_ifsc_code:
                 type: string
+              upi_address:
+                description: UPI payment address e.g. VPA
+                type: string
               settlement_status:
                 type: string
                 enum:
