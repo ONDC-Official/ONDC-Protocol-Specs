@@ -1942,10 +1942,18 @@ components:
               $ref: '#/components/schemas/Scalar'
     Item:
       description: Describes a product or a service offered to the end consumer by the provider<br>
-                   Use Use price.listed_value for declared price, descriptor.name for item name - statutory requirements<br>
-                   For packaged commodities, use price.maximum_value for MRP - statutory requirement<br>
-                   For pre-packaged food, use descriptor.symbol for Veg or Non-veg, descriptor.short_desc for food allergen (e.g. "Product contains nuts"), descriptor.long_desc for instructions for use - all statutory requirements<br>
-                   All statutory attributes must be provided, as applicable, for a Catalog Item
+                   Statutory requirements for packaged commodities<br>
+                   descriptor.name (item name)<br>
+                   price.listed_value (declared price)<br>
+                   price.maximum_value (MRP)<br>
+                   Statutory requirements for pre-packaged food<br>
+                   descriptor.name (item name)<br>
+                   descriptor.symbol (veg or non-veg)<br>
+                   descriptor.short_desc (food allergen)<br>
+                   descriptor.long_desc (instructions for use)<br>
+                   price.listed_value (declared price)<br>
+                   All other statutory attributes must be provided, as applicable, for the above<br>
+                   No statutory requirement for category "F&B" (fresh food)
       type: object
       properties:
         id:
@@ -1983,7 +1991,7 @@ components:
           description: in case of return, whether the item should be picked up by seller
           type: boolean
         ./ondc-return_window:
-          description: return window for the item in ISO8601 durations format e.g. 'P24H' indicates 24 hour return window
+          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
           type: string
         ./ondc-cancellable:
           description: whether the item is cancellable
@@ -1993,6 +2001,12 @@ components:
           type: string
         ./ondc-statutory_reqs_packaged_commodities:
           type: object
+          description: <br>
+            mandatory attributes include the following<br>
+              common_or_generic_name_of_commodity<br>
+              net_quantity_or_measure_of_commodity_in_pkg<br>
+              month_year_of_manufacture_packing_import<br>
+              contact_details_consumer_care<br>
           properties:
             manufacturer_or_packer_name:
               description: name of manufacturer or packer (in case manufacturer is not the packer) or name of importer for imported goods
@@ -2020,6 +2034,13 @@ components:
               type: string
         ./ondc-statutory_reqs_prepackaged_food:
           type: object
+          description: <br>
+            mandatory attributes include the following<br>
+              ingredients_info<br>
+              nutritional_info<br>
+              additives_info<br>
+              net_quantity<br>
+              contact_details_consumer_care<br>
           properties:
             ingredients_info:
               description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..)<br>
