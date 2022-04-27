@@ -2204,7 +2204,8 @@ components:
       properties:
         id:
           type: string
-          description: Hash of order object without id
+          description: Hash of order object without id<br>
+                       Will be created by buyer app in confirm API
         state:
           type: string
           enum:
@@ -2287,11 +2288,6 @@ components:
             properties:
               id:
                 type: string
-      required:
-        - id
-        - state
-        - created_at
-        - updated_at
     Organization:
       description: Describes an organization
       type: object
