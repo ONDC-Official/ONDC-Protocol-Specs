@@ -456,7 +456,8 @@ paths:
         - ONDC Gateway
       description: Send catalog
       requestBody:
-        description: Sellers provide their catalog in response to buyer search
+        description: Sellers provide their catalog in response to buyer search<br>
+                     In case of large catalogs, seller apps can page their catalog response and send multiple on_search responses for a single search request
         content:
           application/json:
             schema:
@@ -1438,6 +1439,7 @@ components:
         time:
           $ref: '#/components/schemas/Time'
         tax_number:
+          description: GST number
           type: string
         created_at:
           type: string
@@ -1634,7 +1636,8 @@ components:
         ttl:
           type: string
           description: Timestamp for which this message holds valid in ISO8601 durations format<br>
-                       Value for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds
+                       Outer limit for ttl for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds<br>
+                       Different buyer apps can change this to meet their UX requirements, but it shouldn't exceed this outer limit
       required:
         - domain
         - action
@@ -1999,6 +2002,9 @@ components:
         ./ondc-time_to_ship:
           description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'PT2H' indicates item ready to ship in 2 hrs
           type: string
+        ./ondc-available_on_cod:
+          description: whether the catalog item is available on COD
+          type: boolean
         ./ondc-statutory_reqs_packaged_commodities:
           type: object
           description: <br>
@@ -2113,6 +2119,7 @@ components:
         - id
         - category_id
         - fulfillment_id
+        - price
     Language:
       description: indicates language code. ONDC supports language codes as per ISO 639.2 standard
       type: object
@@ -2379,7 +2386,8 @@ components:
             - Disagree
             - Terminate
         ./ondc-return_window:
-          $ref: '#/components/schemas/DecimalValue'
+          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
+          type: string
         ./ondc-return_window_status:
           type: string
           enum:
@@ -2402,7 +2410,8 @@ components:
             - Disagree
             - Terminate
         ./ondc-settlement_window:
-          $ref: '#/components/schemas/DecimalValue'
+          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
+          type: string
         ./ondc-settlement_window_status:
           type: string
           enum:
