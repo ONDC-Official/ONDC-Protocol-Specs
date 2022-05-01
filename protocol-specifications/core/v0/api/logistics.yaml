@@ -1437,6 +1437,7 @@ components:
         time:
           $ref: '#/components/schemas/Time'
         tax_number:
+          description: GST number
           type: string
         created_at:
           type: string
@@ -2266,6 +2267,51 @@ components:
           type: string
           enum:
             - CoD
+        ./ondc-cod-settlement_window:
+          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
+          type: string
+        ./ondc-cod-settlement_window_status:
+          type: string
+          enum:
+            - Assert
+            - Agree
+            - Disagree
+            - Terminate
+        ./ondc-cod-settlement_details:
+          type: array
+          items:
+            type: object
+            properties:
+              settlement_counterparty:
+                type: string
+                enum:
+                  - buyer-app
+                  - seller-app
+              settlement_type:
+                type: string
+                enum:
+                  - neft
+                  - rtgs
+                  - upi
+              settlement_bank_account_no:
+                type: string
+              settlement_ifsc_code:
+                type: string
+              upi_address:
+                description: UPI payment address e.g. VPA
+                type: string
+              settlement_status:
+                type: string
+                enum:
+                  - PAID
+                  - NOT-PAID
+              settlement_reference:
+                description: Settlement transaction reference number
+                type: string
+              settlement_timestamp:
+                description: Settlement transaction timestamp
+                type: string
+                format: date-time
     Person:
       description: Describes a person.
       type: object
