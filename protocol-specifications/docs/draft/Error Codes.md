@@ -36,6 +36,7 @@ CC-BY-ND
   |10000|Gateway|Bad or Invalid request error|Generic bad or invalid request error|
   |10001|Gateway|Invalid Signature|Cannot verify signature for request|
   |20000|Buyer App|Invalid catalog item|Catalog Item cannot be displayed as it does not meet statutory requirements|
+  |20001|Buyer App|Invalid Signature|Cannot verify signature for request|
   |30000|Seller App|Invalid request error|Generic invalid request error|
   |30001|Seller App|Provider not found|When Seller App is unable to find the provider id sent by the Buyer App|
   |30002|Seller App|Provider location not found|When Seller App is unable to find the provider location id sent by the Buyer App|
@@ -52,6 +53,7 @@ CC-BY-ND
   |30013|Seller App|Update inconsistency|When the Seller App finds changes in the order object other than the update_target|
   |30014|Seller App|Entity to rate not found|When the Seller App is unable to find the entity to rate in id|
   |30015|Seller App|Invalid rating value|When the Seller App receives an invalid value as the rating value in value|
+  |30016|Seller App|Invalid Signature|Cannot verify signature for request|
   |40000|Seller App|Business Error|Generic business error|
   |40001|Seller App|Action not applicable|When an API endpoint is not implemented by the Seller App as it is not required for their use cases and a Buyer App calls one of these endpoints|
   |40002|Seller App|Item quantity unavailable|When the Seller App is unable to select the specified number in order.items[].quantity|
@@ -66,6 +68,7 @@ CC-BY-ND
   |50004|Seller App|Support unavailable|When the Seller App receives an object if for which it does not provide support|
   |60001|Logistics|Location Serviceability Error|Pickup or Dropoff locations not serviceable by Logistics Provider|
   |60002|Logistics|Order Serviceability Error|Order not serviceable as Logistics Agents not available|
+  |60003|Logistics|Invalid Signature|Cannot verify signature for request|
 
   ## Acknowledgements
   This document has been adapted from the [Error Codes draft document](https://github.com/beckn/protocol-specifications/blob/draft/docs/protocol-drafts/BECKN-RFC-005-Error-Codes-Draft-01.md) from the Beckn Foundation.
