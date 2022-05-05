@@ -35,6 +35,7 @@ CC-BY-ND
   |---|---|---|---|
   |10000|Gateway|Bad or Invalid request error|Generic bad or invalid request error|
   |10001|Gateway|Invalid Signature|Cannot verify signature for request|
+  |10002|Gateway|Invalid City Code|Valid city code needs to be passed for search|
   |20000|Buyer App|Invalid catalog item|Catalog Item cannot be displayed as it does not meet statutory requirements|
   |20001|Buyer App|Invalid Signature|Cannot verify signature for request|
   |30000|Seller App|Invalid request error|Generic invalid request error|
