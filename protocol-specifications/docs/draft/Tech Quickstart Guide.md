@@ -40,7 +40,11 @@ To get started with understanding ONDC technology, please refer to the following
 
 > Reference buyer side application from Beckn Foundation.
 
- 10. [Sample JSONs](https://docs.google.com/spreadsheets/d/18_YqkIXjJyVOA0ZXhJlQ80t0qaN9k9brKHEKp1CIB4c/edit#gid=0)
+ 10. [Postman Collection](https://github.com/Open-network-for-digital-commerce/integration-hackathon-jan22)
+
+> Postman Collection for ONDC Protocol SDK.
+
+10. [Sample JSONs](https://docs.google.com/spreadsheets/d/18_YqkIXjJyVOA0ZXhJlQ80t0qaN9k9brKHEKp1CIB4c/edit#gid=0)
 
 > Detailed spreadsheet with sample transaction flow use cases in retail and logistics.
 
