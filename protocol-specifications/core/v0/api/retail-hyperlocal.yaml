@@ -2479,6 +2479,15 @@ components:
               upi_address:
                 description: UPI payment address e.g. VPA
                 type: string
+              bank_name:
+                description: Bank name
+                type: string
+              branch_name:
+                description: Branch name
+                type: string
+              beneficiary_address:
+                description: Beneficiary Address
+                type: string
               settlement_status:
                 type: string
                 enum:
