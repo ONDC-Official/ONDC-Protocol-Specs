@@ -1719,7 +1719,7 @@ components:
             - JSON-SCHEMA-ERROR
         code:
           type: string
-          description: 'ONDC specific error code. For full list of error codes, refer to docs/drafts/Error Codes.md of this repo'
+          description: ONDC specific error code. For full list of error codes, refer to docs/drafts/Error Codes.md of this repo
         path:
           type: string
           description: Path to json schema generating the error. Used only during json schema validation errors
@@ -1789,10 +1789,8 @@ components:
     Fulfillment:
       description: Describes how a single product/service will be rendered/fulfilled to the end customer<br>
                    Use tags to communicate if order is ready to ship<br>
-                   Order not ready to ship<br>
-                   "./ondc-order_ready_to_ship:" no<br>
                    Order ready to ship<br>
-                   "./ondc-order_ready_to_ship:" yes<br>
+                   "@ondc/org/order_ready_to_ship" (pass "Yes")<br>
       type: object
       properties:
         id:
@@ -1887,7 +1885,7 @@ components:
           $ref: '#/components/schemas/Offer'
         item:
           $ref: '#/components/schemas/Item'
-        ./ondc-payload_details:
+        "@ondc/org/payload_details":
           type: object
           description: payload details that will allow logistics provider to determine serviceability.<br>
                        For weight, enums for unit are:<br>
@@ -2066,7 +2064,7 @@ components:
           $ref: '#/components/schemas/Descriptor'
     Order:
       description: Describes the details of an order<br>
-                   For "./ondc-cancellation.cancelled_by" use following values<br>
+                   For "@ondc/org/cancellation.cancelled_by" use following values<br>
                    buyer-app<br>
                    seller-app<br>
                    logistics-provider<br>
@@ -2074,7 +2072,7 @@ components:
       properties:
         id:
           type: string
-          description: Hash of order object without id<br>
+          description: Unique identifier for Order across network<br>
                        Will be created by buyer app in confirm API
         state:
           type: string
@@ -2148,15 +2146,15 @@ components:
         updated_at:
           type: string
           format: date-time
-        ./ondc-created_by:
+        "@ondc/org/created_by":
           description: order created by
           type: string
           enum:
             - buyer-app
             - seller-app
-        ./ondc-cancellation:
+        "@ondc/org/cancellation":
           $ref: '#/components/schemas/Cancellation'
-        ./ondc-linked_orders:
+        "@ondc/org/linked_orders":
           description: payload for linked orders e.g. retail order that cascaded into this logistics order
           type: array
           items:
@@ -2263,21 +2261,21 @@ components:
           enum:
             - BAP
             - BPP
-        ./ondc-collection_preference:
+        "@ondc/org/collection_preference":
           type: string
           enum:
             - CoD
-        ./ondc-cod-settlement_window:
+        "@ondc/org/cod-settlement_window":
           description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
           type: string
-        ./ondc-cod-settlement_window_status:
+        "@ondc/org/cod-settlement_window_status":
           type: string
           enum:
             - Assert
             - Agree
             - Disagree
             - Terminate
-        ./ondc-cod-settlement_details:
+        "@ondc/org/cod-settlement_details":
           type: array
           items:
             type: object
