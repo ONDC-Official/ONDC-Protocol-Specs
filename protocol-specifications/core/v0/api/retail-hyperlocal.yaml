@@ -9,7 +9,7 @@ security:
   - GatewaySubscriberAuth: []
   - GatewaySubscriberAuthNew: []
 externalDocs:
-  description: Contract between retail buyer and seller apps (also defined in this spec)
+  description: Contract between retail buyer and seller apps (change tracking here, details in spec)
   url: https://docs.google.com/document/d/12oMC4A05jT5rjCbY-M7j4T2oekr9bqcvSOpTI0jFEgE/edit
 paths:
   /search:
