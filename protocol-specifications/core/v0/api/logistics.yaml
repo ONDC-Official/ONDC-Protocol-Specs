@@ -7,6 +7,9 @@ security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
   - GatewaySubscriberAuthNew: []
+externalDocs:
+  description: Contract between logistics buyer and seller apps
+  url: https://docs.google.com/document/d/1LiKGK3AKwzx5GWAc5g942QKB-TzDn0gGMsvXNJgIrmk/edit
 paths:
   /search:
     post:
@@ -1607,11 +1610,13 @@ components:
         bpp_id:
           type: string
           format: uri
-          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App
+          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App<br>
+                       Mandatory for all peer-to-peer API requests, i.e. except search and on_search
         bpp_uri:
           type: string
           format: uri
-          description: URI of the Seller App. Must have the same domain name as the bap_id
+          description: URI of the Seller App. Must have the same domain name as the bap_id<br>
+                       Mandatory for all peer-to-peer API requests, i.e. except search and on_search
         transaction_id:
           type: string
           description: This is a unique value which persists across all API calls from search through confirm
@@ -1632,13 +1637,13 @@ components:
       required:
         - domain
         - action
-        - country
-        - city
         - core_version
-        - transaction_id
-        - message_id
         - bap_id
         - bap_uri
+        - transaction_id
+        - message_id
+        - city
+        - country
         - timestamp
     Country:
       description: Describes a country.
