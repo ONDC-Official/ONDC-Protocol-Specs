@@ -8,6 +8,9 @@ security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
   - GatewaySubscriberAuthNew: []
+externalDocs:
+  description: Contract between retail buyer and seller apps (also defined in this spec)
+  url: https://docs.google.com/document/d/12oMC4A05jT5rjCbY-M7j4T2oekr9bqcvSOpTI0jFEgE/edit
 paths:
   /search:
     post:
@@ -623,6 +626,11 @@ paths:
                           $ref: '#/components/schemas/Quotation'
                         payment:
                           $ref: '#/components/schemas/Payment'
+                      required:
+                        - provider.id
+                        - provider_location.id
+                        - items.id
+                        - items.quantity
                   required:
                     - order
                 error:
@@ -1543,6 +1551,8 @@ components:
             - items."@ondc/org/return_window"
             - items."@ondc/org/seller_pickup_return"
             - items."@ondc/org/time_to_ship"
+            - items."@ondc/org/available_on_cod"
+            - items."@ondc/org/contact_details_consumer_care"
             - items."@ondc/org/statutory_reqs_packaged_commodities"
             - items."@ondc/org/statutory_reqs_prepackaged_food"
             - items."@ondc/org/mandatory_reqs_veggies_fruits"
@@ -1646,11 +1656,13 @@ components:
         bpp_id:
           type: string
           format: uri
-          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App
+          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App<br>
+                       Mandatory for all peer-to-peer API requests, i.e. except search and on_search
         bpp_uri:
           type: string
           format: uri
-          description: URI of the Seller App. Must have the same domain name as the bap_id
+          description: URI of the Seller App. Must have the same domain name as the bap_id<br>
+                       Mandatory for all peer-to-peer API requests, i.e. except search and on_search
         transaction_id:
           type: string
           description: This is a unique value which persists across all API calls from search through confirm
@@ -1672,13 +1684,13 @@ components:
       required:
         - domain
         - action
-        - country
-        - city
         - core_version
-        - transaction_id
-        - message_id
         - bap_id
         - bap_uri
+        - transaction_id
+        - message_id
+        - city
+        - country
         - timestamp
     Country:
       description: Describes a country.
@@ -2042,10 +2054,14 @@ components:
         "@ondc/org/statutory_reqs_packaged_commodities":
           type: object
           description: <br>
-            mandatory attributes include the following<br>
+            mandatory for category "Grocery" and sub-category "Packaged Commodities"<br>
+            required attributes for all include the following<br>
+              manufacturer_or_packer_name<br>
+              manufacturer_or_packer_address<br>
               common_or_generic_name_of_commodity<br>
               net_quantity_or_measure_of_commodity_in_pkg<br>
               month_year_of_manufacture_packing_import<br>
+            other attributes are required on case-by-case basis
           properties:
             manufacturer_or_packer_name:
               description: name of manufacturer or packer (in case manufacturer is not the packer) or name of importer for imported goods
@@ -2071,11 +2087,12 @@ components:
         "@ondc/org/statutory_reqs_prepackaged_food":
           type: object
           description: <br>
-            mandatory attributes include the following<br>
-              ingredients_info<br>
+            mandatory for category "Grocery" and sub-category "Pre-packaged food"<br>
+            required attributes include the following<br>
               nutritional_info<br>
               additives_info<br>
               net_quantity<br>
+            other attributes are required on case-by-case basis
           properties:
             ingredients_info:
               description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..)<br>
@@ -2142,7 +2159,8 @@ components:
         "@ondc/org/mandatory_reqs_veggies_fruits":
           type: object
           description: <br>
-            mandatory attributes include the following<br>
+            mandatory for category "Grocery" and sub-category "Fresh vegetables and fruits"<br>
+            required attributes include the following<br>
               net_quantity<br>
         tags:
           $ref: '#/components/schemas/Tags'
@@ -2560,12 +2578,12 @@ components:
       properties:
         id:
           type: string
-          description: 'Id of the provider'
+          description: Id of the provider
         descriptor:
           $ref: '#/components/schemas/Descriptor'
         category_id:
           type: string
-          description: 'Category Id of the provider'
+          description: Category Id of the provider
         "@ondc/org/fssai_license_no":
           type: string
           description: FSSAI license no (for F&B restaurants)
@@ -2625,12 +2643,28 @@ components:
           items:
             type: object
             properties:
+              "@ondc/org/item_id":
+                $ref: '#/components/schemas/Item/properties/id'
+              "@ondc/org/item_quantity":
+                $ref: '#/components/schemas/ItemQuantity/properties/selected'
+              "@ondc/org/title_type":
+                type: string
+                enum:
+                  - item
+                  - delivery
+                  - packing
+                  - tax
               title:
                 type: string
               price:
                 $ref: '#/components/schemas/Price'
         ttl:
           $ref: '#/components/schemas/Duration'
+      required:
+        - "@ondc/org/item_id"
+        - "@ondc/org/item_quantity"
+        - "@ondc/org/title_type"
+        - price
     Rateable:
       description: If the entity can be rated or not
       type: boolean
