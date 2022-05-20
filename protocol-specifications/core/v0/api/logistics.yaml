@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.0-draft
+  version: 1.0.1
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1601,7 +1601,7 @@ components:
           description: Version of ONDC core API specification being used
         bap_id:
           type: string
-          format: uri
+          # format: uri
           description: Unique id of the Buyer App. By default it is the fully qualified domain name of the Buyer App
         bap_uri:
           type: string
@@ -1609,7 +1609,7 @@ components:
           description: URI of the Buyer App for accepting callbacks. Must have the same domain name as the bap_id
         bpp_id:
           type: string
-          format: uri
+          # format: uri
           description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App<br>
                        Mandatory for all peer-to-peer API requests, i.e. except search and on_search
         bpp_uri:
@@ -1957,7 +1957,7 @@ components:
         id:
           description: This is the most unique identifier of a service item. An example of an Item ID could be the SKU of a product.
           type: string
-          format: '#/components/schemas/Item/properties/id'
+          # format: '#/components/schemas/Item/properties/id'
         parent_item_id:
           $ref: '#/components/schemas/Item/properties/id'
         descriptor:
