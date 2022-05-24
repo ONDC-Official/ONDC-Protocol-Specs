@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food<br>
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.1
+  version: 1.0.2
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -2043,7 +2043,7 @@ components:
           description: whether the item is cancellable
           type: boolean
         "@ondc/org/time_to_ship":
-          description: time from order confirmation by which item ready to ship in ISO8601 durations format e.g. 'PT2H' indicates item ready to ship in 2 hrs
+          description: mandatory for F&B - time from order confirmation by which item ready to ship in ISO8601 durations format (e.g. 'PT30M' indicates item ready to ship in 30 mins)
           type: string
         "@ondc/org/available_on_cod":
           description: whether the catalog item is available on COD
