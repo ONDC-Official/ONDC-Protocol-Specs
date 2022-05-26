@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.1
+  version: 1.0.2
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -2160,45 +2160,43 @@ components:
         "@ondc/org/cancellation":
           $ref: '#/components/schemas/Cancellation'
         "@ondc/org/linked_orders":
+          type: object
           description: payload for linked orders e.g. retail order that cascaded into this logistics order
-          type: array
-          items:
-            type: object
-            properties:
+          properties:
+            items:
+              type: array
               items:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      $ref: '#/components/schemas/Item/properties/id'
-                    name:
-                      $ref: '#/components/schemas/Descriptor/properties/name'
-                    quantity:
-                      $ref: '#/components/schemas/ItemQuantity/properties/selected'
-                    price:
-                      $ref: '#/components/schemas/Price'
-              provider:
                 type: object
                 properties:
                   id:
-                    $ref: '#/components/schemas/Provider/properties/id'
+                    $ref: '#/components/schemas/Item/properties/id'
                   name:
                     $ref: '#/components/schemas/Descriptor/properties/name'
-                  address:
-                    $ref: '#/components/schemas/Address'
-              order:
-                description: use same units for weight and dimensions as defined for Intent
-                type: object
-                properties:
-                  weight:
-                    $ref: '#/components/schemas/Scalar'
-                  dimensions:
-                    $ref: '#/components/schemas/Dimensions'
-                  value:
+                  quantity:
+                    $ref: '#/components/schemas/ItemQuantity/properties/selected'
+                  price:
                     $ref: '#/components/schemas/Price'
-                  payment:
-                    $ref: '#/components/schemas/Payment'
+            provider:
+              type: object
+              properties:
+                id:
+                  $ref: '#/components/schemas/Provider/properties/id'
+                name:
+                  $ref: '#/components/schemas/Descriptor/properties/name'
+                address:
+                  $ref: '#/components/schemas/Address'
+            order:
+              description: use same units for weight and dimensions as defined for Intent
+              type: object
+              properties:
+                weight:
+                  $ref: '#/components/schemas/Scalar'
+                dimensions:
+                  $ref: '#/components/schemas/Dimensions'
+                value:
+                  $ref: '#/components/schemas/Price'
+                payment:
+                  $ref: '#/components/schemas/Payment'
     Organization:
       description: Describes an organization
       type: object
