@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food<br>
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.2
+  version: 1.0.3
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1521,41 +1521,44 @@ components:
           items:
             $ref: '#/components/schemas/Provider'
           required:
-            - descriptor.name
-            - descriptor.symbol
-            - descriptor.short_desc
-            - descriptor.long_desc
-            - descriptor.images
-            - locations.id
-            - locations.gps
-            - locations.address.street
-            - locations.address.city
-            - locations.address.state
-            - items.id
-            - items.descriptor.name
-            - items.descriptor.symbol
-            - items.descriptor.short_desc
-            - items.descriptor.long_desc
-            - items.descriptor.images
-            - items.price.currency
-            - items.price.value
-            - items.price.maximum_value
-            - items.category_id
-            - items.fulfillment_id
-            - items.location_id
-            - items.matched
-            - items.related
-            - items.recommended
-            - items."@ondc/org/returnable"
-            - items."@ondc/org/cancellable"
-            - items."@ondc/org/return_window"
-            - items."@ondc/org/seller_pickup_return"
-            - items."@ondc/org/time_to_ship"
-            - items."@ondc/org/available_on_cod"
-            - items."@ondc/org/contact_details_consumer_care"
-            - items."@ondc/org/statutory_reqs_packaged_commodities"
-            - items."@ondc/org/statutory_reqs_prepackaged_food"
-            - items."@ondc/org/mandatory_reqs_veggies_fruits"
+            - Provider.ttl
+            - Provider."@ondc/org/fssai_license_no"
+            - Provider.descriptor.name
+            - Provider.descriptor.symbol
+            - Provider.descriptor.short_desc
+            - Provider.descriptor.long_desc
+            - Provider.descriptor.images
+            - Provider.fulfillments.id
+            - Provider.fulfillments.type
+            - Provider.locations.id
+            - Provider.locations.gps
+            - Provider.locations.address.street
+            - Provider.locations.address.city
+            - Provider.locations.address.area_code
+            - Provider.locations.address.state
+            - Provider.items.id
+            - Provider.items.descriptor.name
+            - Provider.items.descriptor.symbol
+            - Provider.items.descriptor.short_desc
+            - Provider.items.descriptor.long_desc
+            - Provider.items.descriptor.images
+            - Provider.items.price.currency
+            - Provider.items.price.value
+            - Provider.items.price.maximum_value
+            - Provider.items.category_id
+            - Provider.items.fulfillment_id
+            - Provider.items.location_id
+            - Provider.items.matched
+            - Provider.items."@ondc/org/returnable"
+            - Provider.items."@ondc/org/cancellable"
+            - Provider.items."@ondc/org/return_window"
+            - Provider.items."@ondc/org/seller_pickup_return"
+            - Provider.items."@ondc/org/time_to_ship"
+            - Provider.items."@ondc/org/available_on_cod"
+            - Provider.items."@ondc/org/contact_details_consumer_care"
+            - Provider.items."@ondc/org/statutory_reqs_packaged_commodities"
+            - Provider.items."@ondc/org/statutory_reqs_prepackaged_food"
+            - Provider.items."@ondc/org/mandatory_reqs_veggies_fruits"
         exp:
           type: string
           description: Time after which catalog has to be refreshed
@@ -2620,6 +2623,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Item'
+        ttl:
+          type: string
+          description: Validity of catalog in ISO8601 durations format; value of 0 indicates catalog is not cacheable
         exp:
           type: string
           description: Time after which catalog has to be refreshed
@@ -2631,6 +2637,7 @@ components:
       required:
         - id
         - "@ondc/org/fssai_license_no"
+        - ttl
         - rateable
     Quotation:
       description: Describes a quote
