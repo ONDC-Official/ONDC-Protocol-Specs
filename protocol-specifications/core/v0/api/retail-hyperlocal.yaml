@@ -2625,7 +2625,7 @@ components:
             $ref: '#/components/schemas/Item'
         ttl:
           type: string
-          description: Validity of catalog in ISO8601 durations format; value of 0 indicates catalog is not cacheable
+          description: Validity of catalog in ISO8601 durations format after which it has to be refreshed e.g. 'P7D' indicates validity of 7 days; value of 0 indicates catalog is not cacheable
         exp:
           type: string
           description: Time after which catalog has to be refreshed
