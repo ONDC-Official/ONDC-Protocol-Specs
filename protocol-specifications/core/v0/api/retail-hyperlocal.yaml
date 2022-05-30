@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food<br>
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.4
+  version: 1.0.5
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -2169,9 +2169,30 @@ components:
           $ref: '#/components/schemas/Tags'
       required:
         - id
+        - descriptor
+        - descriptor.name
+        - descriptor.symbol
+        - descriptor.short_desc
+        - descriptor.long_desc
+        - descriptor.images
+        - price
+        - price.currency
+        - price.value
+        - price.maximum_value
         - category_id
         - fulfillment_id
-        - price
+        - location_id
+        - matched
+        - "@ondc/org/returnable"
+        - "@ondc/org/cancellable"
+        - "@ondc/org/return_window"
+        - "@ondc/org/seller_pickup_return"
+        - "@ondc/org/time_to_ship"
+        - "@ondc/org/available_on_cod"
+        - "@ondc/org/contact_details_consumer_care"
+        - "@ondc/org/statutory_reqs_packaged_commodities"
+        - "@ondc/org/statutory_reqs_prepackaged_food"
+        - "@ondc/org/mandatory_reqs_veggies_fruits"
     Language:
       description: indicates language code. ONDC supports language codes as per ISO 639.2 standard
       type: object
@@ -2638,7 +2659,6 @@ components:
         - id
         - "@ondc/org/fssai_license_no"
         - ttl
-        - rateable
     Quotation:
       description: Describes a quote
       type: object
