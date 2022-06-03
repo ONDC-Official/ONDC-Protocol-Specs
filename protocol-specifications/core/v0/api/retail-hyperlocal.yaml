@@ -2013,8 +2013,20 @@ components:
           $ref: '#/components/schemas/Item/properties/id'
         descriptor:
           $ref: '#/components/schemas/Descriptor'
+          required:
+            - name
+            - symbol
+            - short_desc
+            - long_desc
+            - images
+
         price:
           $ref: '#/components/schemas/Price'
+          required:
+            - value
+            - maximum_value
+            - currency
+
         category_id:
           $ref: '#/components/schemas/Category/properties/id'
         fulfillment_id:
@@ -2170,15 +2182,7 @@ components:
       required:
         - id
         - descriptor
-        - descriptor.name
-        - descriptor.symbol
-        - descriptor.short_desc
-        - descriptor.long_desc
-        - descriptor.images
         - price
-        - price.currency
-        - price.value
-        - price.maximum_value
         - category_id
         - fulfillment_id
         - location_id
