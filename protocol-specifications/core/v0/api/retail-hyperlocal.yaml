@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food<br>
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.7
+  version: 1.0.8
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1675,7 +1675,6 @@ components:
           description: Version of ONDC core API specification being used
         bap_id:
           type: string
-          # format: uri
           description: Unique id of the Buyer App. By default it is the fully qualified domain name of the Buyer App
         bap_uri:
           type: string
@@ -2016,11 +2015,11 @@ components:
               $ref: '#/components/schemas/Scalar'
     Item:
       description: Describes a product or a service offered to the end consumer by the provider<br>
-                   Statutory requirements for packaged commodities<br>
+                   Statutory requirements for category_id "Packaged Commodities"<br>
                    descriptor.name (item name)<br>
                    price.value (declared price)<br>
                    price.maximum_value (MRP)<br>
-                   Statutory requirements for pre-packaged food<br>
+                   Statutory requirements for category_id "Packaged Foods"<br>
                    descriptor.name (item name)<br>
                    descriptor.symbol (veg or non-veg)<br>
                    descriptor.short_desc (food allergen)<br>
@@ -2033,7 +2032,6 @@ components:
         id:
           description: This is the most unique identifier of a service item. An example of an Item ID could be the SKU of a product.
           type: string
-          # format: '#/components/schemas/Item/properties/id'
         parent_item_id:
           $ref: '#/components/schemas/Item/properties/id'
         descriptor:
@@ -2044,14 +2042,12 @@ components:
             - short_desc
             - long_desc
             - images
-
         price:
           $ref: '#/components/schemas/Price'
           required:
             - value
             - maximum_value
             - currency
-
         category_id:
           $ref: '#/components/schemas/Category/properties/id'
         fulfillment_id:
@@ -2077,13 +2073,13 @@ components:
           description: in case of return, whether the item should be picked up by seller
           type: boolean
         "@ondc/org/return_window":
-          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
+          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window. Mandatory if "@ondc/org/returnable" is "true"
           type: string
         "@ondc/org/cancellable":
           description: whether the item is cancellable
           type: boolean
         "@ondc/org/time_to_ship":
-          description: mandatory for F&B - time from order confirmation by which item ready to ship in ISO8601 durations format (e.g. 'PT30M' indicates item ready to ship in 30 mins)
+          description: time from order confirmation by which item ready to ship in ISO8601 durations format (e.g. 'PT30M' indicates item ready to ship in 30 mins). Mandatory for category_id "F&B"
           type: string
         "@ondc/org/available_on_cod":
           description: whether the catalog item is available on COD
@@ -2094,7 +2090,7 @@ components:
         "@ondc/org/statutory_reqs_packaged_commodities":
           type: object
           description: <br>
-            mandatory for category "Grocery" and sub-category "Packaged Commodities"<br>
+            mandatory for category_id "Packaged Commodities"<br>
             required attributes for all include the following<br>
               manufacturer_or_packer_name<br>
               manufacturer_or_packer_address<br>
@@ -2127,7 +2123,7 @@ components:
         "@ondc/org/statutory_reqs_prepackaged_food":
           type: object
           description: <br>
-            mandatory for category "Grocery" and sub-category "Pre-packaged food"<br>
+            mandatory for category_id "Pre-packaged food"<br>
             required attributes include the following<br>
               nutritional_info<br>
               additives_info<br>
@@ -2199,7 +2195,7 @@ components:
         "@ondc/org/mandatory_reqs_veggies_fruits":
           type: object
           description: <br>
-            mandatory for category "Grocery" and sub-category "Fresh vegetables and fruits"<br>
+            mandatory for category_id "Fruits and Vegetables"<br>
             required attributes include the following<br>
               net_quantity<br>
         tags:
@@ -2639,7 +2635,7 @@ components:
           description: Category Id of the provider
         "@ondc/org/fssai_license_no":
           type: string
-          description: FSSAI license no (for F&B restaurants)
+          description: FSSAI license no. Mandatory for category_id "F&B"
         rating:
           $ref: '#/components/schemas/Rating/properties/value'
         time:
