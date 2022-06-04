@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.2
+  version: 1.0.3
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -282,6 +282,8 @@ paths:
                    ("003", "One or more items in the Order not available");<br>
                    ("004", "Delivery pin code not serviceable");<br>
                    ("005", "Buyer refused to accept delivery");<br>
+                   ("006", "Buyer not found");<br>
+                   ("007", "Address not found");<br>
       requestBody:
         description: Buyer cancels an order
         content:
@@ -1518,14 +1520,18 @@ components:
       required:
         - bpp/providers
     Category:
-      description: Describes a category. Category codes can have following values - 'Express Delivery', 'Standard Delivery'
+      description: Describes a category.
       type: object
       properties:
         id:
           type: string
           description: Unique id of the category
+          enum:
+            - Express delivery
+            - Standard Delivery
         parent_category_id:
-          $ref: '#/components/schemas/Category/properties/id'
+          type: string
+          description: Unique id of the parent category
         descriptor:
           $ref: '#/components/schemas/Descriptor'
         time:
@@ -1553,6 +1559,17 @@ components:
         code:
           type: string
           description: Codification of city code will be using the std code of the city e.g. for Bengaluru, city code is 'std:080'
+          enum:
+            - std:080 (Bengaluru)
+            - std:011 (New Delhi)
+            - std:0422 (Coimbatore)
+            - std:0364 (Shillong)
+            - std:0522 (Lucknow)
+            - std:0755 (Bhopal)
+            - std:022 (Mumbai)
+            - std:020 (Pune)
+            - std:040 (Hyderabad)
+            - std:0145 (Ajmer)
     Contact:
       type: object
       properties:
