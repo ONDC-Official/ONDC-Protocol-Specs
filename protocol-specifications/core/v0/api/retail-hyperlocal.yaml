@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food<br>
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.6
+  version: 1.0.7
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -282,7 +282,9 @@ paths:
                    ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment");<br>
                    ("003", "One or more items in the Order not available");<br>
                    ("004", "Delivery pin code not serviceable");<br>
-                   ("005", "Buyer refused to accept delivery");
+                   ("005", "Buyer refused to accept delivery");<br>
+                   ("006", "Buyer not found");<br>
+                   ("007", "Address not found");
       requestBody:
         description: Buyer cancels an order
         content:
@@ -1573,8 +1575,20 @@ components:
         id:
           type: string
           description: Unique id of the category
+          enum:
+            - Grocery
+            - Packaged Commodities
+            - Packaged Foods
+            - Fruits and Vegetables
+            - F&B
+            - Fashion
         parent_category_id:
-          $ref: '#/components/schemas/Category/properties/id'
+          type: string
+          description: Unique id of the parent category
+          enum:
+            - Grocery
+            - F&B
+            - Fashion
         descriptor:
           $ref: '#/components/schemas/Descriptor'
         time:
@@ -1602,6 +1616,17 @@ components:
         code:
           type: string
           description: Codification of city code will be using the std code of the city e.g. for Bengaluru, city code is 'std:080'
+          enum:
+            - std:080 (Bengaluru)
+            - std:011 (New Delhi)
+            - std:0422 (Coimbatore)
+            - std:0364 (Shillong)
+            - std:0522 (Lucknow)
+            - std:0755 (Bhopal)
+            - std:022 (Mumbai)
+            - std:020 (Pune)
+            - std:040 (Hyderabad)
+            - std:0145 (Ajmer)
     Contact:
       type: object
       properties:
