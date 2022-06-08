@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.3
+  version: 1.0.4
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1527,11 +1527,16 @@ components:
           type: string
           description: Unique id of the category
           enum:
-            - Express delivery
+            - Express Delivery
             - Standard Delivery
+            - Immediate Delivery
+            - Same Day Delivery
+            - Next Day Delivery
         parent_category_id:
           type: string
           description: Unique id of the parent category
+            - Express delivery
+            - Standard Delivery
         descriptor:
           $ref: '#/components/schemas/Descriptor'
         time:
@@ -1821,6 +1826,11 @@ components:
         type:
           type: string
           description: This describes the type of fulfillment
+          enum:
+            - CoD
+            - Prepaid
+            - RTO
+            - Reverse QC
         provider_id:
           $ref: '#/components/schemas/Provider/properties/id'
         rating:
@@ -1921,6 +1931,12 @@ components:
               $ref: '#/components/schemas/Scalar'
             dimensions:
               $ref: '#/components/schemas/Dimensions'
+            category:
+              type: string
+            value:
+              $ref: '#/components/schemas/Price'
+            dangerous_goods:
+              type: boolean
         tags:
           $ref: '#/components/schemas/Tags'
     ItemQuantity:
@@ -1974,7 +1990,6 @@ components:
         id:
           description: This is the most unique identifier of a service item. An example of an Item ID could be the SKU of a product.
           type: string
-          # format: '#/components/schemas/Item/properties/id'
         parent_item_id:
           $ref: '#/components/schemas/Item/properties/id'
         descriptor:
@@ -2281,10 +2296,9 @@ components:
           enum:
             - BAP
             - BPP
-        "@ondc/org/collection_preference":
+        "@ondc/org/collection_amount":
+          description: CoD collection amount
           type: string
-          enum:
-            - CoD
         "@ondc/org/cod-settlement_window":
           description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
           type: string
@@ -2384,7 +2398,6 @@ components:
       required:
         - currency
         - value
-        - estimated_value
     Provider:
       description: 'Describes a service provider. This can be a restaurant, a hospital, a Store etc'
       type: object
