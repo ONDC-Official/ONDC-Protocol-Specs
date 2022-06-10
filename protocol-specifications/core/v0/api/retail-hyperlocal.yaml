@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food<br>
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.10
+  version: 1.0.11
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -276,15 +276,7 @@ paths:
     post:
       tags:
         - ONDC Seller App
-      description: Cancel an order.<br>
-                   Use the following cancellation reason codes (cancellation_reason_id, descriptor.code):<br>
-                   ("001", "Order delivery delayed or not possible");<br>
-                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment");<br>
-                   ("003", "One or more items in the Order not available");<br>
-                   ("004", "Delivery pin code not serviceable");<br>
-                   ("005", "Buyer refused to accept delivery");<br>
-                   ("006", "Buyer not found");<br>
-                   ("007", "Address not found");
+      description: Cancel an order
       requestBody:
         description: Buyer cancels an order
         content:
@@ -750,8 +742,7 @@ paths:
     post:
       tags:
         - ONDC Buyer App
-      description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object<br>
-                   Use same cancellation reason codes as in /cancel
+      description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object
       requestBody:
         description: Seller provides response to cancellation request
         content:
@@ -1462,7 +1453,14 @@ components:
         - phone
         - tax_number
     Cancellation:
-      description: Describes a cancellation event
+      description: Describes a cancellation event. Use the following reason codes (reasons.id, reasons.descriptor.code)<br>
+                   ("001", "Order delivery delayed or not possible");<br>
+                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment");<br>
+                   ("003", "One or more items in the Order not available");<br>
+                   ("004", "Delivery pin code not serviceable");<br>
+                   ("005", "Buyer refused to accept delivery");<br>
+                   ("006", "Buyer not found");<br>
+                   ("007", "Address not found");
       type: object
       properties:
         type:
@@ -2359,12 +2357,6 @@ components:
           $ref: '#/components/schemas/Quotation'
         payment:
           $ref: '#/components/schemas/Payment'
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
         "@ondc/org/cancellation":
           $ref: '#/components/schemas/Cancellation'
         "@ondc/org/linked_orders":
@@ -2375,6 +2367,12 @@ components:
             properties:
               id:
                 type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
     Organization:
       description: Describes an organization
       type: object
