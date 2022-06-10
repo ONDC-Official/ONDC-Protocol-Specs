@@ -1460,7 +1460,9 @@ components:
                    ("004", "Delivery pin code not serviceable");<br>
                    ("005", "Buyer refused to accept delivery");<br>
                    ("006", "Buyer not found");<br>
-                   ("007", "Address not found");
+                   ("007", "Address not found");<br>
+                   ("008", "Buyer does not want product any more");<br>
+                   ("009", "Product available at lower price the order price");
       type: object
       properties:
         type:
