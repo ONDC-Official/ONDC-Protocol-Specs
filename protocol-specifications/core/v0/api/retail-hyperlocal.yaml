@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.11
+  version: 1.0.12
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1651,13 +1651,13 @@ components:
           description: URI of the Buyer App for accepting callbacks. Must have the same domain name as the bap_id
         bpp_id:
           type: string
-          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App
-                       Mandatory for all peer-to-peer API requests, i.e. except search and on_search
+          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App,
+                       mandatory for all peer-to-peer API requests, i.e. except search and on_search
         bpp_uri:
           type: string
           format: uri
-          description: URI of the Seller App. Must have the same domain name as the bap_id
-                       Mandatory for all peer-to-peer API requests, i.e. except search and on_search
+          description: URI of the Seller App. Must have the same domain name as the bap_id,
+                       mandatory for all peer-to-peer API requests, i.e. except search and on_search
         transaction_id:
           type: string
           description: This is a unique value which persists across all API calls from search through confirm
@@ -1673,9 +1673,9 @@ components:
           description: The encryption public key of the sender
         ttl:
           type: string
-          description: Timestamp for which this message holds valid in ISO8601 durations format
-                       Outer limit for ttl for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds
-                       Different buyer apps can change this to meet their UX requirements, but it shouldn't exceed this outer limit
+          description: Timestamp for which this message holds valid in ISO8601 durations format -
+                       Outer limit for ttl for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds,
+                       different buyer apps can change this to meet their UX requirements, but it shouldn't exceed this outer limit
       required:
         - domain
         - action
@@ -1834,8 +1834,8 @@ components:
           required:
             - feedback_id
     Fulfillment:
-      description: Describes how a single product/service will be rendered/fulfilled to the end customer
-                   (id, type) have the following values
+      description: Describes how a single product/service will be rendered/fulfilled to the end customer -
+                   (id, type) have the following values -
                    ("1", "Delivery")
                    ("2", "Pickup")
                    ("3", "Delivery and Pickup")
@@ -1860,6 +1860,8 @@ components:
           type: string
         provider_id:
           $ref: '#/components/schemas/Provider/properties/id'
+        "@ondc/org/provider_name":
+          type: string
         rating:
           $ref: '#/components/schemas/Rating/properties/value'
         state:
