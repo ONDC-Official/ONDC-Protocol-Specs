@@ -1,4 +1,4 @@
-1. [ONDC Protocol Specifications (Retail) - SwaggerHub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Hyperlocal/1.0.11)
+1. [ONDC Protocol Specifications (Retail) - SwaggerHub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Hyperlocal/1.0.12)
 
 > Core APIs for buyer and seller platforms along with schema reference.
 
