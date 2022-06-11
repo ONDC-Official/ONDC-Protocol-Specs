@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: ONDC Protocol API for retail (grocery, f&b)
-  description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food<br>
+  description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
   version: 1.0.11
 security:
@@ -453,8 +453,7 @@ paths:
         - ONDC Gateway
       description: Send catalog
       requestBody:
-        description: Sellers provide their catalog in response to buyer search<br>
-                     In case of large catalogs, seller apps can page their catalog response and send multiple on_search responses for a single search request
+        description: Sellers provide their catalog in response to buyer search
         content:
           application/json:
             schema:
@@ -1453,16 +1452,16 @@ components:
         - phone
         - tax_number
     Cancellation:
-      description: Describes a cancellation event. Use the following reason codes (reasons.id, reasons.descriptor.code)<br>
-                   ("001", "Order delivery delayed or not possible");<br>
-                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment");<br>
-                   ("003", "One or more items in the Order not available");<br>
-                   ("004", "Delivery pin code not serviceable");<br>
-                   ("005", "Buyer refused to accept delivery");<br>
-                   ("006", "Buyer not found");<br>
-                   ("007", "Address not found");<br>
-                   ("008", "Buyer does not want product any more");<br>
-                   ("009", "Product available at lower price the order price");
+      description: Describes a cancellation event. Use the following reason codes (reasons.id, reasons.descriptor.code)
+                   ("001", "Order delivery delayed or not possible")
+                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment")
+                   ("003", "One or more items in the Order not available")
+                   ("004", "Delivery pin code not serviceable")
+                   ("005", "Buyer refused to accept delivery")
+                   ("006", "Buyer not found")
+                   ("007", "Address not found")
+                   ("008", "Buyer does not want product any more")
+                   ("009", "Product available at lower price the order price")
       type: object
       properties:
         type:
@@ -1652,13 +1651,12 @@ components:
           description: URI of the Buyer App for accepting callbacks. Must have the same domain name as the bap_id
         bpp_id:
           type: string
-          # format: uri
-          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App<br>
+          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App
                        Mandatory for all peer-to-peer API requests, i.e. except search and on_search
         bpp_uri:
           type: string
           format: uri
-          description: URI of the Seller App. Must have the same domain name as the bap_id<br>
+          description: URI of the Seller App. Must have the same domain name as the bap_id
                        Mandatory for all peer-to-peer API requests, i.e. except search and on_search
         transaction_id:
           type: string
@@ -1675,8 +1673,8 @@ components:
           description: The encryption public key of the sender
         ttl:
           type: string
-          description: Timestamp for which this message holds valid in ISO8601 durations format<br>
-                       Outer limit for ttl for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds<br>
+          description: Timestamp for which this message holds valid in ISO8601 durations format
+                       Outer limit for ttl for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds
                        Different buyer apps can change this to meet their UX requirements, but it shouldn't exceed this outer limit
       required:
         - domain
@@ -1836,11 +1834,11 @@ components:
           required:
             - feedback_id
     Fulfillment:
-      description: Describes how a single product/service will be rendered/fulfilled to the end customer<br>
+      description: Describes how a single product/service will be rendered/fulfilled to the end customer
                    (id, type) have the following values
-                   1:Delivery<br>
-                   2:Pickup<br>
-                   3:Delivery and Pickup<br>
+                   ("1", "Delivery")
+                   ("2", "Pickup")
+                   ("3", "Delivery and Pickup")
                    State can have following values - "Searching-for-Agent", "Assigned-Agent", "En-route-to-drop", "At-pickup-location", "At-drop-location", "Delivered-package", "Cancelled-package", "Returned-package"
       type: object
       properties:
@@ -1996,19 +1994,19 @@ components:
             measure:
               $ref: '#/components/schemas/Scalar'
     Item:
-      description: Describes a product or a service offered to the end consumer by the provider<br>
-                   Statutory requirements for category_id "Packaged Commodities"<br>
-                   descriptor.name (item name)<br>
-                   price.value (declared price)<br>
-                   price.maximum_value (MRP)<br>
-                   Statutory requirements for category_id "Packaged Foods"<br>
-                   descriptor.name (item name)<br>
-                   descriptor.symbol (veg or non-veg)<br>
-                   descriptor.short_desc (food allergen)<br>
-                   descriptor.long_desc (instructions for use)<br>
-                   price.value (declared price)<br>
-                   All other statutory attributes must be provided, as applicable, for the above<br>
-                   No statutory requirement for category "F&B" (fresh food)
+      description: Describes a product or a service offered to the end consumer by the provider -
+                   Statutory requirements for category_id "Packaged Commodities" -
+                   descriptor.name (for item name),
+                   price.value (for declared price),
+                   price.maximum_value (for MRP);
+                   Statutory requirements for category_id "Packaged Foods" -
+                   descriptor.name (for item name),
+                   descriptor.symbol (for veg or non-veg),
+                   descriptor.short_desc (for food allergen),
+                   descriptor.long_desc (for instructions for use),
+                   price.value (for declared price);
+                   All other statutory attributes must be provided, as applicable, for the above;
+                   No statutory requirement for category_id "F&B" or "Fruits and Vegetables"
       type: object
       properties:
         id:
@@ -2071,14 +2069,14 @@ components:
           type: string
         "@ondc/org/statutory_reqs_packaged_commodities":
           type: object
-          description: <br>
-            mandatory for category_id "Packaged Commodities"<br>
-            required attributes for all include the following<br>
-              manufacturer_or_packer_name<br>
-              manufacturer_or_packer_address<br>
-              common_or_generic_name_of_commodity<br>
-              net_quantity_or_measure_of_commodity_in_pkg<br>
-              month_year_of_manufacture_packing_import<br>
+          description:
+            mandatory for category_id "Packaged Commodities" -
+            required attributes for all include the following -
+              manufacturer_or_packer_name,
+              manufacturer_or_packer_address,
+              common_or_generic_name_of_commodity,
+              net_quantity_or_measure_of_commodity_in_pkg,
+              month_year_of_manufacture_packing_import;
             other attributes are required on case-by-case basis
           properties:
             manufacturer_or_packer_name:
@@ -2104,20 +2102,20 @@ components:
               type: string
         "@ondc/org/statutory_reqs_prepackaged_food":
           type: object
-          description: <br>
-            mandatory for category_id "Pre-packaged food"<br>
-            required attributes include the following<br>
-              nutritional_info<br>
-              additives_info<br>
-              net_quantity<br>
+          description:
+            mandatory for category_id "Packaged food" -
+            required attributes include the following -
+              nutritional_info,
+              additives_info,
+              net_quantity;
             other attributes are required on case-by-case basis
           properties:
             ingredients_info:
-              description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..)<br>
+              description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..)
                            e.g. "Puffed Rice (40%); Split Green Gram (20%); Ground Nuts (20%);.."
               type: string
             nutritional_info:
-              description: nutritional info (can be shown as nutritional info (with unit, per standard unit, per serving);..)<br>
+              description: nutritional info (can be shown as nutritional info (with unit, per standard unit, per serving);..)
                            e.g. "Energy(KCal) - (per 100kg) 420, (per serving 50g) 250; Protein(g) - (per 100kg) 12, (per serving 50g)6;.."
               type: string
             additives_info:
@@ -2176,10 +2174,10 @@ components:
               type: string
         "@ondc/org/mandatory_reqs_veggies_fruits":
           type: object
-          description: <br>
-            mandatory for category_id "Fruits and Vegetables"<br>
-            required attributes include the following<br>
-              net_quantity<br>
+          description:
+            mandatory for category_id "Fruits and Vegetables"
+            required attributes include the following -
+              net_quantity
         tags:
           $ref: '#/components/schemas/Tags'
       required:
@@ -2282,16 +2280,16 @@ components:
         descriptor:
           $ref: '#/components/schemas/Descriptor'
     Order:
-      description: Describes the details of an order<br>
-                   For "@ondc/org/cancellation.cancelled_by" use following values<br>
-                   buyer-app<br>
-                   seller-app<br>
-                   logistics-provider<br>
+      description: Describes the details of an order -
+                   For "@ondc/org/cancellation.cancelled_by" use following values -
+                   buyer-app,
+                   seller-app,
+                   logistics-provider;
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier for Order across the network<br>
+          description: Unique identifier for Order across the network,
                        Will be created by buyer app in confirm API
         state:
           type: string
