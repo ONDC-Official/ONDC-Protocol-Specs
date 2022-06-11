@@ -275,15 +275,7 @@ paths:
     post:
       tags:
         - ONDC Seller App
-      description: Cancel an order<br>
-                   Use the following cancellation reason codes (cancellation_reason_id, descriptor.code):<br>
-                   ("001", "Order delivery delayed or not possible");<br>
-                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment");<br>
-                   ("003", "One or more items in the Order not available");<br>
-                   ("004", "Delivery pin code not serviceable");<br>
-                   ("005", "Buyer refused to accept delivery");<br>
-                   ("006", "Buyer not found");<br>
-                   ("007", "Address not found");<br>
+      description: Cancel an order
       requestBody:
         description: Buyer cancels an order
         content:
@@ -743,8 +735,7 @@ paths:
     post:
       tags:
         - ONDC Buyer App
-      description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object<br>
-                   Use the same cancellation reason codes as in /cancel
+      description: Send cancellation request_id with reasons list in case of cancellation request. Else send cancelled order object
       requestBody:
         description: Seller provides response to cancellation request
         content:
@@ -1455,7 +1446,16 @@ components:
         - phone
         - tax_number
     Cancellation:
-      description: Describes a cancellation event
+      description: Describes a cancellation event. Use the following reason codes (reasons.id, reasons.descriptor.code)
+                   ("001", "Order delivery delayed or not possible")
+                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment")
+                   ("003", "One or more items in the Order not available")
+                   ("004", "Delivery pin code not serviceable")
+                   ("005", "Buyer refused to accept delivery")
+                   ("006", "Buyer not found")
+                   ("007", "Address not found")
+                   ("008", "Buyer does not want product any more")
+                   ("009", "Product available at lower price the order price")
       type: object
       properties:
         type:
@@ -1631,14 +1631,13 @@ components:
           description: URI of the Buyer App for accepting callbacks. Must have the same domain name as the bap_id
         bpp_id:
           type: string
-          # format: uri
-          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App<br>
-                       Mandatory for all peer-to-peer API requests, i.e. except search and on_search
+          description: Unique id of the Seller App. By default it is the fully qualified domain name of the Seller App,
+                       mandatory for all peer-to-peer API requests, i.e. except search and on_search
         bpp_uri:
           type: string
           format: uri
-          description: URI of the Seller App. Must have the same domain name as the bap_id<br>
-                       Mandatory for all peer-to-peer API requests, i.e. except search and on_search
+          description: URI of the Seller App. Must have the same domain name as the bap_id,
+                       mandatory for all peer-to-peer API requests, i.e. except search and on_search
         transaction_id:
           type: string
           description: This is a unique value which persists across all API calls from search through confirm
@@ -1654,8 +1653,9 @@ components:
           description: The encryption public key of the sender
         ttl:
           type: string
-          description: Timestamp for which this message holds valid in ISO8601 durations format<br>
-                       Value for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds
+          description: Timestamp for which this message holds valid in ISO8601 durations format -
+                       Outer limit for ttl for search, select, init, confirm, status, track, cancel, update, rating, support is 'PT30S' which is 30 seconds,
+                       different buyer apps can change this to meet their UX requirements, but it shouldn't exceed this outer limit
       required:
         - domain
         - action
@@ -1814,10 +1814,10 @@ components:
           required:
             - feedback_id
     Fulfillment:
-      description: Describes how a single product/service will be rendered/fulfilled to the end customer<br>
-                   Use tags to communicate if order is ready to ship<br>
-                   Order ready to ship<br>
-                   "@ondc/org/order_ready_to_ship" (pass "Yes")<br>
+      description: Describes how a single product/service will be rendered/fulfilled to the end customer -
+                   Use tags to communicate if order is ready to ship -
+                   Order ready to ship -
+                   "@ondc/org/order_ready_to_ship" (pass "Yes")
       type: object
       properties:
         id:
@@ -1919,13 +1919,13 @@ components:
           $ref: '#/components/schemas/Item'
         "@ondc/org/payload_details":
           type: object
-          description: payload details that will allow logistics provider to determine serviceability.<br>
-                       For weight, enums for unit are:<br>
-                       "Kilogram"<br>
-                       "Gram"<br>
-                       For dimensions, enums for length.unit, breadth.unit and height.unit are:<br>
-                       "meter"<br>
-                       "centimeter"<br>
+          description: payload details that will allow logistics provider to determine serviceability.
+                       For weight, enums for unit are -
+                       "Kilogram",
+                       "Gram"
+                       For dimensions, enums for length.unit, breadth.unit and height.unit are -
+                       "meter",
+                       "centimeter"
           properties:
             weight:
               $ref: '#/components/schemas/Scalar'
@@ -2100,17 +2100,17 @@ components:
         descriptor:
           $ref: '#/components/schemas/Descriptor'
     Order:
-      description: Describes the details of an order<br>
-                   For "@ondc/org/cancellation.cancelled_by" use following values<br>
-                   buyer-app<br>
-                   seller-app<br>
-                   logistics-provider<br>
+      description: Describes the details of an order -
+                   For "@ondc/org/cancellation.cancelled_by" use following values -
+                   buyer-app,
+                   seller-app,
+                   logistics-provider
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier for Order across network<br>
-                       Will be created by buyer app in confirm API
+          description: Unique identifier for Order across network,
+                       will be created by buyer app in confirm API
         state:
           type: string
           enum:
