@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.4
+  version: 1.0.5
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -2300,7 +2300,7 @@ components:
           description: CoD collection amount
           type: string
         "@ondc/org/cod-settlement_window":
-          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
+          description: settlement window in ISO8601 durations format e.g. 'PT48H' indicates T+2 settlement
           type: string
         "@ondc/org/cod-settlement_window_status":
           type: string
@@ -2462,6 +2462,15 @@ components:
           items:
             type: object
             properties:
+              "@ondc/org/item_id":
+                $ref: '#/components/schemas/Item/properties/id'
+              "@ondc/org/title_type":
+                type: string
+                enum:
+                  - Delivery Charge
+                  - RTO Charge
+                  - Reverse QC Charge
+                  - Tax
               title:
                 type: string
               price:
