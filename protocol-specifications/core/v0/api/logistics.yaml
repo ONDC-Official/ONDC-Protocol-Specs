@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.5
+  version: 1.0.6
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -2143,6 +2143,8 @@ components:
             properties:
               id:
                 $ref: '#/components/schemas/Item/properties/id'
+              category_id:
+                $ref: '#/components/schemas/Category/properties/id'
               quantity:
                 $ref: '#/components/schemas/ItemQuantity/properties/selected'
             required:
@@ -2191,17 +2193,17 @@ components:
             - seller-app
         "@ondc/org/cancellation":
           $ref: '#/components/schemas/Cancellation'
-        "@ondc/org/linked_orders":
+        "@ondc/org/linked_order":
           type: object
-          description: payload for linked orders e.g. retail order that cascaded into this logistics order
+          description: payload for linked order e.g. retail order that cascaded into this logistics order
           properties:
             items:
               type: array
               items:
                 type: object
                 properties:
-                  id:
-                    $ref: '#/components/schemas/Item/properties/id'
+                  category_id:
+                    $ref: '#/components/schemas/Category/properties/id'
                   name:
                     $ref: '#/components/schemas/Descriptor/properties/name'
                   quantity:
@@ -2221,14 +2223,24 @@ components:
               description: use same units for weight and dimensions as defined for Intent
               type: object
               properties:
+                id:
+                  $ref: '#/components/schemas/Order/properties/id'
                 weight:
                   $ref: '#/components/schemas/Scalar'
                 dimensions:
                   $ref: '#/components/schemas/Dimensions'
-                value:
+                declared_value:
                   $ref: '#/components/schemas/Price'
-                payment:
-                  $ref: '#/components/schemas/Payment'
+                taxable_value:
+                  $ref: '#/components/schemas/Price'
+                hsn_code:
+                  type: string
+                sgst_amount:
+                  $ref: '#/components/schemas/DecimalValue'
+                cgst_amount:
+                  $ref: '#/components/schemas/DecimalValue'
+                igst_amount:
+                  $ref: '#/components/schemas/DecimalValue'
     Organization:
       description: Describes an organization
       type: object
