@@ -2,6 +2,6 @@
 
 > Core APIs for buyer and seller platforms along with schema reference.
 
-2. [ONDC Protocol Specifications (Logistics) - SwaggerHub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Logistics/1.0.6)
+2. [ONDC Protocol Specifications (Logistics) - SwaggerHub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Logistics/1.0.7)
 
 > Core APIs for buyer and seller platforms along with schema reference.
