@@ -64,15 +64,11 @@ To get started with understanding ONDC technology, please refer to the following
 
 > Reference buyer side application from Beckn Foundation.
 
-15. [Postman Collection](https://github.com/Open-network-for-digital-commerce/integration-hackathon-jan22)
-
-> Postman Collection for ONDC Protocol SDK.
-
-16. [Checklist for sellers](https://docs.google.com/document/d/1m2V3GR6UIjJK65u4JW1r35cihy7lFmuBe8_cv66mVU8/edit#)
+15. [Checklist for sellers](https://docs.google.com/document/d/1m2V3GR6UIjJK65u4JW1r35cihy7lFmuBe8_cv66mVU8/edit#)
 
 > To define what the retail seller needs to do at each step of the transaction flow.
 
-17. **Process for Participants joining ONDC at any time**
+16. **Process for Participants joining ONDC at any time**
 
 > ![Visualising ONDC (19)](https://user-images.githubusercontent.com/95357304/156694718-3d86822e-bf42-4b1d-be73-680235c965d2.jpg)
 >![Visualising ONDC (20)](https://user-images.githubusercontent.com/95357304/156694766-00570ec9-3ae4-41dd-86e4-e91de7247188.jpg)
