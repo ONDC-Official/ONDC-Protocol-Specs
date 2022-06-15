@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.7
+  version: 1.0.8
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1571,6 +1571,7 @@ components:
             - std:0364 (Shillong)
             - std:0522 (Lucknow)
             - std:0755 (Bhopal)
+            - std:044 (Chennai)
             - std:022 (Mumbai)
             - std:020 (Pune)
             - std:040 (Hyderabad)
