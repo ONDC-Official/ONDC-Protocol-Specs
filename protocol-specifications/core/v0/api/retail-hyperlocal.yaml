@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.14
+  version: 1.0.15
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1586,17 +1586,17 @@ components:
           type: string
           description: Codification of city code will be using the std code of the city e.g. for Bengaluru, city code is 'std:080'
           enum:
-            - std:080 (Bengaluru)
-            - std:011 (New Delhi)
-            - std:0422 (Coimbatore)
-            - std:0364 (Shillong)
-            - std:0522 (Lucknow)
-            - std:0755 (Bhopal)
-            - std:044 (Chennai)
-            - std:022 (Mumbai)
-            - std:020 (Pune)
-            - std:040 (Hyderabad)
-            - std:0145 (Ajmer)
+            - std:080
+            - std:011
+            - std:0422
+            - std:0364
+            - std:0522
+            - std:0755
+            - std:044
+            - std:022
+            - std:020
+            - std:040
+            - std:0145
     Contact:
       type: object
       properties:
