@@ -16,11 +16,11 @@ To get started with understanding ONDC technology, please refer to the following
 
 > Core APIs for buyer and seller platforms along with schema reference.
 
-5. [ONDC Protocol Specifications (Retail) - Swaggerhub](https://https://app.swaggerhub.com/organizations/ONDC)
+5. [ONDC Protocol Specifications (Retail) - Swaggerhub](https://app.swaggerhub.com/organizations/ONDC)
 
 > Core APIs for buyer and seller platforms along with schema reference.
 
-6. [ONDC Protocol Specifications (Logistics) - Swaggerhub](https://app.swaggerhub.com/apis/ONDC/ONDC-Protocol-Logistics/1.0.8)
+6. [ONDC Protocol Specifications (Logistics) - Swaggerhub](https://app.swaggerhub.com/organizations/ONDC)
 
 > Core APIs for buyer and seller platforms along with schema reference.
 
