@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.11
+  version: 1.0.12
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -2213,8 +2213,8 @@ components:
                 properties:
                   category_id:
                     type: string
-                  name:
-                    $ref: '#/components/schemas/Descriptor/properties/name'
+                  descriptor:
+                    $ref: '#/components/schemas/Descriptor'
                   quantity:
                     $ref: '#/components/schemas/ItemQuantity/properties/selected'
                   price:
@@ -2224,8 +2224,8 @@ components:
               properties:
                 id:
                   $ref: '#/components/schemas/Provider/properties/id'
-                name:
-                  $ref: '#/components/schemas/Descriptor/properties/name'
+                descriptor:
+                  $ref: '#/components/schemas/Descriptor'
                 address:
                   $ref: '#/components/schemas/Address'
             order:
