@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.15
+  version: 1.0.16
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1593,6 +1593,8 @@ components:
             - std:0522
             - std:0755
             - std:044
+            - std:0497
+            - std:0487
             - std:022
             - std:020
             - std:040
