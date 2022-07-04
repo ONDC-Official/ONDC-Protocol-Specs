@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.12
+  version: 1.0.13
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1572,6 +1572,8 @@ components:
             - std:0522
             - std:0755
             - std:044
+            - std:0497
+            - std:0487
             - std:022
             - std:020
             - std:040
