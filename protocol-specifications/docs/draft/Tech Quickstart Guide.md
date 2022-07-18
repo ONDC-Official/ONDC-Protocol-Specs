@@ -63,8 +63,18 @@ To get started with understanding ONDC technology, please refer to the following
 
 
 
+14. **Sequence Diagrams**
 
- 
+>![1](https://user-images.githubusercontent.com/95357304/179464543-932fde3e-5358-4d9e-a075-dc7da723f5ff.png)
+>
+>![2](https://user-images.githubusercontent.com/95357304/179464579-bfa898a8-e641-47d0-bbbc-abbdfc3e3162.png)
+>
+>![3](https://user-images.githubusercontent.com/95357304/179464600-4781f7e5-40cd-4033-82d3-c1b619d7baa6.png)
+>
+>![4](https://user-images.githubusercontent.com/95357304/179464932-0393a512-8a11-4aed-8035-1750d0129b23.png)
+>
+>![5](https://user-images.githubusercontent.com/95357304/179465248-feee5a91-3089-48b4-acf5-ed54d98e2652.png)
+
 
 
 
