@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.16
+  version: 1.0.17
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1452,16 +1452,7 @@ components:
         - phone
         - tax_number
     Cancellation:
-      description: Describes a cancellation event. Use the following reason codes (reasons.id, reasons.descriptor.code)
-                   ("001", "Order delivery delayed or not possible")
-                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment")
-                   ("003", "One or more items in the Order not available")
-                   ("004", "Delivery pin code not serviceable")
-                   ("005", "Buyer refused to accept delivery")
-                   ("006", "Buyer not found")
-                   ("007", "Address not found")
-                   ("008", "Buyer does not want product any more")
-                   ("009", "Product available at lower price the order price")
+      description: Describes a cancellation event
       type: object
       properties:
         type:
@@ -1585,20 +1576,6 @@ components:
         code:
           type: string
           description: Codification of city code will be using the std code of the city e.g. for Bengaluru, city code is 'std:080'
-          enum:
-            - std:080
-            - std:011
-            - std:0422
-            - std:0364
-            - std:0522
-            - std:0755
-            - std:044
-            - std:0497
-            - std:0487
-            - std:022
-            - std:020
-            - std:040
-            - std:0145
     Contact:
       type: object
       properties:
@@ -1842,7 +1819,14 @@ components:
                    ("1", "Delivery")
                    ("2", "Pickup")
                    ("3", "Delivery and Pickup")
-                   State can have following values - "Searching-for-Agent", "Assigned-Agent", "En-route-to-drop", "At-pickup-location", "At-drop-location", "Delivered-package", "Cancelled-package", "Returned-package"
+                   State can have following values -
+                     "Searching for Agent",
+                     "Agent is assigned",
+                     "Agent reached pickup",
+                     "Agent has picked up the order and enroute to drop",
+                     "Agent reached drop location",
+                     "Agent has delivered the order",
+                     "Order is cancelled"
       type: object
       properties:
         id:
@@ -2300,11 +2284,12 @@ components:
           type: string
           enum:
             - Created
+            - Packed
             - Shipped
+            - Out for Delivery
             - Delivered
-            - Updated
-            - Returned
-            - Replaced
+            - RTO Initiated
+            - RTO delivered
             - Cancelled
         provider:
           type: object
@@ -2356,8 +2341,10 @@ components:
             $ref: '#/components/schemas/Document'
         billing:
           $ref: '#/components/schemas/Billing'
-        fulfillment:
-          $ref: '#/components/schemas/Fulfillment'
+        fulfillments:
+          type: array
+          items:
+            $ref: "#/components/schemas/Fulfillment"
         quote:
           $ref: '#/components/schemas/Quotation'
         payment:
