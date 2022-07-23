@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.13
+  version: 1.0.14
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1446,16 +1446,7 @@ components:
         - phone
         - tax_number
     Cancellation:
-      description: Describes a cancellation event. Use the following reason codes (reasons.id, reasons.descriptor.code)
-                   ("001", "Order delivery delayed or not possible")
-                   ("002", "Price of one or more items have changed due to which buyer was asked to make additional payment")
-                   ("003", "One or more items in the Order not available")
-                   ("004", "Delivery pin code not serviceable")
-                   ("005", "Buyer refused to accept delivery")
-                   ("006", "Buyer not found")
-                   ("007", "Address not found")
-                   ("008", "Buyer does not want product any more")
-                   ("009", "Product available at lower price the order price")
+      description: Describes a cancellation event
       type: object
       properties:
         type:
@@ -1564,20 +1555,6 @@ components:
         code:
           type: string
           description: Codification of city code will be using the std code of the city e.g. for Bengaluru, city code is 'std:080'
-          enum:
-            - std:080
-            - std:011
-            - std:0422
-            - std:0364
-            - std:0522
-            - std:0755
-            - std:044
-            - std:0497
-            - std:0487
-            - std:022
-            - std:020
-            - std:040
-            - std:0145
     Contact:
       type: object
       properties:
@@ -1821,6 +1798,14 @@ components:
                    Use tags to communicate if order is ready to ship -
                    Order ready to ship -
                    "@ondc/org/order_ready_to_ship" (pass "Yes")
+                   State can have following values -
+                     "Searching for Agent",
+                     "Agent is assigned",
+                     "Agent reached pickup",
+                     "Agent has picked up the order and enroute to drop",
+                     "Agent reached drop location",
+                     "Agent has delivered the order",
+                     "Order is cancelled"
       type: object
       properties:
         id:
@@ -2124,13 +2109,12 @@ components:
         state:
           type: string
           enum:
-            - Active
-            - Updated
-            - Completed
+            - Created
+            - Out for Delivery
+            - Delivered
+            - RTO Initiated
+            - RTO delivered
             - Cancelled
-            - Shipped
-            - RTO_Init
-            - RTO_Delivered
         provider:
           type: object
           properties:
