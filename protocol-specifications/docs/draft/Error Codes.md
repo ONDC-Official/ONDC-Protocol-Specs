@@ -46,11 +46,11 @@ CC-BY-ND
   |30005|Seller App|Category not found|When Seller App is unable to find the category id sent by the Buyer App|
   |30006|Seller App|Offer not found|When Seller App is unable to find the offer id sent by the Buyer App|
   |30007|Seller App|Add-on not found|When the Seller App is unable to find the add-on id sent by the Buyer App|
-  |30008|Seller App|Fulfillment unavailable|When Seller App is unable to find the fulfillment id sent by the Buyer App|
-  |30009|Seller App|Fulfilment provider unavailable|When the Seller App is unable to find fulfilment provider id sent by the Buyer App|
-  |30010|Seller App|Order not found|When the Seller App is unable to find the order id sent by the Buyer App|
-  |30011|Seller App|Invalid cancellation reason|When the Seller App is unable to find the cancellation reason in cancellation_reason_id|
-  |30012|Seller App|Invalid update_target|When the Seller App is unable to find the update_target in the order object|
+  |30008|Seller App|Location Serviceability Error|Pickup location not serviceable by Logistics Provider|
+  |30009|Seller App|Location Serviceability Error|Dropoff location not serviceable by Logistics Provider|
+  |30010|Seller App|Location Serviceability Error|Delivery distance exceeds the maximum serviceability distance|
+  |30011|Seller App|Order Serviceability Error|Delivery Partners not available|
+  |30012|Seller App|Invalid cancellation reason|When the Seller App is unable to find the cancellation reason in cancellation_reason_id|
   |30013|Seller App|Update inconsistency|When the Seller App finds changes in the order object other than the update_target|
   |30014|Seller App|Entity to rate not found|When the Seller App is unable to find the entity to rate in id|
   |30015|Seller App|Invalid rating value|When the Seller App receives an invalid value as the rating value in value|
@@ -67,9 +67,11 @@ CC-BY-ND
   |50002|Seller App|Updation not possible|When the Seller App is unable to update the order due to it's updation policy|
   |50003|Seller App|Unsupported rating category|When the Seller App receives an entity to rate which is not supported|
   |50004|Seller App|Support unavailable|When the Seller App receives an object if for which it does not provide support|
-  |60001|Logistics|Location Serviceability Error|Pickup or Dropoff locations not serviceable by Logistics Provider|
-  |60002|Logistics|Order Serviceability Error|Order not serviceable as Logistics Agents not available|
-  |60003|Logistics|Invalid Signature|Cannot verify signature for request|
+  |60001|Logistics|Location Serviceability Error|Pickup location not serviceable by Logistics Provider|
+  |60002|Logistics|Location Serviceability Error|Dropoff location not serviceable by Logistics Provider|
+  |60003|Logistics|Location Serviceability Error|Delivery distance exceeds the maximum serviceability distance|
+  |60004|Logistics|Order Serviceability Error|Delivery Partners not available|
+  |60005|Logistics|Invalid Signature|Cannot verify signature for request|
 
   ## Acknowledgements
   This document has been adapted from the [Error Codes draft document](https://github.com/beckn/protocol-specifications/blob/draft/docs/protocol-drafts/BECKN-RFC-005-Error-Codes-Draft-01.md) from the Beckn Foundation.
