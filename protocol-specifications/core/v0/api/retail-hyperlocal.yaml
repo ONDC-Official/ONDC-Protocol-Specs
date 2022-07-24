@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.17
+  version: 1.0.19
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1815,17 +1815,13 @@ components:
             - feedback_id
     Fulfillment:
       description: Describes how a single product/service will be rendered/fulfilled to the end customer -
-                   (id, type) have the following values -
-                   ("1", "Delivery")
-                   ("2", "Pickup")
-                   ("3", "Delivery and Pickup")
                    State can have following values -
-                     "Searching for Agent",
-                     "Agent is assigned",
+                     "Serviceable",
+                     "Non-serviceable",
                      "Agent reached pickup",
-                     "Agent has picked up the order and enroute to drop",
+                     "Agent picked up order",
                      "Agent reached drop location",
-                     "Agent has delivered the order",
+                     "Agent delivered the order",
                      "Order is cancelled"
       type: object
       properties:
@@ -1839,6 +1835,7 @@ components:
             - Delivery
             - Pickup
             - Delivery and Pickup
+            - Reverse QC
         "@ondc/org/category":
           type: string
           description: Fulfillment Category
@@ -2288,7 +2285,7 @@ components:
             - Shipped
             - Out for Delivery
             - Delivered
-            - RTO Initiated
+            - RTO initiated
             - RTO delivered
             - Cancelled
         provider:
@@ -2497,6 +2494,7 @@ components:
               settlement_counterparty:
                 type: string
                 enum:
+                  - buyer
                   - buyer-app
                   - seller-app
                   - logistics-provider
@@ -2505,6 +2503,7 @@ components:
                 enum:
                   - sale-amount
                   - withholding-amount
+                  - refund
               settlement_type:
                 type: string
                 enum:
