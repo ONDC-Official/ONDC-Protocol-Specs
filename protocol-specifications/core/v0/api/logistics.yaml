@@ -2111,6 +2111,7 @@ components:
           enum:
             - Created
             - Out for Delivery
+            - Shipped
             - Delivered
             - RTO initiated
             - RTO delivered
