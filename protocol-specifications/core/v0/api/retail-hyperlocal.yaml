@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.19
+  version: 1.0.21
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1541,14 +1541,14 @@ components:
             - Packaged Foods
             - Fruits and Vegetables
             - F&B
-            - Fashion
+            - Home & Decor
         parent_category_id:
           type: string
           description: Unique id of the parent category
           enum:
             - Grocery
             - F&B
-            - Fashion
+            - Home & Decor
         descriptor:
           $ref: '#/components/schemas/Descriptor'
         time:
@@ -1818,11 +1818,11 @@ components:
                    State can have following values -
                      "Serviceable",
                      "Non-serviceable",
-                     "Agent reached pickup",
-                     "Agent picked up order",
-                     "Agent reached drop location",
-                     "Agent delivered the order",
-                     "Order is cancelled"
+                     "At pickup location",
+                     "Order picked up",
+                     "At drop location",
+                     "Order delivered",
+                     "Cancelled"
       type: object
       properties:
         id:
@@ -2504,6 +2504,8 @@ components:
                   - sale-amount
                   - withholding-amount
                   - refund
+              settlement_amount:
+                type: integer
               settlement_type:
                 type: string
                 enum:
