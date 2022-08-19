@@ -2306,7 +2306,14 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Item'
+            type: object
+            properties:
+              id:
+                $ref: '#/components/schemas/Item/properties/id'
+              quantity:
+                $ref: '#/components/schemas/ItemQuantity/properties/selected'
+            required:
+              - id
         add_ons:
           type: array
           items:
