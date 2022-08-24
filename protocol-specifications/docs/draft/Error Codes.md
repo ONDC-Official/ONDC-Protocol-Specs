@@ -73,6 +73,7 @@ CC-BY-ND
   |60003|Logistics|Location Serviceability Error|Delivery distance exceeds the maximum serviceability distance|
   |60004|Logistics|Order Serviceability Error|Delivery Partners not available|
   |60005|Logistics|Invalid Signature|Cannot verify signature for request|
+  |60007|Logistics|Policy Error|Canncellation not possible because of Logistics Provider policy|
 
   ## Acknowledgements
   This document has been adapted from the [Error Codes draft document](https://github.com/beckn/protocol-specifications/blob/draft/docs/protocol-drafts/BECKN-RFC-005-Error-Codes-Draft-01.md) from the Beckn Foundation.
