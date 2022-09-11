@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.17
+  version: 1.0.18
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1801,11 +1801,11 @@ components:
                    State can have following values -
                      "Searching for Agent",
                      "Agent assigned",
-                     "Agent reached pickup",
-                     "Agent picked up order",
-                     "Agent reached drop location",
-                     "Agent delivered the order"
-                     "Order is cancelled"
+                     "At pickup location",
+                     "Order picked up",
+                     "At drop location",
+                     "Order delivered",
+                     "Cancelled"
       type: object
       properties:
         id:
@@ -2309,17 +2309,17 @@ components:
         "@ondc/org/collection_amount":
           description: CoD collection amount
           type: string
-        "@ondc/org/cod-settlement_window":
+        "@ondc/org/settlement_window":
           description: settlement window in ISO8601 durations format e.g. 'PT48H' indicates T+2 settlement
           type: string
-        "@ondc/org/cod-settlement_window_status":
+        "@ondc/org/settlement_window_status":
           type: string
           enum:
             - Assert
             - Agree
             - Disagree
             - Terminate
-        "@ondc/org/cod-settlement_details":
+        "@ondc/org/settlement_details":
           type: array
           items:
             type: object
