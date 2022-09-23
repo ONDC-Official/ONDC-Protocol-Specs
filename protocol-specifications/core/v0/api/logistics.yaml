@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.18
+  version: 1.0.19
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1798,14 +1798,6 @@ components:
                    Use tags to communicate if order is ready to ship -
                    Order ready to ship -
                    "@ondc/org/order_ready_to_ship" (pass "Yes")
-                   State can have following values -
-                     "Searching for Agent",
-                     "Agent assigned",
-                     "At pickup location",
-                     "Order picked up",
-                     "At drop location",
-                     "Order delivered",
-                     "Cancelled"
       type: object
       properties:
         id:
@@ -2108,14 +2100,6 @@ components:
                        will be created by buyer app in confirm API
         state:
           type: string
-          enum:
-            - Created
-            - Out for Delivery
-            - Shipped
-            - Delivered
-            - RTO initiated
-            - RTO delivered
-            - Cancelled
         provider:
           type: object
           properties:
