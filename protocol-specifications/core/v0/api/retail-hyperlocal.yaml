@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.24
+  version: 1.0.25
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1814,15 +1814,7 @@ components:
           required:
             - feedback_id
     Fulfillment:
-      description: Describes how a single product/service will be rendered/fulfilled to the end customer -
-                   State can have following values -
-                     "Serviceable",
-                     "Non-serviceable",
-                     "At pickup location",
-                     "Order picked up",
-                     "At drop location",
-                     "Order delivered",
-                     "Cancelled"
+      description: Describes how a single product/service will be rendered/fulfilled to the end customer
       type: object
       properties:
         id:
@@ -2281,15 +2273,6 @@ components:
                        Will be created by buyer app in confirm API
         state:
           type: string
-          enum:
-            - Created
-            - Packed
-            - Shipped
-            - Out for Delivery
-            - Delivered
-            - RTO initiated
-            - RTO delivered
-            - Cancelled
         provider:
           type: object
           properties:
