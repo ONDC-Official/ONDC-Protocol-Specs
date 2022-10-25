@@ -10,7 +10,7 @@ To get started with understanding ONDC technology, please refer to the following
 
 2. [Test Drive the ONDC reference web app](https://buyer-app.ondc.org)
 
-3. [ONDC Protocol Specifications - GitHub](https://github.com/ONDC-Official/ONDC-Protocol/tree/master/protocol-specifications/core/v0/api)	
+3. [ONDC Protocol Specifications - GitHub](https://github.com/ONDC-Official/ONDC-Protocol-Specs)	
 
 > Core APIs for buyer and seller platforms along with schema reference.
 
