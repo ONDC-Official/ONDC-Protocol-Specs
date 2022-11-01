@@ -58,7 +58,7 @@ CC-BY-ND
   |30016|Seller App|Invalid Signature|Cannot verify signature for request|
   |30017|Seller App|Merchant Unavailable|Merchant is currently not taking orders|
   |30018|Seller App|Invalid Order|Order not found|
-  |30019|Seller App|Cannot Confirm Order|Seller App is unable to confirm the order|
+  |30019|Seller App|Order Confirm Error|Seller App is unable to confirm the order|
   |30020|Seller App|Order Confirm Failure|Seller App cannot confirm order as no response from Buyer App|
   |40000|Seller App|Business Error|Generic business error|
   |40001|Seller App|Action not applicable|When an API endpoint is not implemented by the Seller App as it is not required for their use cases and a Buyer App calls one of these endpoints|
@@ -79,6 +79,7 @@ CC-BY-ND
   |60005|Logistics|Invalid Signature|Cannot verify signature for request|
   |60006|Logistics|Invalid Request|Invalid request, not compliant with API contract|
   |60007|Logistics|Policy Error|Cancellation not possible because of Logistics Provider policy|
+  |65001|Logistics|Order Confirm Error|Logistics Provider is unable to confirm the order|
 
   ## Acknowledgements
   This document has been adapted from the [Error Codes draft document](https://github.com/beckn/protocol-specifications/blob/draft/docs/protocol-drafts/BECKN-RFC-005-Error-Codes-Draft-01.md) from the Beckn Foundation.
