@@ -38,6 +38,7 @@ CC-BY-ND
   |10002|Gateway|Invalid City Code|Valid city code needs to be passed for search|
   |20000|Buyer App|Invalid catalog item|Catalog Item cannot be displayed as it does not meet statutory requirements|
   |20001|Buyer App|Invalid Signature|Cannot verify signature for request|
+  |25001|Buyer App|Order Confirm Failure|Buyer App couldn't confirm order as no response from Seller App|
   |30000|Seller App|Invalid request error|Generic invalid request error|
   |30001|Seller App|Provider not found|When Seller App is unable to find the provider id sent by the Buyer App|
   |30002|Seller App|Provider location not found|When Seller App is unable to find the provider location id sent by the Buyer App|
