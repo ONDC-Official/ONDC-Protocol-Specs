@@ -38,7 +38,7 @@ CC-BY-ND
   |10002|Gateway|Invalid City Code|Valid city code needs to be passed for search|
   |20000|Buyer App|Invalid catalog item|Catalog Item cannot be displayed as it does not meet statutory requirements|
   |20001|Buyer App|Invalid Signature|Cannot verify signature for request|
-  |25001|Buyer App|Order Confirm Failure|Buyer App couldn't confirm order as no response from Seller App|
+  |25001|Buyer App|Order Confirm Failure|Buyer App cannot confirm order as no response from Seller App|
   |30000|Seller App|Invalid request error|Generic invalid request error|
   |30001|Seller App|Provider not found|When Seller App is unable to find the provider id sent by the Buyer App|
   |30002|Seller App|Provider location not found|When Seller App is unable to find the provider location id sent by the Buyer App|
@@ -59,7 +59,7 @@ CC-BY-ND
   |30017|Seller App|Merchant Unavailable|Merchant is currently not taking orders|
   |30018|Seller App|Invalid Order|Order not found|
   |30019|Seller App|Cannot Confirm Order|Seller App is unable to confirm the order|
-  |30020|Seller App|Order Confirm Failure|Seller App couldn't confirm order as no response from Buyer App|
+  |30020|Seller App|Order Confirm Failure|Seller App cannot confirm order as no response from Buyer App|
   |40000|Seller App|Business Error|Generic business error|
   |40001|Seller App|Action not applicable|When an API endpoint is not implemented by the Seller App as it is not required for their use cases and a Buyer App calls one of these endpoints|
   |40002|Seller App|Item quantity unavailable|When the Seller App is unable to select the specified number in order.items[].quantity|
