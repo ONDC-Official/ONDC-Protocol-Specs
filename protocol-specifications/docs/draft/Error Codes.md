@@ -57,6 +57,7 @@ CC-BY-ND
   |30016|Seller App|Invalid Signature|Cannot verify signature for request|
   |30017|Seller App|Merchant Unavailable|Merchant is currently not taking orders|
   |30018|Seller App|Invalid Order|Order not found|
+  |30019|Seller App|Cannot Confirm Order|Seller App is unable to confirm the order|
   |40000|Seller App|Business Error|Generic business error|
   |40001|Seller App|Action not applicable|When an API endpoint is not implemented by the Seller App as it is not required for their use cases and a Buyer App calls one of these endpoints|
   |40002|Seller App|Item quantity unavailable|When the Seller App is unable to select the specified number in order.items[].quantity|
