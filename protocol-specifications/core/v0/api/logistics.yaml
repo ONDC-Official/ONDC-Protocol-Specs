@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.14
+  version: 1.0.19
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1798,14 +1798,6 @@ components:
                    Use tags to communicate if order is ready to ship -
                    Order ready to ship -
                    "@ondc/org/order_ready_to_ship" (pass "Yes")
-                   State can have following values -
-                     "Searching for Agent",
-                     "Agent is assigned",
-                     "Agent reached pickup",
-                     "Agent has picked up the order and enroute to drop",
-                     "Agent reached drop location",
-                     "Agent has delivered the order",
-                     "Order is cancelled"
       type: object
       properties:
         id:
@@ -2108,13 +2100,6 @@ components:
                        will be created by buyer app in confirm API
         state:
           type: string
-          enum:
-            - Created
-            - Out for Delivery
-            - Delivered
-            - RTO Initiated
-            - RTO delivered
-            - Cancelled
         provider:
           type: object
           properties:
@@ -2168,8 +2153,10 @@ components:
             $ref: '#/components/schemas/Document'
         billing:
           $ref: '#/components/schemas/Billing'
-        fulfillment:
-          $ref: '#/components/schemas/Fulfillment'
+        fulfillments:
+          type: array
+          items:
+            $ref: "#/components/schemas/Fulfillment"
         quote:
           $ref: '#/components/schemas/Quotation'
         payment:
@@ -2306,17 +2293,17 @@ components:
         "@ondc/org/collection_amount":
           description: CoD collection amount
           type: string
-        "@ondc/org/cod-settlement_window":
+        "@ondc/org/settlement_window":
           description: settlement window in ISO8601 durations format e.g. 'PT48H' indicates T+2 settlement
           type: string
-        "@ondc/org/cod-settlement_window_status":
+        "@ondc/org/settlement_window_status":
           type: string
           enum:
             - Assert
             - Agree
             - Disagree
             - Terminate
-        "@ondc/org/cod-settlement_details":
+        "@ondc/org/settlement_details":
           type: array
           items:
             type: object
