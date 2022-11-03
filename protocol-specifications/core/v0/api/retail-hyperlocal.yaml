@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.17
+  version: 1.0.25
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1541,14 +1541,14 @@ components:
             - Packaged Foods
             - Fruits and Vegetables
             - F&B
-            - Fashion
+            - Home & Decor
         parent_category_id:
           type: string
           description: Unique id of the parent category
           enum:
             - Grocery
             - F&B
-            - Fashion
+            - Home & Decor
         descriptor:
           $ref: '#/components/schemas/Descriptor'
         time:
@@ -1814,19 +1814,7 @@ components:
           required:
             - feedback_id
     Fulfillment:
-      description: Describes how a single product/service will be rendered/fulfilled to the end customer -
-                   (id, type) have the following values -
-                   ("1", "Delivery")
-                   ("2", "Pickup")
-                   ("3", "Delivery and Pickup")
-                   State can have following values -
-                     "Searching for Agent",
-                     "Agent is assigned",
-                     "Agent reached pickup",
-                     "Agent has picked up the order and enroute to drop",
-                     "Agent reached drop location",
-                     "Agent has delivered the order",
-                     "Order is cancelled"
+      description: Describes how a single product/service will be rendered/fulfilled to the end customer
       type: object
       properties:
         id:
@@ -1839,6 +1827,7 @@ components:
             - Delivery
             - Pickup
             - Delivery and Pickup
+            - Reverse QC
         "@ondc/org/category":
           type: string
           description: Fulfillment Category
@@ -2017,6 +2006,8 @@ components:
             - value
             - maximum_value
             - currency
+        quantity:
+          $ref: '#/components/schemas/ItemQuantity'
         category_id:
           $ref: '#/components/schemas/Category/properties/id'
         fulfillment_id:
@@ -2282,15 +2273,6 @@ components:
                        Will be created by buyer app in confirm API
         state:
           type: string
-          enum:
-            - Created
-            - Packed
-            - Shipped
-            - Out for Delivery
-            - Delivered
-            - RTO Initiated
-            - RTO delivered
-            - Cancelled
         provider:
           type: object
           properties:
@@ -2456,7 +2438,7 @@ components:
             - Disagree
             - Terminate
         "@ondc/org/return_window":
-          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
+          description: return window for withholding amount in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
           type: string
         "@ondc/org/return_window_status":
           type: string
@@ -2480,7 +2462,7 @@ components:
             - Disagree
             - Terminate
         "@ondc/org/settlement_window":
-          description: return window for the item in ISO8601 durations format e.g. 'PT24H' indicates 24 hour return window
+          description: settlement window for the counterparty in ISO8601 durations format e.g. 'PT48H' indicates 48 hour return window
           type: string
         "@ondc/org/settlement_window_status":
           type: string
@@ -2497,6 +2479,7 @@ components:
               settlement_counterparty:
                 type: string
                 enum:
+                  - buyer
                   - buyer-app
                   - seller-app
                   - logistics-provider
@@ -2505,6 +2488,9 @@ components:
                 enum:
                   - sale-amount
                   - withholding-amount
+                  - refund
+              settlement_amount:
+                type: integer
               settlement_type:
                 type: string
                 enum:
@@ -2687,6 +2673,8 @@ components:
                   - tax
                   - convenience charge
                   - discount
+              item:
+                $ref: '#/components/schemas/Item'
               title:
                 type: string
               price:
