@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ONDC Protocol API for logistics
   description: ONDC Protocol Core API specification. This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.19
+  version: 1.0.20
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -2325,6 +2325,18 @@ components:
                 type: string
               upi_address:
                 description: UPI payment address e.g. VPA
+                type: string
+              bank_name:
+                description: Bank name
+                type: string
+              branch_name:
+                description: Branch name
+                type: string
+              beneficiary_name:
+                description: Beneficiary Name
+                type: string
+              beneficiary_address:
+                description: Beneficiary Address
                 type: string
               settlement_status:
                 type: string
