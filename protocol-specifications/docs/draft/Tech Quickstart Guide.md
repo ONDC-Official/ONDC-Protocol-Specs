@@ -68,7 +68,7 @@ To get started with understanding ONDC technology, please refer to the following
 
 >![2](https://user-images.githubusercontent.com/95357304/179464579-bfa898a8-e641-47d0-bbbc-abbdfc3e3162.png)
 
-                            ONDC Select a item flow betweeb buyer and seller
+                            ONDC Select a item flow between buyer and seller
 
 >![3](https://user-images.githubusercontent.com/95357304/179464600-4781f7e5-40cd-4033-82d3-c1b619d7baa6.png)
 
