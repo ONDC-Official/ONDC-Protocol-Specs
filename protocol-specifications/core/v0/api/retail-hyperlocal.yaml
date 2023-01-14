@@ -2593,7 +2593,7 @@ components:
                   - delivery
                   - packing
                   - tax
-                  - convenience charge
+                  - misc
                   - discount
               item:
                 $ref: '#/components/schemas/Item'
