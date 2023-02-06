@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.28
+  version: 1.0.29
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1999,6 +1999,9 @@ components:
             imported_product_country_of_origin:
               description: country of origin for imported products (ISO 3166 Alpha-3 code format)
               type: string
+            back_image_url:
+              description: back image URL for statutory requirements
+              type: string
         "@ondc/org/statutory_reqs_prepackaged_food":
           type: object
           description:
@@ -2070,6 +2073,9 @@ components:
               type: string
             other_importer_country_of_origin:
               description: country of origin for product manufactured outside but packaged or bottled in India (ISO 3166 Alpha-3 code format)
+              type: string
+            back_image_url:
+              description: back image URL for statutory requirements
               type: string
         "@ondc/org/mandatory_reqs_veggies_fruits":
           type: object
