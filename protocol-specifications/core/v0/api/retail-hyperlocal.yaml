@@ -3,7 +3,7 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.29
+  version: 1.0.30
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
@@ -1984,6 +1984,9 @@ components:
             manufacturer_or_packer_address:
               description: address of manufacturer or packer (in case manufacturer is not the packer) or address of importer for imported goods
               type: string
+            mfg_license_no:
+              description: manufacturing license no
+              type: string
             common_or_generic_name_of_commodity:
               description: common or generic name of commodity
               type: string
@@ -1995,6 +1998,9 @@ components:
               type: string
             month_year_of_manufacture_packing_import:
               description: month and year of manufacture or packing or import
+              type: string
+            expiry_date:
+              description: month and year of expiry
               type: string
             imported_product_country_of_origin:
               description: country of origin for imported products (ISO 3166 Alpha-3 code format)
