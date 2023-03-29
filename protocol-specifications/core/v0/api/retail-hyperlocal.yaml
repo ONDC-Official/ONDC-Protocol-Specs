@@ -2427,6 +2427,7 @@ components:
                   - neft
                   - rtgs
                   - upi
+                  - credit
               settlement_bank_account_no:
                 type: string
               settlement_ifsc_code:
