@@ -2473,10 +2473,11 @@ components:
               "@ondc/org/title_type":
                 type: string
                 enum:
-                  - Delivery Charge
-                  - RTO Charge
-                  - Reverse QC Charge
-                  - Tax
+                  - delivery
+                  - rto
+                  - reverseqc
+                  - differential
+                  - tax
               title:
                 type: string
               price:
