@@ -3,14 +3,11 @@ info:
   title: ONDC Protocol API for retail (grocery, f&b)
   description: ONDC Protocol API specification, which includes statutory requirements for packaged commodities and pre-packaged food
               This is an adaptation of Beckn Core version 0.9.3
-  version: 1.0.30
+  version: 1.0.31
 security:
   - SubscriberAuth: []
   - GatewaySubscriberAuth: []
   - GatewaySubscriberAuthNew: []
-externalDocs:
-  description: Contract between retail buyer and seller apps (change tracking here, details in spec)
-  url: https://docs.google.com/document/d/12oMC4A05jT5rjCbY-M7j4T2oekr9bqcvSOpTI0jFEgE/edit
 paths:
   /search:
     post:
@@ -1273,6 +1270,11 @@ components:
           enum:
             - ACK
             - NACK
+        tags:
+          description: A list of tags containing any additional information sent along with the Acknowledgement.
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
       required:
         - status
     AddOn:
@@ -1377,10 +1379,6 @@ components:
         updated_at:
           type: string
           format: date-time
-      required:
-        - name
-        - phone
-        - tax_number
     Cancellation:
       description: Describes a cancellation event
       type: object
@@ -1410,18 +1408,70 @@ components:
               $ref: '#/components/schemas/Option/properties/id'
         additional_description:
           $ref: '#/components/schemas/Descriptor'
+    CancellationTerm:
+      description: Describes the cancellation terms of an item or an order. This can be referenced at an item or order level. Item-level cancellation terms can override the terms at the order level.
+      type: object
+      properties:
+        reason_required:
+          description: Indicates whether a reason is required to cancel the order
+          type: boolean
+        refund_eligible:
+          description: Indicates if cancellation will result in a refund
+          type: boolean
+        return_eligible:
+          description: Indicates if cancellation will result in a return to origin
+          type: boolean
+        fulfillment_state:
+          description: The state of fulfillment during which these terms are applicable.
+          allOf:
+            - $ref: '#/components/schemas/State'
+        return_policy:
+          description: Describes the return policy of an item or an order
+          type: object
+          properties:
+            return_eligible:
+              description: Indicates whether the item is eligible for return
+              type: boolean
+            return_within:
+              description: 'Applicable only for buyer managed returns where the buyer has to return the item to the origin before a certain date-time, failing which they will not be eligible for refund.'
+              allOf:
+                - $ref: '#/components/schemas/Time'
+            return_location:
+              $ref: '#/components/schemas/Location'
+            fulfillment_managed_by:
+              enum:
+                - customer
+                - provider
+        refund_policy:
+          type: object
+          properties:
+            refund_eligible:
+              description: Indicates if cancellation will result in a refund
+              type: boolean
+            refund_within:
+              description: Time within which refund will be processed after successful cancellation.
+              allOf:
+                - $ref: '#/components/schemas/Time'
+            refund_amount:
+              $ref: '#/components/schemas/Price'
+        cancel_by:
+          description: Information related to the time of cancellation.
+          allOf:
+            - $ref: '#/components/schemas/Time'
+        cancellation_fee:
+          $ref: '#/components/schemas/Fee'
+        xinput_required:
+          $ref: '#/components/schemas/XInput'
+        xinput_response:
+          $ref: '#/components/schemas/XInputResponse'
+        external_ref:
+          $ref: '#/components/schemas/MediaFile'
     Catalog:
       description: Describes a Seller App catalog
       type: object
       properties:
         bpp/descriptor:
           $ref: '#/components/schemas/Descriptor'
-          required:
-            - name
-            - symbol
-            - short_desc
-            - long_desc
-            - images
         bpp/categories:
           type: array
           items:
@@ -1442,22 +1492,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Provider'
-          required:
-            - Provider.fulfillments.id
-            - Provider.fulfillments.type
-            - Provider.locations.id
-            - Provider.locations.gps
-            - Provider.locations.address.street
-            - Provider.locations.address.city
-            - Provider.locations.address.area_code
-            - Provider.locations.address.state
         exp:
           type: string
           description: Time after which catalog has to be refreshed
           format: date-time
-      required:
-        - bpp/descriptor
-        - bpp/providers
     Category:
       description: Describes a category
       type: object
@@ -1473,7 +1511,7 @@ components:
         time:
           $ref: '#/components/schemas/Time'
         tags:
-          $ref: '#/components/schemas/Tags'
+          $ref: '#/components/schemas/TagGroup'
     Circle:
       description: Describes a circular area on the map
       type: object
@@ -1503,7 +1541,7 @@ components:
         email:
           type: string
         tags:
-          $ref: '#/components/schemas/Tags'
+          $ref: '#/components/schemas/TagGroup'
     Context:
       description: Describes a ONDC message context
       type: object
@@ -1596,6 +1634,23 @@ components:
         code:
           type: string
           description: Country code as per ISO 3166 Alpha-3 code format
+    Credential:
+      description: Describes a credential of an entity - Person or Organization
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          default: VerifiableCredential
+        descriptor:
+          $ref: '#/components/schemas/Descriptor'
+        url:
+          description: URL of the credential
+          type: string
+          format: uri
+        tags:
+          $ref: '#/components/schemas/TagGroup'
     DecimalValue:
       description: Describes a decimal value
       type: string
@@ -1675,6 +1730,18 @@ components:
       required:
         - type
         - code
+    Fee:
+      description: A fee applied on a particular entity
+      type: object
+      properties:
+        percentage:
+          description: Percentage of a value
+          allOf:
+            - $ref: '#/components/schemas/DecimalValue'
+        amount:
+          description: A fixed value
+          allOf:
+            - $ref: '#/components/schemas/Price'
     Feedback:
       description: Feedback for a service
       type: object
@@ -1732,6 +1799,20 @@ components:
             type: string
           required:
             - feedback_id
+    Form:
+      description: Describes a form
+      type: object
+      properties:
+        url:
+          description: 'The URL from where the form can be fetched. The content fetched from the url must be processed as per the mime_type specified in this object. Once fetched, the rendering platform can choosed to render the form as-is as an embeddable element; or process it further to blend with the theme of the application. In case the interface is non-visual, the the render can process the form data and reproduce it as per the standard specified in the form.'
+          type: string
+          format: uri
+        data:
+          description: The form content string. This content will again follow the mime_type field for processing. Typically forms should be sent as an html string starting with <form></form> tags. The application must render this form after removing any css or javascript code if necessary. The `action` attribute in the form should have a url where the form needs to be submitted.
+          type: string
+        mime_type:
+          description: This field indicates the nature and format of the form received by querying the url. MIME types are defined and standardized in IETF's RFC 6838.
+          type: string
     Fulfillment:
       description: Describes how a single product/service will be rendered/fulfilled to the end customer
       type: object
@@ -1815,7 +1896,7 @@ components:
         rateable:
           $ref: '#/components/schemas/Rateable'
         tags:
-          $ref: '#/components/schemas/Tags'
+          $ref: '#/components/schemas/TagGroup'
       required:
         - id
         - type
@@ -1845,7 +1926,7 @@ components:
         item:
           $ref: '#/components/schemas/Item'
         tags:
-          $ref: '#/components/schemas/Tags'
+          $ref: '#/components/schemas/TagGroup'
     ItemQuantity:
       description: Describes count or amount of an item
       type: object
@@ -1890,20 +1971,18 @@ components:
               minimum: 0
             measure:
               $ref: '#/components/schemas/Scalar'
+        unitized:
+          description: This represents the quantity available in a single unit of the item
+          type: object
+          properties:
+            count:
+              type: integer
+              minimum: 1
+              maximum: 1
+            measure:
+              $ref: '#/components/schemas/Scalar'
     Item:
-      description: Describes a product or a service offered to the end consumer by the provider -
-                   Statutory requirements for category_id "Packaged Commodities" -
-                   descriptor.name (for item name),
-                   price.value (for declared price),
-                   price.maximum_value (for MRP);
-                   Statutory requirements for category_id "Packaged Foods" -
-                   descriptor.name (for item name),
-                   descriptor.symbol (for veg or non-veg),
-                   descriptor.short_desc (for food allergen),
-                   descriptor.long_desc (for instructions for use),
-                   price.value (for declared price);
-                   All other statutory attributes must be provided, as applicable, for the above;
-                   No statutory requirement for category_id "F&B" or "Fruits and Vegetables"
+      description: Describes a product or a service offered to the end consumer by the provider
       type: object
       properties:
         id:
@@ -1913,22 +1992,18 @@ components:
           $ref: '#/components/schemas/Item/properties/id'
         descriptor:
           $ref: '#/components/schemas/Descriptor'
-          required:
-            - name
-            - symbol
-            - short_desc
-            - long_desc
-            - images
         price:
           $ref: '#/components/schemas/Price'
-          required:
-            - value
-            - maximum_value
-            - currency
         quantity:
           $ref: '#/components/schemas/ItemQuantity'
         category_id:
           $ref: '#/components/schemas/Category/properties/id'
+        category_ids:
+          description: Categories this item can be listed under
+          type: array
+          items:
+            allOf:
+              - $ref: '#/components/schemas/Category/properties/id'
         fulfillment_id:
           $ref: '#/components/schemas/Fulfillment/properties/id'
         rating:
@@ -1969,14 +2044,7 @@ components:
         "@ondc/org/statutory_reqs_packaged_commodities":
           type: object
           description:
-            mandatory for category_id "Packaged Commodities" -
-            required attributes for all include the following -
-              manufacturer_or_packer_name,
-              manufacturer_or_packer_address,
-              common_or_generic_name_of_commodity,
-              net_quantity_or_measure_of_commodity_in_pkg,
-              month_year_of_manufacture_packing_import;
-            other attributes are required on case-by-case basis
+            mandatory for category_id "Packaged Commodities"
           properties:
             manufacturer_or_packer_name:
               description: name of manufacturer or packer (in case manufacturer is not the packer) or name of importer for imported goods
@@ -2002,21 +2070,10 @@ components:
             expiry_date:
               description: month and year of expiry
               type: string
-            imported_product_country_of_origin:
-              description: country of origin for imported products (ISO 3166 Alpha-3 code format)
-              type: string
-            back_image_url:
-              description: back image URL for statutory requirements
-              type: string
         "@ondc/org/statutory_reqs_prepackaged_food":
           type: object
           description:
-            mandatory for category_id "Packaged food" -
-            required attributes include the following -
-              nutritional_info,
-              additives_info,
-              net_quantity;
-            other attributes are required on case-by-case basis
+            mandatory for category_id "Packaged food"
           properties:
             ingredients_info:
               description: list of ingredients (except single ingredient foods), can be shown as ingredient (with percentage); ingredient (with percentage);..)
@@ -2077,38 +2134,8 @@ components:
             other_premises:
               description: premises where product manufactured outside are packaged or bottled in India
               type: string
-            other_importer_country_of_origin:
-              description: country of origin for product manufactured outside but packaged or bottled in India (ISO 3166 Alpha-3 code format)
-              type: string
-            back_image_url:
-              description: back image URL for statutory requirements
-              type: string
-        "@ondc/org/mandatory_reqs_veggies_fruits":
-          type: object
-          description:
-            mandatory for category_id "Fruits and Vegetables"
-            required attributes include the following -
-              net_quantity
         tags:
-          $ref: '#/components/schemas/Tags'
-      required:
-        - id
-        - descriptor
-        - price
-        - category_id
-        - fulfillment_id
-        - location_id
-        - matched
-        - "@ondc/org/returnable"
-        - "@ondc/org/cancellable"
-        - "@ondc/org/return_window"
-        - "@ondc/org/seller_pickup_return"
-        - "@ondc/org/time_to_ship"
-        - "@ondc/org/available_on_cod"
-        - "@ondc/org/contact_details_consumer_care"
-        - "@ondc/org/statutory_reqs_packaged_commodities"
-        - "@ondc/org/statutory_reqs_prepackaged_food"
-        - "@ondc/org/mandatory_reqs_veggies_fruits"
+          $ref: '#/components/schemas/TagGroup'
     Language:
       description: indicates language code. ONDC supports language codes as per ISO 639.2 standard
       type: object
@@ -2145,6 +2172,23 @@ components:
       type: string
       description: 'Describes the name of a person in format: ./{given_name}/{honorific_prefix}/{first_name}/{middle_name}/{last_name}/{honorific_suffix}'
       pattern: '^\./[^/]+/[^/]*/[^/]*/[^/]*/[^/]*/[^/]*$'
+    MediaFile:
+      description: This object contains a url to a media file.
+      type: object
+      properties:
+        mimetype:
+          description: 'indicates the nature and format of the document, file, or assortment of bytes. MIME types are defined and standardized in IETF''s RFC 6838'
+          type: string
+        url:
+          description: The URL of the file
+          type: string
+          format: uri
+        signature:
+          description: The digital signature of the file signed by the sender
+          type: string
+        dsa:
+          description: The signing algorithm used by the sender
+          type: string
     Offer:
       description: Describes an offer
       type: object
@@ -2167,6 +2211,8 @@ components:
             $ref: '#/components/schemas/Item/properties/id'
         time:
           $ref: '#/components/schemas/Time'
+        tags:
+          $ref: '#/components/schemas/TagGroup'
     Operator:
       description: Describes the agent of a service
       allOf:
@@ -2191,17 +2237,12 @@ components:
         descriptor:
           $ref: '#/components/schemas/Descriptor'
     Order:
-      description: Describes the details of an order -
-                   For "@ondc/org/cancellation.cancelled_by" use following values -
-                   buyer-app,
-                   seller-app,
-                   logistics-provider;
+      description: Describes the details of an order
       type: object
       properties:
         id:
           type: string
-          description: Unique identifier for Order across the network,
-                       Will be created by buyer app in confirm API
+          description: Unique identifier for Order across the network
         state:
           type: string
         provider:
@@ -2217,8 +2258,6 @@ components:
                 properties:
                   id:
                     $ref: '#/components/schemas/Location/properties/id'
-                required:
-                  - id
         items:
           type: array
           items:
@@ -2228,8 +2267,6 @@ components:
                 $ref: '#/components/schemas/Item/properties/id'
               quantity:
                 $ref: '#/components/schemas/ItemQuantity/properties/selected'
-            required:
-              - id
         add_ons:
           type: array
           items:
@@ -2237,8 +2274,6 @@ components:
             properties:
               id:
                 $ref: '#/components/schemas/AddOn/properties/id'
-            required:
-              - id
         offers:
           type: array
           items:
@@ -2246,8 +2281,6 @@ components:
             properties:
               id:
                 $ref: '#/components/schemas/Offer/properties/id'
-            required:
-              - id
         documents:
           type: array
           items:
@@ -2258,20 +2291,15 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Fulfillment"
+        cancellation_terms:
+          description: The cancellation terms of this order. This can be overriden at the item level cancellation terms.
+          type: array
+          items:
+            $ref: '#/components/schemas/CancellationTerm'
         quote:
           $ref: '#/components/schemas/Quotation'
         payment:
           $ref: '#/components/schemas/Payment'
-        "@ondc/org/cancellation":
-          $ref: '#/components/schemas/Cancellation'
-        "@ondc/org/linked_orders":
-          description: payload for cascaded orders e.g. order for logistics services linked to a retail order
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
         created_at:
           type: string
           format: date-time
@@ -2381,9 +2409,9 @@ components:
           description: In case of prepaid payment, whether settlement between counterparties should be on the basis of collection, shipment or delivery
           type: string
           enum:
-            - Collection
-            - Shipment
-            - Delivery
+            - shipment
+            - delivery
+            - return_window_expiry
         "@ondc/org/settlement_basis_status":
           type: string
           enum:
@@ -2473,10 +2501,8 @@ components:
         gender:
           type: string
           description: 'Gender of something, typically a Person, but possibly also fictional characters, animals, etc. While Male and Female may be used, text strings are also acceptable for people who do not identify as a binary gender'
-        cred:
-          type: string
         tags:
-          $ref: '#/components/schemas/Tags'
+          $ref: '#/components/schemas/TagGroup'
     Policy:
       description: Describes a policy. Allows for domain extension.
       type: object
@@ -2510,9 +2536,8 @@ components:
           $ref: '#/components/schemas/DecimalValue'
         maximum_value:
           $ref: '#/components/schemas/DecimalValue'
-      required:
-        - currency
-        - value
+        tags:
+          $ref: '#/components/schemas/TagGroup'
     Provider:
       description: Describes a service provider. This can be a restaurant, a hospital, a Store etc
       type: object
@@ -2522,12 +2547,6 @@ components:
           description: Id of the provider
         descriptor:
           $ref: '#/components/schemas/Descriptor'
-          required:
-            - name
-            - symbol
-            - short_desc
-            - long_desc
-            - images
         category_id:
           type: string
           description: Category Id of the provider
@@ -2542,6 +2561,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Category'
+        creds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Credential'
         fulfillments:
           type: array
           items:
@@ -2577,12 +2600,7 @@ components:
         rateable:
           $ref: '#/components/schemas/Rateable'
         tags:
-          $ref: '#/components/schemas/Tags'
-      required:
-        - id
-        - "@ondc/org/fssai_license_no"
-        - ttl
-        - descriptor
+          $ref: '#/components/schemas/TagGroup'
     Quotation:
       description: Describes a quote
       type: object
@@ -2615,11 +2633,6 @@ components:
                 $ref: '#/components/schemas/Price'
         ttl:
           $ref: '#/components/schemas/Duration'
-      required:
-        - "@ondc/org/item_id"
-        - "@ondc/org/item_quantity"
-        - "@ondc/org/title_type"
-        - price
     Rateable:
       description: If the entity can be rated or not
       type: boolean
@@ -2766,11 +2779,42 @@ components:
         ref_id:
           type: string
         channels:
-          $ref: '#/components/schemas/Tags'
-    Tags:
-      description: Describes a tag. This is a simple key-value store which is used to contain extended metadata
-      additionalProperties:
-        type: string
+          $ref: '#/components/schemas/TagGroup'
+    Tag:
+      description: 'Describes a tag. This is a simple key-value store which is used to contain extended metadata. This object can be added as a property to any schema to describe extended attributes. For BAPs, tags can be sent during search to optimize and filter search results. BPPs can use tags to index their catalog to allow better search functionality. Tags are sent by the BPP as part of the catalog response in the `on_search` callback. Tags are also meant for display purposes. Upon receiving a tag, BAPs are meant to render them as name-value pairs. This is particularly useful when rendering tabular information about a product or service.'
+      type: object
+      properties:
+        code:
+          description: 'The machine-readable name of the tag. The allowed values of this property can be published at three levels namely, a) Core specification, b) industry sector-specific adaptations, and c) Network-specific adaptations. Except core, each adaptation (sector or network) should prefix a unique namespace with the allowed value.'
+          type: string
+        name:
+          description: 'The human-readable name of the tag. This set by the BPP and rendered as-is by the BAP. Sometimes, the network policy may reserve some names for this property. Values outside the reserved values can be set by the BPP. However,the BAP may choose to rename or even ignore this value and render the output purely using the `code` property, but it is recommended for BAPs to keep the name same to avoid confusion and provide consistency.'
+          type: string
+        value:
+          description: The value of the tag. This set by the BPP and rendered as-is by the BAP.
+          type: string
+        display:
+          description: 'This value indicates if the tag is intended for display purposes. If set to `true`, then this tag must be displayed. If it is set to `false`, it should not be displayed. This value can override the group display value.'
+          type: boolean
+    TagGroup:
+      description: 'A collection of tag objects with group level attributes. For detailed documentation on the Tags and Tag Groups schema go to https://github.com/beckn/protocol-specifications/discussions/316'
+      type: object
+      properties:
+        display:
+          description: 'Indicates the display properties of the tag group. If display is set to false, then the group will not be displayed. If it is set to true, it should be displayed. However, group-level display properties can be overriden by individual tag-level display property. As this schema is purely for catalog display purposes, it is not recommended to send this value during search.'
+          type: boolean
+          default: true
+        code:
+          description: 'The machine-readable name of the tag group. The allowed values of this property can be published at three levels namely, a) Core specification, b) industry sector-specific adaptations, and c) Network-specific adaptations. Except core, each adaptation (sector or network) should prefix a unique namespace with the allowed value. Values outside the allowed values may or may not be ignored by the rendering platform. As this schema is purely for catalog display purposes, it is not recommended to send this value during search.'
+          type: string
+        name:
+          description: 'A human-readable string describing the heading under which the tags are to be displayed. Sometimes, the network policy may reserve some names for this property. Values outside the reserved values can be set by the BPP. However,the BAP may choose to rename or even ignore this value and render the output purely using code property, but it is recommended for BAPs to keep the name same to avoid confusion and provide consistency. As this schema is purely for catalog display purposes, it is not recommended to send this value during `search`.'
+          type: string
+        list:
+          description: 'An array of Tag objects listed under this group. This property can be set by BAPs during search to narrow the `search` and achieve more relevant results. When received during `on_search`, BAPs must render this list under the heading described by the `name` property of this schema.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
     Time:
       description: Describes time in its various forms. It can be a single point in time; duration; or a structured timetable of operations
       type: object
@@ -2796,21 +2840,29 @@ components:
           description: comma separated values representing days of the week
         schedule:
           $ref: '#/components/schemas/Schedule'
-    TrackingData:
-      description: Describes tracking data object during live tracking of an order
-      $ref: '#/components/schemas/Location/properties/gps'
     Tracking:
-      description: Describes the tracking info of an object
+      description: Contains tracking information that can be used by the BAP to track the fulfillment of an order in real-time. which is useful for knowing the location of time sensitive deliveries.
       type: object
       properties:
+        id:
+          description: A unique tracking reference number
+          type: string
         url:
+          description: 'A URL to the tracking endpoint. This can be a link to a tracking webpage, a webhook URL created by the BAP where BPP can push the tracking data, or a GET url creaed by the BPP which the BAP can poll to get the tracking data. It can also be a websocket URL where the BPP can push real-time tracking data.'
           type: string
           format: uri
+        location:
+          description: 'In case there is no real-time tracking endpoint available, this field will contain the latest location of the entity being tracked. The BPP will update this value everytime the BAP calls the track API.'
+          allOf:
+            - $ref: '#/components/schemas/Location'
         status:
+          description: 'This value indicates if the tracking is currently active or not. If this value is `active`, then the BAP can begin tracking the order. If this value is `inactive`, the tracking URL is considered to be expired and the BAP should stop tracking the order.'
           type: string
           enum:
             - active
             - inactive
+        tags:
+          $ref: '#/components/schemas/TagGroup'
     Vehicle:
       description: Describes the properties of a vehicle used in a mobility service
       type: object
@@ -2833,3 +2885,19 @@ components:
           type: string
         registration:
           type: string
+    XInput:
+      description: 'Contains any additional or extended inputs required to confirm an order. This is typically a Form Input. Sometimes, selection of catalog elements is not enough for the BPP to confirm an order. For example, to confirm a flight ticket, the airline requires details of the passengers along with information on baggage, identity, in addition to the class of ticket. Similarly, a logistics company may require details on the nature of shipment in order to confirm the shipping. A recruiting firm may require additional details on the applicant in order to confirm a job application. For all such purposes, the BPP can choose to send this object attached to any object in the catalog that is required to be sent while placing the order. This object can typically be sent at an item level or at the order level. The item level XInput will override the Order level XInput as it indicates a special requirement of information for that particular item. Hence the BAP must render a separate form for the Item and another form at the Order level before confirmation.'
+      allOf:
+        - $ref: '#/components/schemas/Form'
+    XInputResponse:
+      description: The response to the form fetched via the XInput URL
+      type: array
+      items:
+        type: object
+        properties:
+          input:
+            description: The _name_ attribute of the input tag in the XInput form
+            type: string
+          value:
+            description: 'The value of the input field. Files must be sent as data URLs. For more information on Data URLs visit https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs'
+            type: string
