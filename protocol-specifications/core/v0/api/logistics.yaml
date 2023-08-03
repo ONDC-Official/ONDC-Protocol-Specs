@@ -2567,6 +2567,7 @@ components:
                   - reverseqc
                   - differential
                   - tax
+                  - discount
               title:
                 type: string
               price:
