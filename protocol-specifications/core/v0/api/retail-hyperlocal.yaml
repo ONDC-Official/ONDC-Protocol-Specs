@@ -2261,12 +2261,7 @@ components:
         items:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                $ref: '#/components/schemas/Item/properties/id'
-              quantity:
-                $ref: '#/components/schemas/ItemQuantity/properties/selected'
+            $ref: '#/components/schemas/Item'
         add_ons:
           type: array
           items:
