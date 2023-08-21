@@ -334,7 +334,7 @@ paths:
                   type: object
                   properties:
                     update_target:
-                      description: 'Comma separated values of order objects being updated. For example: ```"update_target":"item,billing,fulfillment"```'
+                      description: 'Comma separated values of order objects being updated. For example: ```"update_target":"item,billing,fulfillment,payment"```'
                       type: string
                     order:
                       $ref: '#/components/schemas/Order'
