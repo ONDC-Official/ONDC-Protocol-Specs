@@ -1578,7 +1578,9 @@ components:
         time:
           $ref: '#/components/schemas/Time'
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     Circle:
       description: Describes a circular area on the map
       type: object
@@ -1608,7 +1610,9 @@ components:
         email:
           type: string
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     Context:
       description: Describes a ONDC message context
       type: object
@@ -1952,7 +1956,9 @@ components:
         rateable:
           $ref: '#/components/schemas/Rateable'
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     Gps:
       description: Describes a gps coordinate
       type: string
@@ -1999,7 +2005,9 @@ components:
             dangerous_goods:
               type: boolean
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     ItemQuantity:
       description: Describes count or amount of an item
       type: object
@@ -2076,7 +2084,9 @@ components:
         recommended:
           type: boolean
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     Language:
       description: indicates language code. ONDC supports language codes as per ISO 639.2 standard
       type: object
@@ -2446,7 +2456,9 @@ components:
         cred:
           type: string
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     Policy:
       description: Describes a policy. Allows for domain extension.
       type: object
@@ -2535,7 +2547,9 @@ components:
         rateable:
           $ref: '#/components/schemas/Rateable'
         tags:
-          $ref: '#/components/schemas/TagGroup'
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     Quotation:
       description: Describes a quote
       type: object
