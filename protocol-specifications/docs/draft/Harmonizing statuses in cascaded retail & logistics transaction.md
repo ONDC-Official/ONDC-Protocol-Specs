@@ -27,5 +27,5 @@ The proposed mapping of the most widely communicated information, between the re
 | /on_update                | Logistics Agent    | Status for delivery e.g. "Delivered"                         | Order.fulfillment.end.instructions.name                      |
 | /on_confirm or /on_update | Logistics Provider | Delivery confirmation code (DCC) e.g. Article number / AWB / Shipment / Consignment / Order nos / OTP | Order.fulfillment.end.instructions.short_desc                |
 | /init or /update          | Retail Seller App  | Drop instructions                                            | Order.fulfillment.end.instructions.long_desc                 |
-| /on_update                | Logistics Agent    | Delivery confirmation image e.g. photo                       | Order.fulfillment.start.instructions.images                  |
+| /on_update                | Logistics Agent    | Delivery confirmation image e.g. photo                       | Order.fulfillment.end.instructions.images                  |
 
