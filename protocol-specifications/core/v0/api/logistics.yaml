@@ -2781,6 +2781,10 @@ components:
           enum:
             - active
             - inactive
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagGroup'
     Vehicle:
       description: Describes the properties of a vehicle used in a mobility service
       type: object
